@@ -1,0 +1,26 @@
+footer {
+    display: flex;
+    justify-content: space-between;
+
+    /* text-align: center; */
+    padding: 0.5em 2em;
+    background: #616192;
+    color: white;
+}
+
+footer ul {
+    display: flex;
+    gap: 1em
+}
+
+footer ul li,
+footer ul li a {
+    display: block;
+}
+
+footer p {
+    padding: 0;
+}
+li svg{
+    fill: white;
+}

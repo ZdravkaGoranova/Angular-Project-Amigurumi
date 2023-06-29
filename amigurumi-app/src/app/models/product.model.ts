@@ -4,6 +4,6 @@ export class Product {
         public description: string,
         public author: string,
         public imageUrl: string,
-        public skillLevel: string,
+        // public skillLevel: string,
     ) { }
 }

@@ -18,6 +18,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
+import { ProductComponent } from './product/product.component';
+import { ProductsComponent } from './products/products.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +30,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MenuBarComponent,
     FooterBarComponent,
     LoginComponent,
+    RegisterComponent,
+    ProductComponent,
+    ProductsComponent,
+
+
    
   ],
   imports: [

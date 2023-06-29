@@ -1,9 +1,8 @@
 const data = [{
-    title: 'Crochet Bear With Bow Amigurumi Free Pattern',
+    title: 'Crochet Bear With Bow',
     description: 'Hello dear Amigurumi FollowersToday we share Crochet Bear with Bow Amigurumi Free Pattern for you. As you know we share new free amigurumi pattern every day.',
     author: 'Author 1',
-    imageUrl:
-        'https://i.pinimg.com/564x/51/63/37/516337d1d71a31f5afe359391aa5bdb8.jpg'
+    imageUrl:'https://i.pinimg.com/564x/51/63/37/516337d1d71a31f5afe359391aa5bdb8.jpg'
 },
 {
     title: 'Crochet Floppy Eared Bunny',
@@ -31,7 +30,14 @@ const data = [{
     description: 'If you’re looking for a bit of bunny personality, then check out the pattern for Totte. Totte is ready for the day in his overalls and carrot bag, and oh-so-fashionable with his striped shirt and scarf. It’s relatively easy to make, but there are a lot of elements that will come in handy if you’re a little more experienced. The best part: this crochet pattern is free!',
     author: 'Author 2',
     imageUrl: 'https://craftyclub.co/wp-content/uploads/2020/10/Totte-the-bunny-768x1024.jpg'
+},
+{
+    title: 'Cute Crochet',
+    description: 'If you’re looking for a bit of bunny personality, then check out the pattern for Totte. Totte is ready for the day in his overalls and carrot bag, and oh-so-fashionable with his striped shirt and scarf. It’s relatively easy to make, but there are a lot of elements that will come in handy if you’re a little more experienced. The best part: this crochet pattern is free!',
+    author: 'Author 2',
+    imageUrl: 'https://i.pinimg.com/564x/ea/8b/68/ea8b685dc27ad4eaa399a2087ef6da7e.jpg'
 }
+
 
 ,{
     

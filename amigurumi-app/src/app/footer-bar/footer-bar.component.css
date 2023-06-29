@@ -16,6 +16,8 @@ footer ul {
 footer ul li,
 footer ul li a {
     display: block;
+    color: white;
+    text-decoration: none;
 }
 
 footer p {

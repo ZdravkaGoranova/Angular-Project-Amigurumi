@@ -10,8 +10,10 @@ export class ProductData {
           const description = data[i].description || '';
           const author = data[i].author || '';
           const imageUrl = data[i].imageUrl || '';
-    
-          products[i] = new Product(title, description, author, imageUrl);
+          const skillLevel = data[i].skillLevel || '';
+
+
+          products[i] = new Product(title, description, author, imageUrl,skillLevel);
         }
     
         return products;

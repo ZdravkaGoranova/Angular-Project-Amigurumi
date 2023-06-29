@@ -12,7 +12,7 @@
   width: 50%;
   margin: 4rem auto;
 
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   /* background: url("https://i.pinimg.com/564x/c2/e2/f8/c2e2f8c0cdf209cbb7144c8f0b75d5ef.jpg") no-repeat center center;
   filter: brightness(90%);
@@ -28,8 +28,8 @@
   background: #f6f7f8;
   width: 60%;
 
-  border-bottom-right-radius: 20px;
-  border-top-right-radius: 20px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .custom-button {
@@ -43,8 +43,8 @@
   /* filter: brightness(70%); */
   /* background-size: cover;
   width: 100%; */
-  border-bottom-left-radius: 20px;
-  border-top-left-radius: 20px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
 
   background-size: cover;
   width: 40%;

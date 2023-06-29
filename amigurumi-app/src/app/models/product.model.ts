@@ -4,6 +4,8 @@ export class Product {
         public description: string,
         public author: string,
         public imageUrl: string,
-        // public skillLevel: string,
+        // public usersLiked: [],
+        // public coments:  [],
+        public skillLevel: string,
     ) { }
 }

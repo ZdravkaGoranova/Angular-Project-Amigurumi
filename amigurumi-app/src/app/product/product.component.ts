@@ -15,7 +15,7 @@ export class ProductComponent {
   productDescLen: number;
   showReadMoreBtn: boolean = true;
   showHideBtn: boolean = false;
-  imageIsShown: boolean = false;
+  imageIsShown: boolean = true;
   imageButtonTitle: string = 'Show Image';
 
   likeIsShown: boolean = false;

@@ -37,7 +37,7 @@ img {
     border-radius: 4px;
     border: 1px solid rgb(248, 248, 248);
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    opacity: 0.9;
+    opacity: 0.7;
     /* transform: opacity 0.3s ease-in; */
 }
 
@@ -47,7 +47,7 @@ img:hover {
 }
 
 #title {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     color: white;
 }
 
@@ -83,9 +83,12 @@ button:hover {
     display: flex;
     text-align: center;
     justify-content: center;
+    flex-wrap: wrap;
 
 }
+
 .prd-author,
+.prd-skillLevel,
 .btn-edit,
 .btn-delete,
 .btn-like {
@@ -96,6 +99,12 @@ button:hover {
     justify-content: center;
 
 }
+
+.prd-author,
+.prd-skillLevel {
+    color: white;
+}
+
 
 .btn-edit,
 .btn-delete {

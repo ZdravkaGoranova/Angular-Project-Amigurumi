@@ -12,12 +12,19 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
+import { LoginComponent } from './login/login.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     NavigationBarComponent,
     MenuBarComponent,
     FooterBarComponent,
+    LoginComponent,
    
   ],
   imports: [
@@ -28,7 +35,12 @@ import { FooterBarComponent } from './footer-bar/footer-bar.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

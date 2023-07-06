@@ -92,13 +92,14 @@ button:hover {
 .prd-skillLevel,
 .btn-edit,
 .btn-delete,
-.btn-like {
-    padding: 0.5em 1em;
+.btn-like,
+.btn-comment {
+    padding: 0.2em 0.8em;
     display: flex;
     gap: 0.5em;
     text-align: center;
     justify-content: center;
-
+    align-items: center;
 }
 
 .prd-author,

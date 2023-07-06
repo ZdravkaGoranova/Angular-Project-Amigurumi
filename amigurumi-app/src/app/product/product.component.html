@@ -9,7 +9,8 @@
 
         <span class="material-symbols-outlined">
             account_circle
-        </span>{{product.author}}
+        </span>
+        <span>{{product.author}}</span>
 
     </div>
     <button *ngIf="showReadMoreBtn" (click)="readMore()">Read More</button>
@@ -38,10 +39,10 @@
             </span>
             <span>{{likeButtonTitle}}</span>
         </button>
-        <button class="btn-like" >
+        <button class="btn-comment">
             <span class="material-symbols-outlined">
                 rate_review
-                </span>
+            </span>
             <span>Add Comment</span>
         </button>
 

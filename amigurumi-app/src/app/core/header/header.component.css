@@ -18,10 +18,6 @@ header ul {
     margin: auto;
 }
 
-header ul span {
-    color: white;
-    padding: 0.5em;
-}
 
 .mini-navbar ul {
     border: 1px solid #00d4ff;
@@ -72,6 +68,7 @@ nav {
     align-items: flex-end;
     justify-content: flex-end;
 }
+
 /* 
 .navigation-wrap ul li:hover {
 
@@ -108,6 +105,7 @@ nav {
 }
 
 
+
 /* mini-navbar */
 
 .mini-navbar ul {
@@ -128,10 +126,7 @@ nav {
     /* width: 10%; */
     overflow: hidden;
     display: flex;
-    gap:1em;
-    justify-content: center;
     align-items: center;
-    
 }
 
 .img-wrap img {
@@ -141,8 +136,17 @@ nav {
     width: 100%;
     height: auto;
     margin: 0.5em 0; */
-    width: 60px;
-    height: 60px;
+}
+
+.logo {
+    width: 10%;
+    height: 10%;
     border-radius: 50%;
+    /* margin-right: 10px; */
     margin: 0.5em 0;
+}
+
+.img-wrap h1 {
+    color: white;
+    padding: 0.5em;
 }

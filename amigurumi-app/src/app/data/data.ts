@@ -1,4 +1,5 @@
-import { Product} from "../models/product.model";
+
+import { Product } from "../types/product";
 import { data } from "./seed";
 
 export class ProductData {

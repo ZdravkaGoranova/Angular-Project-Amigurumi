@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from '../models/product.model';
+import { Product } from '../types/product';
 
 @Component({
   selector: 'app-product',
@@ -7,10 +7,13 @@ import { Product } from '../models/product.model';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
+  
   private symbols: number = 250;
+
   @Input() product!: Product;
   @Input() productDesc!: string;
   // author
+  
   descToShow: string;
   productDescLen: number;
   showReadMoreBtn: boolean = true;
@@ -21,12 +24,10 @@ export class ProductComponent {
   likeIsShown: boolean = false;
   likeButtonTitle: string = 'Like';
 
-
   constructor() {
     this.productDescLen = 0;
     this.descToShow = "";
   }
-
   readMore(): void {
     this.productDescLen += this.symbols;
     if (this.productDescLen >= this.productDesc.length) {
@@ -55,8 +56,4 @@ export class ProductComponent {
     this.showReadMoreBtn = true;
     this.showHideBtn = false;
   }
-  
 }
-
-
-

@@ -6,7 +6,7 @@ const data = [{
     skillLevel:'easy'
 },
 {
-    title: 'Crochet Floppy Eared Bunny',
+    title: 'Floppy Eared Bunny',
     description: 'Whether it’s springtime, Christmas time, or the height of summer, crochet can always come in handy. One of the best…',
     author: 'Author 2',
     imageUrl: 'https://i.pinimg.com/564x/22/c1/47/22c147c643ebf005b20e58e4b39807dc.jpg',

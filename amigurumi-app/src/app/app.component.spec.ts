@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'amigurumi-app'`, () => {
+  it(`should have as title 'Prodject-Amigorumi'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('amigurumi-app');
+    expect(app.title).toEqual('Prodject-Amigorumi');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('amigurumi-app app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Prodject-Amigorumi app is running!');
   });
 });

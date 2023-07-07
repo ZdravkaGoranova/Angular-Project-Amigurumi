@@ -67,6 +67,12 @@ nav {
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+
+}
+
+
+.navigation-wrap ul li a {
+    font-weight: 600;
 }
 
 /* 
@@ -77,10 +83,11 @@ nav {
 } */
 
 .navigation-wrap ul li a:hover {
-    font-weight: 700;
+
     background-color: white;
     color: #5758BB;
     padding: .55em 1em;
+    transform: scale(1.01);	
 }
 
 .logo {

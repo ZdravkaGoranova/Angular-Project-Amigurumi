@@ -1,4 +1,5 @@
-const data = [{
+const data = [
+    {
     title: 'Crochet Bear With Bow',
     description: 'Hello dear Amigurumi FollowersToday we share Crochet Bear with Bow Amigurumi Free Pattern for you. As you know we share new free amigurumi pattern every day.',
     author: 'Author 1',
@@ -46,13 +47,13 @@ const data = [{
 }
 
 
-,{
+// ,{
     
 
-    // imageUrl: 'https://i.pinimg.com/564x/f5/37/0b/f5370b150a17d3840b66e58b908529b4.jpg',
-    // imageUrl: 'https://i.pinimg.com/564x/c2/e2/f8/c2e2f8c0cdf209cbb7144c8f0b75d5ef.jpg',
-    // imageUrl: 'https://i.pinimg.com/564x/2d/e5/4c/2de54cc969fabaed567f7d6df7affc9d.jpg',
+//     imageUrl: 'https://i.pinimg.com/564x/f5/37/0b/f5370b150a17d3840b66e58b908529b4.jpg',
+//     imageUrl: 'https://i.pinimg.com/564x/c2/e2/f8/c2e2f8c0cdf209cbb7144c8f0b75d5ef.jpg',
+//     imageUrl: 'https://i.pinimg.com/564x/2d/e5/4c/2de54cc969fabaed567f7d6df7affc9d.jpg',
   
-}
+// }
 ]
 export { data };

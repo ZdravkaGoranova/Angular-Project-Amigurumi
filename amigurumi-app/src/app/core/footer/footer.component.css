@@ -28,6 +28,12 @@ footer ul li a {
     opacity: 0.7;
 }
 
+footer ul li:hover,footer ul li a:hover,li svg:hover{
+    opacity:3;
+    font-weight: 600;
+}
+
+
 footer p {
     padding: 0;
     opacity: 0.9;

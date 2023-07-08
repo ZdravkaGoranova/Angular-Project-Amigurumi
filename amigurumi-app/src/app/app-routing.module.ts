@@ -9,13 +9,15 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   // { path: '/', component: MainComponent},
+  
   // { path: '', pathMatch:'full', component: MainComponent},
+  { path: '', pathMatch:'full', redirectTo:'app-main'},
 
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent },
   
   { path: 'notFound', component: NotFoundComponent },
-  // { path: '**', component: NotFoundComponent },
+
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
@@ -25,6 +27,7 @@ const routes: Routes = [
   { path: 'profile', component:UserProfileComponent},
   // { path: 'CONTACT', component:}
 
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

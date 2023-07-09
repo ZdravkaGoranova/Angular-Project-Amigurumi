@@ -10,9 +10,9 @@ import { DetailsProductComponent } from './product/details-product/details-produ
 
 const routes: Routes = [
   // { path: '/', component: MainComponent},
-  // { path: '', pathMatch:'full', component: MainComponent},
+  { path: '', pathMatch:'full', component: MainComponent},
   // { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '', pathMatch: 'full', redirectTo: 'app-main' },
+  // { path: '', pathMatch: 'full', redirectTo: 'app-main' },
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

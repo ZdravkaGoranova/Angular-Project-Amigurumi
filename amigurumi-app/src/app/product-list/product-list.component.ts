@@ -9,18 +9,42 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit  {
-  products!: Product[];
-  constructor() {}
+// export class ProductListComponent implements OnInit  {
+//   products!: Product[];
+//   constructor() {}
   
-  ngOnInit(): void {
-    this.products = new ProductData().getData();
-    console.log(this.products)
-  }
-}
-// export class ProductListComponent implements OnInit {
-//   constructor(private apiService: ApiService) { }
 //   ngOnInit(): void {
-//     this.apiService.getProducts().subscribe((products) => { console.log(products) })
+//     this.products = new ProductData().getData();
+//     console.log(this.products)
 //   }
 // }
+export class ProductListComponent implements OnInit {
+products!: Product[];
+isLoading: boolean = true;
+constructor(private apiService: ApiService) { }
+ngOnInit(): void {
+
+
+  this.apiService.getProducts().subscribe({
+    next: (products) => {
+      console.log({ products })
+      this.products = products;
+      this.isLoading = false;
+    }
+    , error: (err) => {
+      this.isLoading = false;
+      console.log(`Error: ${err}`)
+    },
+  })
+}
+}
+
+  // products!: Product[];
+
+  // constructor(private apiService: ApiService) { }
+
+  // ngOnInit(): void {
+
+  //   this.apiService.getProducts().subscribe((products) => { console.log(products) })
+  // }
+

@@ -12,21 +12,21 @@ export class ProductData {
       const author = data[i].author || '';
       const imageUrl = data[i].imageUrl || '';
       const skillLevel = data[i].skillLevel || '';
+      const id = Number(data[i].id) || 0;
 
-
-      products[i] = new Product(title, description, author, imageUrl, skillLevel);
+      products[i] = new Product(author, description, id, imageUrl, skillLevel, title);
     }
 
     return products;
   }
   getProductId(id: number): Product | undefined {
     const product = data.find(item => item.id === id);
-  
+
     if (product) {
-      const { title, description, author, imageUrl, skillLevel } = product;
-      return new Product(title, description, author, imageUrl, skillLevel);
+      const { author, description, id, imageUrl, skillLevel, title } = product;
+      return new Product(author, description, id, imageUrl, skillLevel, title);
     }
-  
+
     return undefined;
   }
 

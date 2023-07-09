@@ -11,7 +11,10 @@
         <button *ngIf="showHideBtn" (click)="hideDesc()">Hide Desc</button> -->
 
     <button><a routerLink="details">Details</a></button>
-    <button (click)="toggleImage()">{{imageButtonTitle}}</button>
+    <!-- <button><a [routerLink]="['product','detail',p.id]">Details</a></button> -->
+
+
+    <!-- <button (click)="toggleImage()">{{imageButtonTitle}}</button> -->
     <div class="desc" *ngIf="productDescLen> 0">{{descToShow}}</div>
     <img *ngIf="imageIsShown" src="{{product.imageUrl}}" alt="product image" />
 

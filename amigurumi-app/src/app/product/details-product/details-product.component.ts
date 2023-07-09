@@ -24,8 +24,11 @@ export class DetailsProductComponent implements OnInit {
   likeIsShown: boolean = false;
   likeButtonTitle: string = 'Like';
 
-  constructor(private activeRoute: ActivatedRoute, ) {
+  constructor(private activeRoute: ActivatedRoute ) {
+
     console.log(this.activeRoute.snapshot.data);
+    console.log(this.activeRoute.snapshot.data['product']);
+    
     this.activeRoute.params.subscribe((v) => console.log(v))
 
     this.productDescLen = 0;

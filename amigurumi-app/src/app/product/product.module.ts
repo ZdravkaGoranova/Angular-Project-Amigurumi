@@ -5,6 +5,7 @@ import { DetailsProductComponent } from './details-product/details-product.compo
 import { CardProductComponent } from './card-product/card-product.component';
 import { RouterModule } from '@angular/router';
 import { ProductlResolver } from './product-detail.resolver';
+import { MainComponent } from '../main/main.component';
 @NgModule({
   declarations: [
     NewProductComponent,
@@ -14,11 +15,14 @@ import { ProductlResolver } from './product-detail.resolver';
   imports: [
     CommonModule,
     RouterModule.forChild([
-
+      {
+        path: 'catalog',
+        component: MainComponent,
+      },
       {
         path: 'product/details/:id',
         resolve: { product: ProductlResolver },
-        component: DetailsProductComponent
+        component: DetailsProductComponent,
       },
     ])
 

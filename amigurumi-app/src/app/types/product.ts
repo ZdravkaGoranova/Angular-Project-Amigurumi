@@ -1,11 +1,16 @@
 export class Product {
     constructor(
-        public title: string,
-        public description: string,
+  
         public author: string,
+        public description: string,
+        public id: number,
         public imageUrl: string,
+        public skillLevel: string,
+        public title: string,
+       
+    
         // public usersLiked: [],
         // public coments:  [],
-        public skillLevel: string,
+       
     ) { }
 }

@@ -6,11 +6,13 @@ import { CardProductComponent } from './card-product/card-product.component';
 import { RouterModule } from '@angular/router';
 import { ProductlResolver } from './product-detail.resolver';
 import { MainComponent } from '../main/main.component';
+
 @NgModule({
   declarations: [
     NewProductComponent,
     DetailsProductComponent,
-    CardProductComponent
+    CardProductComponent,
+ 
   ],
   imports: [
     CommonModule,

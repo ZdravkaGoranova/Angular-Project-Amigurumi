@@ -1,32 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductsComponent } from './products/products.component';
+// import { ProductsComponent } from './products/products.component';
 import { MainComponent } from './main/main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { DetailsProductComponent } from './product/details-product/details-product.component';
 
 const routes: Routes = [
   // { path: '/', component: MainComponent},
-  
   // { path: '', pathMatch:'full', component: MainComponent},
-  { path: '', pathMatch:'full', redirectTo:'app-main'},
+  // { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', pathMatch: 'full', redirectTo: 'app-main' },
 
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  
-  { path: 'notFound', component: NotFoundComponent },
-
-
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-
 
   { path: 'catalog', component: MainComponent },
+  { path: 'details', component: DetailsProductComponent },
+  { path: 'profile', component: ProfileComponent },
 
-  { path: 'profile', component:UserProfileComponent},
   // { path: 'CONTACT', component:}
-
+  { path: 'notFound', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

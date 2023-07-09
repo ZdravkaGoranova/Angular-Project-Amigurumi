@@ -7,7 +7,7 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { DetailsProductComponent } from './product/details-product/details-product.component';
-
+import { ProductlResolver } from './product/product-detail.resolver';
 const routes: Routes = [
   // { path: '/', component: MainComponent},
   { path: '', pathMatch:'full', component: MainComponent},
@@ -19,6 +19,11 @@ const routes: Routes = [
 
   { path: 'catalog', component: MainComponent },
   { path: 'details', component: DetailsProductComponent },
+  {
+    path: 'product/details/:id',
+    resolve: { product: ProductlResolver },
+    component: DetailsProductComponent,
+  },
   { path: 'profile', component: ProfileComponent },
 
   // { path: 'CONTACT', component:}

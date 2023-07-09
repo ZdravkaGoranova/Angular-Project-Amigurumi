@@ -1,6 +1,6 @@
 <ul>
     
-    <app-card-product *ngFor="let p of products" [routerLink]="['product','detail',p.id]" [product]="p|| ''"
+    <app-card-product *ngFor="let p of products"  [product]="p|| ''"
         [productDesc]="p.description || ''">
     </app-card-product>
 

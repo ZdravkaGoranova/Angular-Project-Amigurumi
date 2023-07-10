@@ -8,15 +8,7 @@ import { Product } from '../types/product';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-// export class ProductListComponent implements OnInit  {
-//   products!: Product[];
-//   constructor() {}
 
-//   ngOnInit(): void {
-//     this.products = new ProductData().getData();
-//     console.log(this.products)
-//   }
-// }
 export class ProductListComponent implements OnInit {
 
   @Input() product!: Product;
@@ -36,7 +28,6 @@ export class ProductListComponent implements OnInit {
 
   likeIsShown: boolean = false;
   likeButtonTitle: string = 'Like';
-
 
 
   constructor(private apiService: ApiService) {

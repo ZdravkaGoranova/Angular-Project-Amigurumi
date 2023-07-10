@@ -3,7 +3,7 @@ export class Product {
   
         public author: string,
         public description: string,
-        public id: number,
+        public id: string,
         public imageUrl: string,
         public skillLevel: string,
         public title: string,

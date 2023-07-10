@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewProductComponent } from './new-product/new-product.component';
-import { DetailsProductComponent } from './details-product/details-product.component';
 import { CardProductComponent } from './card-product/card-product.component';
-import { RouterModule } from '@angular/router';
-import { ProductlResolver } from './product-detail.resolver';
-import { MainComponent } from '../main/main.component';
+import { DetailsProductComponent } from './details-product/details-product.component';
+import { NewProductComponent } from './new-product/new-product.component';
 import { ProductRoutingModule } from './product-routing.module';
+
 @NgModule({
   declarations: [
     NewProductComponent,

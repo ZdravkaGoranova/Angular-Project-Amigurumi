@@ -13,12 +13,12 @@ export class ApiService {
 
   getProducts() {
     const { appUrl } = environment
-    return this.http.get<Product[]>(`${appUrl}`)
+    return this.http.get<Product[]>(`${appUrl}.json`)
   }
 
-  getSingleProduct(id: number) {
+  getSingleProduct(id: string) {
     const { appUrl } = environment
-    return this.http.get<Product>(`${appUrl}/${id}`)
+    return this.http.get<Product>(`${appUrl}/${id}/.json`)
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from 'src/app/api.service';
 import { Product } from 'src/app/types/product';
 
 @Component({
@@ -8,12 +9,12 @@ import { Product } from 'src/app/types/product';
   styleUrls: ['./details-product.component.css']
 })
 export class DetailsProductComponent implements OnInit {
+
   private symbols: number = 250;
-
-  @Input() product!: Product;
+  // product!: Product[] | undefined;
+  @Input() product!: Product ;
   @Input() productDesc!: string;
-  // author
-
+ 
   descToShow: string;
   productDescLen: number;
   showReadMoreBtn: boolean = true;
@@ -24,30 +25,44 @@ export class DetailsProductComponent implements OnInit {
   likeIsShown: boolean = false;
   likeButtonTitle: string = 'Like';
 
-  constructor(private activeRoute: ActivatedRoute ) {
+  constructor(
 
-    console.log(this.activeRoute.snapshot.data);
-    console.log(this.activeRoute.snapshot.data['product']);
-    
-    this.activeRoute.params.subscribe((v) => console.log(v))
+    private activatedRoute: ActivatedRoute,
+    private apiService: ApiService,
+  ) {
+
+    console.log(this.activatedRoute.snapshot.data);
+    console.log(this.activatedRoute.snapshot.data['product']);
+
+    this.activatedRoute.params.subscribe((v) => console.log(v))
 
     this.productDescLen = 0;
     this.descToShow = "";
   }
   ngOnInit(): void {
-
+    this.fetchTheme();
   }
-  readMore(): void {
-    this.productDescLen += this.symbols;
-    if (this.productDescLen >= this.productDesc.length) {
-      this.showReadMoreBtn = false;
-      this.showHideBtn = true;
-      this.descToShow = this.productDesc;
-    } else {
-      this.descToShow = this.productDesc.substr(0, this.productDescLen);
+  fetchTheme(): void {
+    const id = this.activatedRoute.snapshot.params['productId'];
 
-    }
+    this.apiService.getSingleProduct(id).subscribe((product) => {
+      this.product = product;
+      console.log({ product });
+    });
   }
+
+
+  // readMore(): void {
+  //   this.productDescLen += this.symbols;
+  //   if (this.productDescLen >= this.productDesc.length) {
+  //     this.showReadMoreBtn = false;
+  //     this.showHideBtn = true;
+  //     this.descToShow = this.productDesc;
+  //   } else {
+  //     this.descToShow = this.productDesc.substr(0, this.productDescLen);
+
+  //   }
+  // }
 
   toggleImage(): void {
     this.imageIsShown = !this.imageIsShown;

@@ -5,7 +5,7 @@ import { MainComponent } from '../main/main.component';
 
 const routes: Routes = [
     {
-        path: 'catalog',
+        path: 'products',
         children: [
             {
                 path: '',

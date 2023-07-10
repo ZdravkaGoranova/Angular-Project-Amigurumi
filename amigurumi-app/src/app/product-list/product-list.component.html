@@ -1,14 +1,46 @@
-<ul>
+<ul  >
     
-    <app-card-product *ngFor="let p of products"  [product]="p|| ''"
-        [productDesc]="p.description || ''">
-    </app-card-product>
+    <!-- <app-card-product *ngFor="let p of products"  [product]="p|| ''"
+        [productDesc]="p.description || ''"
+     
+        >
+    </app-card-product> -->
+    <!-- *ngFor="let p of products"  [product]="p|| ''"
+    [productDesc]="p.description || ''" -->
 
+    <li  *ngFor="let product of products">
+        
 
+        <!-- [routerLink]="['product','detail',product.id]"> -->
+        <div class="card" style="width: 18rem;">
+            <img src="{{product.imageUrl}}" class="card-img-top" alt="product image">
+            <div class="card-body">
+              <h5 class="card-title">{{product.title}}</h5>
 
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              
+              <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+              
+              
+              <button>  <a [routerLink]="product.id" class="btn btn-primary">  Details Page</a></button>
+            </div>
+          </div>
+    
+       
+    
+    </li>
 
-   
+  
 </ul>
+
+
+<!-- <div id="title">
+    <h3>{{product.title}}</h3>
+</div> -->
+
+<!-- <div class="desc" *ngIf="productDescLen> 0">{{descToShow}}</div> -->
+<!-- <img *ngIf="imageIsShown" src="{{product.imageUrl}}" alt="product image" />
+<button>  <a [routerLink]="product.id">  Details Page</a></button> -->
 
 <!-- [routerLink]="["product","detail",product.id] -->
 <!-- [product]="p|| ''" [productDesc]="p.description || ''"  -->

@@ -12,30 +12,39 @@
             <p class="logo"><span class="logo">Handmade Amigurumi</span></p>
         </div> -->
         <div class="mini-navbar">
-            <ul>
+            
+            <ul *ngIf="!isLoggedIn">
                 <li>
-                    <a routerLink="login">Login</a>
+                    <a routerLink="/login">Login</a>
                 </li>
                 <li>
-                    <a routerLink="register">Register</a>
-                </li>
-                <li>
-                    <a routerLink="notFound">Logout</a>
+                    <a routerLink="/register">Register</a>
                 </li>
             </ul>
+
+
+            <ul *ngIf="isLoggedIn">
+                <li>
+                    <a routerLink="/profile">{{firstName}}'s profile</a>
+                </li>
+                <li (click)="logout()">
+                    <a>Logout</a>
+                </li>
+            </ul>
+
         </div>
     </div>
     <nav class="navigation-wrap">
         <ul>
             <!-- <li><mat-icon>menu</mat-icon></li> -->
             <li>
-                <a routerLink="">Home</a>
+                <a routerLink="/">Home</a>
             </li>
             <li>
-                <a routerLink="catalog">Catalog</a>
+                <a routerLink="/catalog">Catalog</a>
             </li>
             <li>
-                <a routerLink="profile">Profile</a>
+                <a routerLink="/profile">Profile</a>
             </li>
             <li>
                 <a routerLink="">Contact us</a>

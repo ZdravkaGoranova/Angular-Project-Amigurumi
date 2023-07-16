@@ -10,9 +10,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { ProductListComponent } from './product-list/product-list.component';
 
-
-
-
 import { CoreModule } from './core/core.module';
 import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';

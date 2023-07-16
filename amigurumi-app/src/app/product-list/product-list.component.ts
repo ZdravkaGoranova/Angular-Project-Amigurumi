@@ -14,7 +14,7 @@ export class ProductListComponent implements OnInit {
   @Input() product!: Product;
   @Input() productDesc!: string;
 
-  products!: Product[];
+  products: Product[] = [];
   isLoading: boolean = true;
   private symbols: number = 250;
 
@@ -35,7 +35,6 @@ export class ProductListComponent implements OnInit {
     this.descToShow = "";
   }
   ngOnInit(): void {
-
 
     this.apiService.getProducts().subscribe({
       next: (products) => {

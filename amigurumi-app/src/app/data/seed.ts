@@ -2,7 +2,7 @@ const data = [
     {
         id: 1,
         title: 'Crochet Bear With Bow',
-        description: 'Hello dear Amigurumi FollowersToday we share Crochet Bear with Bow Amigurumi Free Pattern for you. As you know we share new free amigurumi pattern every day.',
+        description: '  ',
         author: 'Author 1',
         imageUrl: 'https://i.pinimg.com/564x/51/63/37/516337d1d71a31f5afe359391aa5bdb8.jpg',
         skillLevel: 'easy'

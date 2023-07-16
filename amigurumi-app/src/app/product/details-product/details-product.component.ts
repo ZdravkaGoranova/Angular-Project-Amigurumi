@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Product } from 'src/app/types/product';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-details-product',
@@ -29,6 +30,7 @@ export class DetailsProductComponent implements OnInit {
 
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
+    private userService:UserService
   ) {
 
     console.log(this.activatedRoute.snapshot.data);
@@ -41,6 +43,9 @@ export class DetailsProductComponent implements OnInit {
   }
   ngOnInit(): void {
     this.fetchTheme();
+  }
+  get isLoggedIn(): boolean {
+    return this.userService.isLogged;
   }
   fetchTheme(): void {
     const id = this.activatedRoute.snapshot.params['productId'];

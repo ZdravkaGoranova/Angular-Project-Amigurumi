@@ -43,8 +43,11 @@
             <li>
                 <a routerLink="/products">Catalog</a>
             </li>
-            <li>
+            <li *ngIf="isLoggedIn">
                 <a routerLink="/profile">Profile</a>
+            </li>
+            <li *ngIf="isLoggedIn">
+                <a routerLink="/profile">Add new Amigurumi</a>
             </li>
             <li>
                 <a routerLink="">Contact us</a>

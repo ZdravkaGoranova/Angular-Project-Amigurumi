@@ -90,7 +90,7 @@
         </span>{{product.skillLevel}}
 
     </div>
-    <div class="settings">
+    <div class="settings" *ngIf="isLoggedIn">
         <!-- <button class="btn-edit" (click)="toggleLike()">
             <span class="material-symbols-outlined">
                 thumb_up

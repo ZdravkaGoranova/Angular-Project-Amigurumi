@@ -17,7 +17,7 @@ export class ProfileComponent {
     return this.userService.isLogged;
   }
 
-  get firstName(): string {
+  get fullName(): string {
     return this.userService.user?.fullName || '';
   }
   get email(): string {

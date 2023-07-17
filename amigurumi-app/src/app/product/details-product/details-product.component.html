@@ -3,12 +3,15 @@
 
 
 
-<!-- <div class="row g-0 bg-primary-subtle bg-opacity-10 position-relative">
+<div class="row g-0 custom-bg-style position-relative">
     <div class="col-md-6 mb-md-0 p-md-4">
-        <img src="{{product.imageUrl}}" class="w-100" alt="...">
+        <div class="square-image-container">
+            <img src="{{product.imageUrl}}" class="square-image" alt="...">
+            <!-- <img src="{{product.imageUrl}}" class="w-100" alt="..."> -->
+        </div>
     </div>
     <div class="col-md-6 p-4 ps-md-0">
-        <h5 class="mt-0">{{product.title}}</h5>
+        <h5 id="title">{{product.title}}</h5>
         <div class="prd-author">
 
             <span class="material-symbols-outlined">
@@ -26,9 +29,11 @@
             </span>{{product.skillLevel}}
 
         </div>
-        <p>{{product.description}}</p>
-        <div class="settings">
-         
+        <div class="desc">
+            <span class="card-text"> {{product.description}}</span>
+        </div>
+        <div class="settings" *ngIf="isLoggedIn">
+
             <button class="btn-like" (click)="toggleLike()">
                 <span class="material-symbols-outlined">
                     thumb_up
@@ -52,13 +57,16 @@
                 <span class="material-symbols-outlined">
                     delete</span>
 
-              
+
                 <span>Delete</span>
             </button>
 
         </div>
+        <a [routerLink]="['..']" class="btn btn-outline-light">Back</a>  
     </div>
-</div> -->
+   
+</div>
+
 <li>
     <div id="title">
         <h3>{{product.title}}</h3>
@@ -69,18 +77,17 @@
             account_circle
         </span>
         <span>{{product.author}}</span>
-      
+
     </div>
 
 
-    
     <div class="desc">
         <span class="card-text"> {{product.description}}</span>
     </div>
     <!-- <button *ngIf="showReadMoreBtn" (click)="readMore()">Read More</button> -->
     <button *ngIf="showHideBtn" (click)="hideDesc()">Hide Desc</button>
-    
- 
+
+
     <img *ngIf="imageIsShown" src="{{product.imageUrl}}" alt="product image" />
 
     <div class="prd-skillLevel">

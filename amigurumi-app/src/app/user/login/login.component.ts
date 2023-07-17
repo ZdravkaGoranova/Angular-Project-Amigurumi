@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -19,5 +20,10 @@ export class LoginComponent {
 
     this.userService.login();
     this.router.navigate(['/']);
+  }
+  submitHandler(form: NgForm): void {
+    console.log(form.value)
+
+
   }
 }

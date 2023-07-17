@@ -12,6 +12,13 @@ export class UserService {
   get isLogged(): boolean {
     return !!this.user;
   }
+  get isMale(): boolean {
+    return this.user?.gender === 'male';
+  }
+
+  get isFemale(): boolean {
+    return this.user?.gender === 'female';
+  }
 
   constructor() {
     try {
@@ -25,7 +32,8 @@ export class UserService {
   login(): void {
     this.user = {
       email: 'niki@abv.bg',
-      firstName: 'Niki',
+      fullName: 'Niki',
+      gender: 'male',
     };
 
     localStorage.setItem(this.USER_KYE, JSON.stringify(this.user))

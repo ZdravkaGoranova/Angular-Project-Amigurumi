@@ -17,8 +17,8 @@ export class HeaderComponent {
     return this.userService.isLogged;
   }
 
-  get firstName(): string {
-    return this.userService.user?.firstName || '';
+  get fullName(): string {
+    return this.userService.user?.fullName || '';
   }
 
   logout(): void {

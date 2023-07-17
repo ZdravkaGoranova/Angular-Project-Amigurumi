@@ -18,9 +18,16 @@ export class ProfileComponent {
   }
 
   get firstName(): string {
-    return this.userService.user?.firstName || '';
+    return this.userService.user?.fullName || '';
   }
   get email(): string {
     return this.userService.user?.email || '';
+  }
+
+  get gender(): string {
+    return this.userService.user?.gender || '';
+  }
+  get isMale(): boolean {
+    return this.userService.isMale;
   }
 }

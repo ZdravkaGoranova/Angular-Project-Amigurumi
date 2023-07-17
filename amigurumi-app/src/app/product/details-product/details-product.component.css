@@ -166,3 +166,7 @@ button:hover {
     max-width: 80%;
     margin: 20px auto;
 }
+.btn-back{
+    text-align: center;
+    padding-top: 10px;
+}

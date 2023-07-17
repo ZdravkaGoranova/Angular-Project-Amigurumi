@@ -7,15 +7,15 @@
 
 			</h2>
 		</div>
-		<form class="card-form">
+		<form class="card-form" #loginForm="ngForm" class="card-form" (ngSubmit)="submitHandler(loginForm)">
 
 			<div class="input">
-				<input type="text" class="input-field" value="vlockn@gmail.com" required #inputEmail />
-				<label class="input-label">Email</label>
+				<input type="text" class="input-field" value="vlockn@gmail.com" required #inputEmail  ngModel/>
+				<label class="input-label"><i class="fa-regular fa-envelope"></i> Email</label>
 			</div>
 			<div class="input">
-				<input type="password" class="input-field" required #inputPassword />
-				<label class="input-label">Password</label>
+				<input type="password" class="input-field" required #inputPassword  ngModel/>
+				<label class="input-label"><i class="fa-solid fa-lock"></i> Password</label>
 			</div>
 			<div class="action">
 

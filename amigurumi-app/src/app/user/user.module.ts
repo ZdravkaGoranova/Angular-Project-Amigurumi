@@ -4,6 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserRoutingModule } from './user-routing.module';
+import { FormsModule } from '@angular/forms';
+import { MaxCountDirective } from './max-count.directive';
 
 
 
@@ -11,11 +13,13 @@ import { UserRoutingModule } from './user-routing.module';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    MaxCountDirective
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    FormsModule,
   ]
 })
 export class UserModule { }

@@ -1,24 +1,68 @@
 <div class="container">
 	<!-- code here -->
 	<div class="card">
-		<div class="card-image">	
+		<div class="card-image">
 			<h2 class="card-heading">
 				Get started
 				<small>Let us create your account</small>
 			</h2>
 		</div>
-		<form class="card-form">
+		<form #registerForm="ngForm" class="card-form" (ngSubmit)="submitHandler(registerForm)">
 			<div class="input">
-				<input type="text" class="input-field"  required/>
-				<label class="input-label">Full name</label>
+				<input type="text" id="fullName" name="fullName" class="input-field" required ngModel />
+
+				<label for="fullName" class="input-label"> <i class="fa-solid fa-user-large"></i> Full name</label>
 			</div>
-						<div class="input">
-				<input type="text" class="input-field"  required/>
-				<label class="input-label">Email</label>
+
+			<div class="input">
+				<input type="text" id="email" name="email" class="input-field" ngModel email required
+					#emailInput="ngModel" />
+				<label for="email" class="input-label"><i class="fa-regular fa-envelope"></i> Email</label>
 			</div>
-						<div class="input">
-				<input type="password" class="input-field" required/>
-				<label class="input-label">Password</label>
+			<!--email error msg-->
+			<div *ngIf="emailInput.touched">
+				<div *ngIf="emailInput.errors?.['required']">Email is required!!!</div>
+				<div *ngIf="emailInput.errors?.['email']">Invalid Email!</div>
+			</div>
+
+
+
+			<div class="input">
+				<input type="password" id="password" name="password" class="input-field" ngModel required
+					#passwordInput="ngModel" [appMaxCount]="20" minlength="4" />
+				<label for="password" class="input-label"><i class="fa-solid fa-lock"></i> Password</label>
+			</div>
+
+			<!--password error msg-->
+			<!-- <div *ngIf="passwordInput.touched">
+				<div *ngIf="passwordInput.errors?.['required']">Password is required!</div>
+				<div *ngIf="passwordInput.errors?.['email']">Invalid Password!</div>
+			</div> -->
+			<div *ngIf="passwordInput.errors?.['appMaxCount']">Invalid Password, because length is longer than
+				{{passwordInput.errors?.['appMaxCount']}} ...</div>
+			<div *ngIf="passwordInput.errors?.['minlength']">Invalid Password, because length is short than
+				{{passwordInput.errors?.['minlength'].requiredLength}} ...</div>
+
+			<div *ngIf="passwordInput.touched  alert alert-danger">
+				Password is required@@@@@!
+			</div>
+
+			<div class="genderRadio">
+			
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="gender" id="male" value="male" ngModel>
+					<label class="form-check-label" for="male">
+						Male
+					</label>
+				</div>
+			
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="gender" id="female" value="female" ngModel
+						checked>
+					<label class="form-check-label" for="female">
+						Female
+					</label>
+				</div>
 			</div>
 			<div class="action">
 				<button class="action-button">Register now</button>
@@ -29,3 +73,4 @@
 		</div>
 	</div>
 </div>
+{{registerForm.value |json}}

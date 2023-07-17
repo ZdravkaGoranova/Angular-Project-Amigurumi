@@ -13,6 +13,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { CoreModule } from './core/core.module';
 import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,12 +28,14 @@ import { ProductModule } from './product/product.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
+    FormsModule,
 
     CoreModule,
     UserModule,
-    ProductModule
+    ProductModule,
+
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

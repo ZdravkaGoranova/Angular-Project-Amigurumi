@@ -1,29 +1,56 @@
+
+
 <div class="container">
-	<!-- code here -->
+
 	<div class="card">
 		<div class="card-image">
 			<h2 class="card-heading">
 				Log in
-
 			</h2>
 		</div>
 		<form class="card-form" #loginForm="ngForm" class="card-form" (ngSubmit)="submitHandler(loginForm)">
 
 			<div class="input">
-				<input type="text" class="input-field" value="vlockn@gmail.com" required #inputEmail  ngModel/>
-				<label class="input-label"><i class="fa-regular fa-envelope"></i> Email</label>
+				<input type="text" id="email" name="email" class="input-field" ngModel email required
+					#emailInput="ngModel" />
+				<label for="email" class="input-label"><i class="fa-regular fa-envelope"></i> Email</label>
 			</div>
-			<div class="input">
-				<input type="password" class="input-field" required #inputPassword  ngModel/>
-				<label class="input-label"><i class="fa-solid fa-lock"></i> Password</label>
-			</div>
-			<div class="action">
 
-				<button class="action-button" (click)="login(inputEmail.value,inputPassword.value)">Submit</button>
+			<!--email error msg-->
+			<div class="error" *ngIf="emailInput.errors?.['required'] && emailInput.touched">Email is required!
 			</div>
+
+			<div class="error" *ngIf="emailInput.errors?.['email']&& emailInput.touched">Invalid Email!
+				{{emailInput.errors?.['email'].requiredLength}} ...
+			</div>
+
+			<div class="input">
+				<input type="password" id="password" name="password" class="input-field" ngModel required
+					#passwordInput="ngModel" [appMaxCount]="20" minlength="4" />
+				<label for="password" class="input-label"><i class="fa-solid fa-lock"></i> Password</label>
+			</div>
+
+			<!--password error msg-->
+			<div class="error" *ngIf="passwordInput.errors?.['appMaxCount']">Invalid Password, because length is longer
+				than
+				{{passwordInput.errors?.['appMaxCount']}} ...
+			</div>
+			<div class="error" *ngIf="passwordInput.errors?.['minlength']">Invalid Password, because length is short
+				than
+				{{passwordInput.errors?.['minlength'].requiredLength}} ...
+			</div>
+			<div class="error" *ngIf="passwordInput.errors?.['required'] && passwordInput.touched">Password is required!
+			</div>
+
+
+			<div class="action">
+				<button class="action-button" (click)="login(emailInput.value,passwordInput.value)">Submit</button>
+			</div>
+
 		</form>
 		<div class="card-info">
-			<p>If you have no registration,please <a routerLink="/register">Register</a></p>
+			<p>If you already have a registration, please <a routerLink="/register">Register</a></p>
 		</div>
 	</div>
 </div>
+{{loginForm.value |json}}

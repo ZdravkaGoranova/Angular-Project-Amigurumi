@@ -7,6 +7,11 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  user: any = {
+    gender: 'male' // или 'female'
+  };
+
+
   //another way to get register form whithout passing it as a parameter of the callback
   // @ViewChild('registerForm') registerForm: NgForm | undefined;
 

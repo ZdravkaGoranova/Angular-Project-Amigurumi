@@ -24,6 +24,19 @@ export class LoginComponent {
   submitHandler(form: NgForm): void {
     console.log(form.value)
 
+    if (form.invalid) {
+      return;
+    }
 
+    // form.setValue({
+    //   fullName: '', email: '', password: '', gender: '',
+    // })
+
+    const value: { fullName: string; email: string; password: string; gender: string; } = form.value
+    console.log({ value })
+    console.log(value.email)
+    console.log(value.fullName)
+    console.log(value.gender)
+    console.log(value.password)
   }
 }

@@ -104,7 +104,7 @@ img {
 .action-button {
 	font: inherit;
 	font-size: 1.25rem;
-	padding: 1em;
+	padding: 0.4em;
 	width: 100%;
 	font-weight: 500;
 	background-color: #6658d3;
@@ -115,7 +115,6 @@ img {
 		outline: 0;
 	}
 }
-
 .card-info {
 	padding: 1rem 1rem;
 	text-align: center;
@@ -129,5 +128,21 @@ img {
 }
 
 
+input.ng-valid {
+	border-left: 5px solid  #6658d3;
+	margin-right: 20px;
+}
+input.ng-invalid.ng-touched {
+	border-left: 5px solid #f8d7da;
+	margin-right: 20px;
+}
+.error {
+	text-align: left;
+    background-color: #f8d7da;
+    padding: 8px;
+    margin:8px ;
+    border-radius: 3px;
+    font-style: italic;
+}
 
 

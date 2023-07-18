@@ -9,23 +9,37 @@
 		</div>
 		<form #registerForm="ngForm" class="card-form" (ngSubmit)="submitHandler(registerForm)">
 			<div class="input">
-				<input type="text" id="fullName" name="fullName" class="input-field" required ngModel />
+				<input type="text" id="fullName" name="fullName" class="input-field" required ngModel
+					#fullNameInput="ngModel" minlength="4" />
 
 				<label for="fullName" class="input-label"> <i class="fa-solid fa-user-large"></i> Full name</label>
 			</div>
-
+			<!--email error msg-->
+			<div class="error" *ngIf="fullNameInput.errors?.['required'] && fullNameInput.touched">
+			
+				Full name is required!
+			</div>
+			<div class="error" *ngIf="fullNameInput.errors?.['minlength']">
+			
+				Invalid Full name, because length is short
+				than
+				{{fullNameInput.errors?.['minlength'].requiredLength}} ...
+			</div>
 			<div class="input">
 				<input type="text" id="email" name="email" class="input-field" ngModel email required
 					#emailInput="ngModel" />
 				<label for="email" class="input-label"><i class="fa-regular fa-envelope"></i> Email</label>
 			</div>
+
 			<!--email error msg-->
-			<div *ngIf="emailInput.touched">
-				<div *ngIf="emailInput.errors?.['required']">Email is required!!!</div>
-				<div *ngIf="emailInput.errors?.['email']">Invalid Email!</div>
+			<div class="error" *ngIf="emailInput.errors?.['required'] && emailInput.touched">
+
+				Email is required!
 			</div>
 
-
+			<div class="error" *ngIf="emailInput.errors?.['email']&& emailInput.touched">Invalid Email!
+				{{emailInput.errors?.['email'].requiredLength}} ...
+			</div>
 
 			<div class="input">
 				<input type="password" id="password" name="password" class="input-field" ngModel required
@@ -38,34 +52,37 @@
 				<div *ngIf="passwordInput.errors?.['required']">Password is required!</div>
 				<div *ngIf="passwordInput.errors?.['email']">Invalid Password!</div>
 			</div> -->
-			<div *ngIf="passwordInput.errors?.['appMaxCount']">Invalid Password, because length is longer than
-				{{passwordInput.errors?.['appMaxCount']}} ...</div>
-			<div *ngIf="passwordInput.errors?.['minlength']">Invalid Password, because length is short than
-				{{passwordInput.errors?.['minlength'].requiredLength}} ...</div>
-
-			<div *ngIf="passwordInput.touched  alert alert-danger">
-				Password is required@@@@@!
+			<div class="error" *ngIf="passwordInput.errors?.['appMaxCount']">Invalid Password, because length is longer
+				than
+				{{passwordInput.errors?.['appMaxCount']}} ...
+			</div>
+			<div class="error" *ngIf="passwordInput.errors?.['minlength']">Invalid Password, because length is short
+				than
+				{{passwordInput.errors?.['minlength'].requiredLength}} ...
+			</div>
+			<div class="error" *ngIf="passwordInput.errors?.['required'] && passwordInput.touched">Password is required!
 			</div>
 
 			<div class="genderRadio">
-			
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="gender" id="male" value="male" ngModel>
+					<input class="form-check-input" type="radio" name="gender" id="male" value="male"
+						[(ngModel)]="user.gender">
 					<label class="form-check-label" for="male">
 						Male
 					</label>
 				</div>
-			
+
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="gender" id="female" value="female" ngModel
-						checked>
+					<input class="form-check-input" type="radio" name="gender" id="female" value="female"
+						[(ngModel)]="user.gender">
 					<label class="form-check-label" for="female">
 						Female
 					</label>
 				</div>
 			</div>
+
 			<div class="action">
-				<button class="action-button">Register now</button>
+				<button class="action-button">Submit</button>
 			</div>
 		</form>
 		<div class="card-info">

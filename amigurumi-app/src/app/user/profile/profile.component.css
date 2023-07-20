@@ -161,3 +161,20 @@ p, .p {
     margin-top:18px;
     color:#FF4500
 }
+
+/* input.ng-valid {
+	border-left: 5px solid  #6658d3;
+	margin-right: 20px;
+} */
+input.ng-invalid.ng-touched {
+	border-left: 5px solid#f8d7da;
+	margin-right: 20px;
+}
+.error {
+	text-align: left;
+    background-color: #f8d7da;
+    padding: 8px;
+    margin:8px ;
+    border-radius: 3px;
+    font-style: italic;
+}

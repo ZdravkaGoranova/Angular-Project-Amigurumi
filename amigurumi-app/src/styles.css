@@ -22,12 +22,27 @@ html {
 /* typography */
 html {
     font: 18px/1.5 Verdana, sans-serif;
+   
 }
 
 body, form, input, textarea, option, select, button {
     font: inherit;
 }
-
+body{
+    background-image: url('https://i.pinimg.com/564x/0d/a6/24/0da624fd36b123a8d39e2466635883d1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    /* background-image: linear-gradient(
+    to bottom,
+    rgba(231, 229, 231, 0.5),
+    rgba(0, 0, 255, 0.5)
+    
+  ), url("https://i.pinimg.com/564x/0d/a6/24/0da624fd36b123a8d39e2466635883d1.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%; */
+}
 ul, ol {
     padding-bottom: 1.5em;
 }

@@ -1,42 +1,40 @@
-<header>
-    <div class="mini-navbar-wrap">
+<!-- 
+<div>
+    <div class="btn-group" role="group" aria-label="Basic outlined example" *ngIf="!isLoggedIn">
 
-        <div class="img-wrap">
-            <!-- <img src="https://i.pinimg.com/564x/2c/a4/b5/2ca4b59eeeb60d053f6186daf110b35e.jpg" alt=""> -->
-            <!-- <img src="https://i.pinimg.com/564x/36/9c/0d/369c0de93bf97aecbe3f7815db0e385d.jpg" alt=""> -->
-            <!-- <img src=" https://i.pinimg.com/564x/26/1b/50/261b503bbc15b5063694847183c04264.jpg" alt=""> -->
-            <img src="https://i.pinimg.com/564x/17/6e/24/176e24e7b955c7d2c60e48dbb529d15c.jpg" alt="Logo" class="logo">
-            <h1 class="logo-text">Handmade Amigurumi</h1>
-        </div>
-        <!-- <div class="logo-wrap">
-            <p class="logo"><span class="logo">Handmade Amigurumi</span></p>
-        </div> -->
-        <div class="mini-navbar">
-            
-            <ul *ngIf="!isLoggedIn">
-                <li>
-                    <a routerLink="/login">Login</a>
-                </li>
-                <li>
-                    <a routerLink="/register">Register</a>
-                </li>
-            </ul>
+        <a routerLink="/login" class="btn btn-outline-primary">Login</a>
+        <a routerLink="/register" class="btn btn-outline-primary">Register</a>
 
-
-            <ul *ngIf="isLoggedIn">
-                <li>
-                    <a routerLink="/profile">{{firstName}}'s profile</a>
-                </li>
-                <li (click)="logout()">
-                    <a>Logout</a>
-                </li>
-            </ul>
-
-        </div>
     </div>
-    <nav class="navigation-wrap">
+    <div class="btn-group" role="group" aria-label="Basic outlined example" *ngIf="isLoggedIn">
+
+        <a routerLink="/profile" class="btn btn-outline-primary">Welcome {{firstName}}!</a>
+        <a routerLink="/register" class="btn btn-outline-primary" (click)="logout()">Logout</a>
+
+    </div>
+</div>
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button  routerLink="/" class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+    </li>
+    <li class="nav-item" role="presentation" *ngIf="isLoggedIn">
+      <button routerLink="/profile" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button   routerLink="/products" class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Catalog</button>
+    </li>
+    <li class="nav-item" role="presentation" *ngIf="isLoggedIn">
+        <button   routerLink="/products" class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Add new Amigurumi</button>
+      </li>
+  </ul> -->
+
+
+<header>
+
+    <!-- <nav class="navigation-wrap">
         <ul>
-            <!-- <li><mat-icon>menu</mat-icon></li> -->
+            
             <li>
                 <a routerLink="/">Home</a>
             </li>
@@ -54,6 +52,54 @@
             </li>
 
         </ul>
-    </nav>
+    </nav> -->
 
+
+    <div class="img-wrap">
+        <!-- <img src="https://i.pinimg.com/564x/17/6e/24/176e24e7b955c7d2c60e48dbb529d15c.jpg" alt="Logo" class="logo"> -->
+
+        <h1 class="logo-text">Handmade Amigurumi</h1>
+
+    </div>
+
+
+
+    <div class="welcome">
+        <div class="btn-group" role="group" aria-label="Basic outlined example" *ngIf="!isLoggedIn">
+
+            <a routerLink="/login" class="btn btn-outline-primary"><i class="fa-solid fa-right-to-bracket fa-fade"></i> Login</a>
+            <a routerLink="/register" class="btn btn-outline-primary">Register</a>
+
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic outlined example" *ngIf="isLoggedIn">
+
+            <a routerLink="/profile" class="btn btn-outline-primary">Welcome {{fullName}}!</a>
+            <a routerLink="/register" class="btn btn-outline-primary" (click)="logout()"> Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+        <li class="nav-item" role="presentation">
+            <button routerLink="/" class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
+                aria-selected="true">Home</button>
+        </li>
+        <li class="nav-item" role="presentation" *ngIf="isLoggedIn">
+            <button routerLink="/profile" class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane"
+                aria-selected="false">Profile</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button routerLink="/products" class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane"
+                aria-selected="false">Catalog</button>
+        </li>
+        <li class="nav-item" role="presentation" *ngIf="isLoggedIn">
+            <button routerLink="/products" class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane"
+                aria-selected="false">Add new Amigurumi</button>
+        </li>
+    </ul>
 </header>

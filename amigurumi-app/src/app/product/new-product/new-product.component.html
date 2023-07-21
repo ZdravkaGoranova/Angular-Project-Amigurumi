@@ -1,1 +1,203 @@
-<p>new-product works!</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+    integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <!-- Page title -->
+            <div class="my-5">
+                <h3>Add new Amigurumi</h3>
+                <hr>
+            </div>
+            <!-- Form START -->
+          
+
+            <form class="file-upload" #form="ngForm" (ngSubmit)="submitHandler(form)">
+                <div class="row mb-5 gx-5">
+                    <!-- change password -->
+                    <div class="col-xxl-6">
+                        <div class="bg-secondary-soft px-4 py-5 rounded">
+                            <div class="row g-3">
+                                <h4 class="my-4">Details:</h4>
+                                <!-- Title -->
+                                <div class="col-md-12">
+                                    <label for="exampleInputPassword1" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="title" name="title" ngModel required
+                                        minlength="4" #titleInput="ngModel">
+                                </div>
+                                <!-- error msg-titleInput-->
+                                <ng-container *ngIf="titleInput.touched">
+
+                                    <div class="error" *ngIf="titleInput.errors?.['minlength']">
+                                        Invalid Title, because length is short
+                                        than {{titleInput.errors?.['minlength'].requiredLength}} symbols.
+                                    </div>
+                                    <div class="error" *ngIf="titleInput.errors?.['required'] ">
+                                        Title is required!
+                                    </div>
+                                </ng-container>
+
+                            
+                                <!-- Description -->
+                                <div class="col-md-12">
+                                    <label for="description" class="form-label">Description</label>
+                                    <input type="text" class="form-control" id="description" name="description" ngModel
+                                        required minlength="15" #descriptionInput="ngModel">
+                                </div>
+                                <!-- error msg-descriptionInput-->
+                                <ng-container *ngIf="descriptionInput.touched">
+
+                                    <div class="error" *ngIf="descriptionInput.errors?.['minlength']">
+                                        Invalid Description, because length is short
+                                        than {{descriptionInput.errors?.['minlength'].requiredLength}} symbols.
+                                    </div>
+                                    <div class="error" *ngIf="descriptionInput.errors?.['required'] ">
+                                        Description is required!
+                                    </div>
+                                </ng-container>
+                                <!-- Photo -->
+                                <div class="col-md-12">
+                                    <label for="exampleInputPassword3" class="form-label">Photo</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword3"
+                                    name="photo" ngModel required
+                                        minlength="4" #photoInput="ngModel"
+                                    >
+                                </div>
+                                <!-- error msg-titleInput-->
+                                <ng-container *ngIf="photoInput.touched">
+
+                                    <div class="error" *ngIf="photoInput.errors?.['minlength']">
+                                        Invalid Photo, because length is short
+                                        than {{photoInput.errors?.['minlength'].requiredLength}} symbols.
+                                    </div>
+                                    <div class="error" *ngIf="photoInput.errors?.['required'] ">
+                                        Photo is required!
+                                    </div>
+                                </ng-container>
+
+                                <!-- Skill Level -->
+                                <div class="skillsRadio">
+                                    <p>Skill Level:</p>
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="radio" name="skillLevel"
+                                         id="easy" value="easy" checked [(ngModel)]="user.skillLevel">
+                                        <label class="form-check-label" for="easy">
+                                            Easy
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="skillLevel"
+                                            id="intermediate" value="intermediate" [(ngModel)]="user.skillLevel">
+                                        <label class="form-check-label" for="intermediate">
+                                            Intermediate
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="skillLevel"
+                                            id="advanced" value="advanced" [(ngModel)]="user.skillLevel">
+                                        <label class="form-check-label" for="advanced">
+                                            Advanced
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- Category -->
+                                <div class="categoryRadio">
+                                    <p>Category:</p>
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="radio" name="category" id="baby" value="baby" [(ngModel)]="user.category">
+                                        <label class="form-check-label" for="baby">
+                                            Baby
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="category" id="animals"
+                                        value="animals" [(ngModel)]="user.category"  checked>
+                                        <label class="form-check-label" for="animals">
+                                            Animals
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="category" id="others"
+                                        value="others" [(ngModel)]="user.category"   checked>
+                                        <label class="form-check-label" for="others">
+                                            Others
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- Example single danger button -->
+                                <!-- <div class="btn-group col-md-6">
+                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                        data-toggle="dropdown">
+                                        Skill Level
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+
+                                    </ul>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Category
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Animals</a></li>
+
+                                        <li><a class="dropdown-item" href="#">Doll</a></li>
+                                        <li><a class="dropdown-item" href="#">Baby</a></li>
+                                        <li><a class="dropdown-item" href="#">Bear</a></li>
+
+                                        <li><a class="dropdown-item" href="#">Bunnies</a></li>
+                                        <li><a class="dropdown-item" href="#">Caterpillar</a></li>
+
+
+                                    </ul>
+                                </div> -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Upload profile -->
+                    <div class="col-xxl-4">
+                        <div class="bg-secondary-soft px-4 py-5 rounded">
+                            <div class="row g-3">
+                                <h4 class="mb-4 mt-0">Upload amigurumi photo</h4>
+                                <div class="text-center">
+
+                                    <div class="square position-relative display-2 mb-3">
+                                        <i
+                                            class="fas fa-regular fa-image position-absolute top-50 start-50 translate-middle text-secondary"></i>
+                                    </div>
+                                    <!-- Button -->
+                                    <div class="d-flex justify-content-evenly">
+                                        <input type="file" id="customFile" name="file" hidden="">
+                                        <label class="btn btn-primary" for="customFile">Upload</label>
+                                        <button type="button" class="btn btn-info">Remove</button>
+                                    </div>
+                                    <!-- Content -->
+                                    <p class="text-muted mt-3 mb-0"><span class="me-1">Note:</span>Minimum size 300px x
+                                        300px</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- Row END -->
+                {{form.value |json}}
+                <!-- button -->
+                <div class="d-flex flex-row mb-3">
+                    <button type="submit" class="btn btn-primary btn-lg" 
+                    [disabled]="form.invalid"
+                    [style]="{backgroundColor:form.invalid ? '#e25562':' #6658d3'}"
+                    >Add new Amigurumi</button>
+
+                </div>
+            </form> <!-- Form END -->
+          
+        </div>
+    </div>
+</div>

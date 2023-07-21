@@ -1,5 +1,8 @@
-<ul  >
-    
+<div class="my-5">
+    <h3>Amigurumi Catalog:</h3>
+    <hr>
+</div>
+<ul>
     <!-- <app-card-product *ngFor="let p of products"  [product]="p|| ''"
         [productDesc]="p.description || ''"
      
@@ -9,30 +12,31 @@
     [productDesc]="p.description || ''" -->
 
     <li *ngFor="let product of products ">
-        
+
 
         <!-- [routerLink]="['product','detail',product.id]"> -->
         <div class="card" style="width: 18rem;">
             <img src="{{product.imageUrl}}" class="card-img-top" alt="product image">
             <div class="card-body">
-              <h5 class="card-title">{{product.title}}</h5>
+                <h5 class="card-title">{{product.title}}</h5>
 
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              
-              <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-              
-              
-              <button>  <a [routerLink]="product.id" class="btn btn-primary"
-                >  Details Page</a></button>
-            
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+
+                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite>
+                </footer>
+
+
+                <button> <a [routerLink]="product.id" class="btn btn-primary"> Details Page</a></button>
+
             </div>
-          </div>
-    
-       
-    
+        </div>
+
+
+
     </li>
 
-  
+
 </ul>
 
 

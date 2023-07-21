@@ -4,6 +4,7 @@ import { CardProductComponent } from './card-product/card-product.component';
 import { DetailsProductComponent } from './details-product/details-product.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { ProductRoutingModule } from './product-routing.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ProductRoutingModule } from './product-routing.module';
   imports: [
     CommonModule,
     ProductRoutingModule,
+    FormsModule,
     // RouterModule.forChild([
     //   {
     //     path: 'catalog',

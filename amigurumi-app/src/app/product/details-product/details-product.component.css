@@ -19,9 +19,10 @@ li {
     transition: all 0.2s linear;
     text-align: center;
     margin: 20px auto;
-    background: #5758BB;
+    /* background: #5758BB; */
+    background-color: rgba(240, 240, 240, 0.8)
     /* background: #ADADE8; */
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    /* box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px; */
 }
 
 li:hover {
@@ -56,8 +57,8 @@ h3 {
 
 #title {
     /* margin-bottom: 10px; */
-    color: white;
-    border-bottom: 3px solid rgba(255, 255, 255, 0.5);
+    color: rgb(27, 28, 27);;
+    border-bottom: 3px solid rgba(26, 23, 23, 0.5);
     margin: 0 auto;
     width: max-content;
     margin-bottom: 20px;
@@ -71,7 +72,7 @@ h3 {
     text-align: center;
 
     opacity: 0.7;
-    color: white;
+    color: rgb(23, 22, 22);
 }
 
 
@@ -80,7 +81,7 @@ button {
     outline: none;
     border: none;
     background: white;
-    color: rgb(7, 7, 7);
+    color: rgb(27, 28, 27);
     padding: 6px;
     border-radius: 3px;
     margin: 5px;
@@ -124,7 +125,7 @@ button:hover {
 
 .prd-author,
 .prd-skillLevel {
-    color: white;
+    color: rgb(27, 28, 27);
 }
 
 .prd-author {
@@ -160,7 +161,9 @@ button:hover {
 }
 
 .custom-bg-style {
-    background-color: #5758BB;
+    /* background-color: #5758BB; */
+    background-color: rgba(240, 240, 240, 0.8);
+    /* background-color: rgba( 87, 88, 187, 0.8); */
     /* Заменете с вашите собствени стойности за цвят */
 
     max-width: 80%;

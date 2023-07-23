@@ -13,9 +13,9 @@ export class DetailsProductComponent implements OnInit {
 
   private symbols: number = 250;
   // product!: Product[] | undefined;
-  @Input() product!: Product ;
+  @Input() product!: Product;
   @Input() productDesc!: string;
- 
+
   descToShow: string;
   productDescLen: number;
   showReadMoreBtn: boolean = true;
@@ -26,11 +26,13 @@ export class DetailsProductComponent implements OnInit {
   likeIsShown: boolean = false;
   likeButtonTitle: string = 'Like';
 
+  isDeleteProduct: boolean = false;
+  
   constructor(
 
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
-    private userService:UserService
+    private userService: UserService
   ) {
 
     console.log(this.activatedRoute.snapshot.data);
@@ -84,5 +86,12 @@ export class DetailsProductComponent implements OnInit {
     this.descToShow = "";
     this.showReadMoreBtn = true;
     this.showHideBtn = false;
+  }
+
+  editProduct(): void {
+
+  }
+  deleteProduct(): void {
+
   }
 }

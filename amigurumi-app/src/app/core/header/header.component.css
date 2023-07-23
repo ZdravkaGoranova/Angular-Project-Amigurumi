@@ -1,16 +1,72 @@
+
+/* Responsive styles for screens smaller than 768px (e.g., mobile devices) */
+@media (max-width: 991px) {
+    header {
+        flex-direction: column; /* Stack the elements vertically */
+        align-items: center; /* Center the elements vertically */
+        padding: 10px; /* Add some padding for better spacing */
+    }
+    
+ 
+    .mini-navbar ul {
+        display: none; /* Hide the navigation links initially */
+    }
+
+    .welcome {
+        display: none; /* Hide the welcome section initially */
+    }
+
+    .logo-text {
+        font-size: 24px; /* Change the font size of the logo text */
+    }
+}
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Stack the elements vertically */
+        align-items: center; /* Center the elements vertically */
+        padding: 10px; /* Add some padding for better spacing */
+    }
+    
+  
+    .mini-navbar ul {
+        display: none; /* Hide the navigation links initially */
+    }
+
+    .welcome {
+        display: none; /* Hide the welcome section initially */
+    }
+
+    .logo-text {
+        font-size: 24px; /* Change the font size of the logo text */
+    }
+}
+/* Responsive styles for screens larger than 768px (e.g., tablets and desktops) */
+@media (min-width: 769px) {
+    .mini-navbar ul {
+        display: flex; /* Show the navigation links as a flexbox container */
+    }
+
+    .welcome {
+        display: none; /* Hide the welcome section initially */
+    }
+
+    /* Add any other specific styles for larger screens here */
+}
+
+
 header {
     /* background: rgb(0, 128, 182);
     background: linear-gradient(0deg, rgba(0, 128, 182, 1) 0%, rgba(0, 128, 182, 1) 35%, rgba(0, 212, 255, 1) 100%); 
      */
     background: rgb(87, 88, 187);
     background: linear-gradient(0deg, rgba(87, 88, 187, 1) 38%,
-     rgba(217, 128, 250, 1) 95%);
+            rgba(217, 128, 250, 1) 95%);
     /* background: rgb(189,220,215);
     background: linear-gradient(0deg, rgba(189,220,215,1) 44%, rgba(253,182,186,1) 86%); */
     /* background: rgb(189,220,215);
     background: linear-gradient(153deg, rgba(189,220,215,1) 0%, rgba(97,191,190,1) 34%, rgba(253,182,186,1) 93%); */
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
 }
 
 header ul {
@@ -21,13 +77,14 @@ header ul {
     /* width: 75%; */
     margin: auto;
 }
-.welcome{
+
+.welcome,.logoWelcome {
     padding: 1em;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     /* width: 75%; */
-    margin: auto;   
+    margin: auto;
 }
 
 .mini-navbar ul {
@@ -43,7 +100,7 @@ header ul {
 header li {
     list-style: none;
     /* margin: .35em; */
-    padding: 0em 
+    padding: 0em
 }
 
 header .mini-navbar ul li:hover {
@@ -101,11 +158,11 @@ nav {
     background-color: white;
     color: #5758BB;
     padding: .55em 1em;
-    transform: scale(1.01);	
+    transform: scale(1.01);
 }
 
 .logo {
-    font-size: 1.3em;
+    /* font-size: 1.3em; */
     color: white;
     padding-bottom: 0;
 }
@@ -116,7 +173,7 @@ nav {
     margin: 0.5em 0;
 }
 
-    /* .mini-navbar-wrap {
+/* .mini-navbar-wrap {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -148,9 +205,10 @@ nav {
     overflow: hidden;
     display: flex;
     align-items: center;
-    
+
 }
-.sasa{
+
+.sasa {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -177,9 +235,9 @@ nav {
     color: white;
     padding: 0.5em;
 }
-.nav-link{
+
+.nav-link {
     color: white;
 }
-.zaza{
-    
-}
+
+.zaza {}

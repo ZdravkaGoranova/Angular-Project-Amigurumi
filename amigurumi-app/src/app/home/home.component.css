@@ -1,3 +1,58 @@
-.page-container{
+
+.container{
+    flex: 1;
+    padding-bottom: 50px;
+    min-height: 75vh;
+}
+.divImage {
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%;
+    background-size: 100% 100%;
+    /* Задава височина от 56.25% спрямо ширината, което съответства на 16:9 соотношение */
+    background-size: cover;
+    background-position: center;
+}
+
+.carousel-item {
+    height: 400px;
+    /* Фиксирана височина на родителския контейнер */
+}
+
+.carouselExampleCaptions {
+    /* background-color: rgba(60, 63, 190, 0.8) !important; */
+    background-color: rgba(152, 160, 237, 0.8) !important;
+
 
 }
+
+/* .carousel {
+    margin: 20px;
+}
+
+.carousel-inner {
+    height: 100%;
+  }
+  
+  .carousel-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+  }
+  
+  .carousel-item img {
+    max-height: 100%;
+    width: auto;
+  }
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.carousel-indicators {
+    font-style: italic;
+    list-style: none;
+} */

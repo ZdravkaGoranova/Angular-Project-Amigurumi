@@ -54,31 +54,31 @@
         </ul>
     </nav> -->
 
-
-    <div class="img-wrap">
-        <!-- <img src="https://i.pinimg.com/564x/17/6e/24/176e24e7b955c7d2c60e48dbb529d15c.jpg" alt="Logo" class="logo"> -->
-
-        <h1 class="logo-text">Handmade Amigurumi</h1>
-
-    </div>
-
-
-
-    <div class="welcome">
-        <div class="btn-group" role="group" aria-label="Basic outlined example" *ngIf="!isLoggedIn">
-
-            <a routerLink="/login" class="btn btn-outline-primary"><i class="fa-solid fa-right-to-bracket fa-fade"></i> Login</a>
-            <a routerLink="/register" class="btn btn-outline-primary">Register</a>
-
+    <!-- <div class="img-wrap">
+        <img src="https://i.pinimg.com/564x/17/6e/24/176e24e7b955c7d2c60e48dbb529d15c.jpg" alt="Logo" class="logo">
+    </div> -->
+    <div class="logoWelcome">
+        <div>
+            <h4 class="logo-text">Handmade Amigurumi</h4>
         </div>
-        <div class="btn-group" role="group" aria-label="Basic outlined example" *ngIf="isLoggedIn">
+        <div class="welcome">
+            <div class="btn-group" role="group" aria-label="Basic outlined example" *ngIf="!isLoggedIn">
 
-            <a routerLink="/profile" class="btn btn-outline-primary">Welcome {{fullName}}!</a>
-            <a routerLink="/register" class="btn btn-outline-primary" (click)="logout()"> Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                <a routerLink="/login" class="btn btn-outline-primary"><i
+                        class="fa-solid fa-right-to-bracket fa-fade"></i>
+                    Login</a>
+                <a routerLink="/register" class="btn btn-outline-primary">Register</a>
 
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic outlined example" *ngIf="isLoggedIn">
+
+                <a routerLink="/profile" class="btn btn-outline-primary">Welcome {{fullName}}!</a>
+                <a routerLink="/register" class="btn btn-outline-primary" (click)="logout()"> Logout <i
+                        class="fa-solid fa-arrow-right-from-bracket"></i></a>
+
+            </div>
         </div>
     </div>
-
     <ul class="nav nav-tabs" id="myTab" role="tablist">
 
         <li class="nav-item" role="presentation">

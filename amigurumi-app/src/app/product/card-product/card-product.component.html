@@ -1,33 +1,46 @@
 <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
-<li>
-    <div id="title">
-        <h3>{{product.title}}</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <!-- Page title -->
+            <div class="my-5">
+                <h3>Add new Amigurumi</h3>
+                <hr>
+            </div>
 
-    </div>
 
-    <div class="desc" *ngIf="productDescLen> 0">{{descToShow}}</div>
-    <img *ngIf="imageIsShown" src="{{product.imageUrl}}" alt="product image" />
-    <button><a routerLink="details">Details</a></button>
-    <a [routerLink]="['product','detail',product.id]">
-        Details Page
-    </a>
-    <!-- <button *ngIf="showReadMoreBtn" (click)="readMore()">Read More</button>
+            <li>
+                <div id="title">
+                    <h3>{{product.title}}</h3>
+
+                </div>
+
+                <div class="desc" *ngIf="productDescLen> 0">{{descToShow}}</div>
+                <img *ngIf="imageIsShown" src="{{product.imageUrl}}" alt="product image" />
+                <button><a routerLink="details">Details</a></button>
+                <a [routerLink]="['product','detail',product.id]">
+                    Details Page
+                </a>
+                <!-- <button *ngIf="showReadMoreBtn" (click)="readMore()">Read More</button>
        
         <button *ngIf="showHideBtn" (click)="hideDesc()">Hide Desc</button> -->
 
 
-    <!-- <button><a [routerLink]="['product','detail',p.id]">Details</a></button> -->
+                <!-- <button><a [routerLink]="['product','detail',p.id]">Details</a></button> -->
 
 
-    <!-- <button (click)="toggleImage()">{{imageButtonTitle}}</button> -->
+                <!-- <button (click)="toggleImage()">{{imageButtonTitle}}</button> -->
 
-    <!-- <div class="prd-skillLevel" *ngIf="!showReadMoreBtn">
+                <!-- <div class="prd-skillLevel" *ngIf="!showReadMoreBtn">
         Skill Level:
         <span class="material-symbols-outlined">
             stars
         </span>{{product.skillLevel}}
     </div> -->
 
-</li>
+            </li>
+        </div>
+    </div>
+</div>

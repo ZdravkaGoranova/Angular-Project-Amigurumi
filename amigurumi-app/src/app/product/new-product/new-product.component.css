@@ -31,14 +31,7 @@ body{margin-top:20px;
         --bs-text-opacity: 1;
         color: rgba(237, 240, 244, 0.2) !important;
     }
-    .btn-success-soft {
-        color: #28a745;
-        background-color: rgba(40, 167, 69, 0.1);
-    }
-    .btn-danger-soft {
-        color: #dc3545;
-        background-color: rgba(220, 53, 69, 0.1);
-    }
+   
     .form-control {
         display: block;
         width: 100%;

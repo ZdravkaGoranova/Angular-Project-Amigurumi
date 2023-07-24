@@ -43,7 +43,7 @@
                     </div>
                     <div class="settings" *ngIf="isLoggedIn">
 
-                        <button class="btn btn-outline-primary" (click)="toggleLike()">
+                        <button class="btn btn-outline-primary btn-sm" (click)="toggleLike()">
                             <span class="material-symbols-outlined">
                                 thumb_up
                             </span>
@@ -97,7 +97,7 @@
                         </div>
 
                         <div class="ownProduct">
-                            <button class="btn btn-outline-primary" (click)="editProduct()">
+                            <button class="btn btn-outline-primary btn-sm" (click)="editProduct()">
                                 <span class="material-symbols-outlined">
                                     edit
                                 </span>
@@ -116,7 +116,7 @@
                           </button> -->
 
                             <!--Delete Button trigger modal -->
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 <span class="material-symbols-outlined">
                                     delete</span>
@@ -150,9 +150,9 @@
 
 
                     <div class="btn-back">
-                        <a [routerLink]="['..']" class="btn btn-outline-light">Back</a>
-                        <a [routerLink]="['..']" class="btn btn-outline-secondary">Back</a>
-                    </div>
+                        <a [routerLink]="['..']" class="btn btn-outline-dark btn-sm">Back</a>
+                        <!-- <a [routerLink]="['..']" class="btn btn-outline-secondary btn-sm">Back</a>-->
+                    </div> 
 
 
                     <div class="alert alert-primary" role="alert">

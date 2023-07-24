@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -10,8 +10,22 @@ export class RegisterComponent implements OnInit {
   user: any = {
     gender: 'male' // или 'female'
   };
+  form = this.fb.group({
+    fullName: [''],
+    email: [''],
+    password: [''],
+    // repassword: [''],
+    gender: [''],
+   
+  })
 
 
+  constructor(
+    private fb: FormBuilder
+
+  ) {
+
+  }
   //another way to get register form whithout passing it as a parameter of the callback
   // @ViewChild('registerForm') registerForm: NgForm | undefined;
 

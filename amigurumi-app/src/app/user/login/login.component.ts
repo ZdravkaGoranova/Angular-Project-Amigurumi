@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { DEFAULT_EMAIL_DOMAINS } from 'src/app/shared/validators/constants';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  appEmailDomains = DEFAULT_EMAIL_DOMAINS;
+
   constructor(
     private userService: UserService,
     private router: Router
@@ -27,7 +30,8 @@ export class LoginComponent {
     if (form.invalid) {
       return;
     }
-
+    this.userService.login();
+    this.router.navigate(['/']);
     // form.setValue({
     //   fullName: '', email: '', password: '', gender: '',
     // })

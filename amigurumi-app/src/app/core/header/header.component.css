@@ -1,59 +1,98 @@
-
 /* Responsive styles for screens smaller than 768px (e.g., mobile devices) */
 @media (max-width: 991px) {
     header {
-        flex-direction: column; /* Stack the elements vertically */
-        align-items: center; /* Center the elements vertically */
-        padding: 10px; /* Add some padding for better spacing */
+        flex-direction: column;
+        /* Stack the elements vertically */
+        align-items: center;
+        /* Center the elements vertically */
+        padding: 10px;
+        /* Add some padding for better spacing */
     }
-    
- 
+
     .mini-navbar ul {
-        display: none; /* Hide the navigation links initially */
+        display: none;
+        /* Hide the navigation links initially */
     }
 
     .welcome {
-        display: none; /* Hide the welcome section initially */
+        display: none;
+        /* Hide the welcome section initially */
     }
 
     .logo-text {
-        font-size: 24px; /* Change the font size of the logo text */
+        font-size: 24px;
+        /* Change the font size of the logo text */
+        color: white;
+
     }
 }
+
 @media (max-width: 768px) {
     header {
-        flex-direction: column; /* Stack the elements vertically */
-        align-items: center; /* Center the elements vertically */
-        padding: 10px; /* Add some padding for better spacing */
+        flex-direction: column;
+        /* Stack the elements vertically */
+        align-items: center;
+        /* Center the elements vertically */
+        padding: 10px;
+        /* Add some padding for better spacing */
     }
-    
-  
+
+
     .mini-navbar ul {
-        display: none; /* Hide the navigation links initially */
+        display: none;
+        /* Hide the navigation links initially */
     }
 
     .welcome {
-        display: none; /* Hide the welcome section initially */
+        display: none;
+       
     }
 
     .logo-text {
-        font-size: 24px; /* Change the font size of the logo text */
+        font-size: 24px;
+        color: white;
     }
 }
+
 /* Responsive styles for screens larger than 768px (e.g., tablets and desktops) */
 @media (min-width: 769px) {
     .mini-navbar ul {
-        display: flex; /* Show the navigation links as a flexbox container */
+        display: flex;
+        /* Show the navigation links as a flexbox container */
     }
 
     .welcome {
-        display: none; /* Hide the welcome section initially */
+        display: none;
+        /* Hide the welcome section initially */
     }
 
     /* Add any other specific styles for larger screens here */
 }
 
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        /* Stack the elements vertically */
+        align-items: center;
+        /* Center the elements vertically */
+        padding: 10px;
+        /* Add some padding for better spacing */
+    }
 
+    .mini-navbar ul {
+        display: none;
+        /* Hide the navigation links initially */
+    }
+
+    .welcome {
+        display: none;
+        /* Hide the welcome section initially */
+    }
+
+    .logo-text, .welcome .btn-group a ,.nav-item {
+        font-size: 14px;
+    }
+}
 header {
     /* background: rgb(0, 128, 182);
     background: linear-gradient(0deg, rgba(0, 128, 182, 1) 0%, rgba(0, 128, 182, 1) 35%, rgba(0, 212, 255, 1) 100%); 
@@ -78,13 +117,20 @@ header ul {
     margin: auto;
 }
 
-.welcome,.logoWelcome {
-    padding: 1em;
+.welcome,
+.logoWelcome {
+   gap:0.5em;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     /* width: 75%; */
-    margin: auto;
+
+}
+
+.logo-text {
+
+    color: white;
+
 }
 
 .mini-navbar ul {
@@ -198,10 +244,8 @@ nav {
     padding-left: .5em;
 }
 
-
-
 .img-wrap {
-    /* width: 10%; */
+    width: 20%;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -217,10 +261,10 @@ nav {
 .img-wrap img {
     /* border-radius: 0.3em; */
     /* margin-bottom: 1em; */
-    /* display: block;
-    width: 100%;
+    display: block;
+    width: 50%;
     height: auto;
-    margin: 0.5em 0; */
+    margin: 0.5em;
 }
 
 .logo {

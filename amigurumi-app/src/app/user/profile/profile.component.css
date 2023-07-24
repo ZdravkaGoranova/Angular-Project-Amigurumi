@@ -178,3 +178,7 @@ input.ng-invalid.ng-touched {
     border-radius: 3px;
     font-style: italic;
 }
+.my-5{
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}

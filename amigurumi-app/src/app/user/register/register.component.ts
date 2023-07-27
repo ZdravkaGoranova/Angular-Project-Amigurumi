@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,19 +12,13 @@ export class RegisterComponent implements OnInit {
   user: any = {
     gender: 'male' // или 'female'
   };
-  form = this.fb.group({
-    fullName: [''],
-    email: [''],
-    password: [''],
-    // repassword: [''],
-    gender: [''],
-   
-  })
+
 
 
   constructor(
-    private fb: FormBuilder
-
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router
   ) {
 
   }
@@ -67,4 +63,28 @@ export class RegisterComponent implements OnInit {
     console.log(value.gender)
     console.log(value.password)
   }
+
+  register(fullName: string, email: string, password: string, ): void {
+  // register(fullName: string, email: string, password: string, gender: string): void {
+    if (email == '') {
+      alert('Plese enter email')
+      return;
+    }
+
+    if (password == '') {
+      alert('Plese enter password')
+      return;
+    }
+
+    this.userService.register(fullName, email, password);
+    // this.userService.register(fullName, email, password,gender);
+    // this.email = '';
+    // this.password = '';
+
+    // this.userService.login( email, password).subscribe(()=>{
+    //   this.router.navigate(['/']);
+    // });
+    // this.router.navigate(['/']);
+  }
+
 }

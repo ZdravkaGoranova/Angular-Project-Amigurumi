@@ -8,8 +8,8 @@
 			</h2>
 		
 		</div>
-		<form class="card-form" #loginForm="ngForm" class="card-form" (ngSubmit)="submitHandler(loginForm)">
-
+		<form class="card-form" #loginForm="ngForm" class="card-form" >
+			<!-- (ngSubmit)="submitHandler(loginForm)" -->
 			<div class="input">
 				<input type="text" id="email" name="email" class="input-field" ngModel email required
 					[appEmail]="appEmailDomains" #emailInput="ngModel" />

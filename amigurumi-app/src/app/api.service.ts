@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
 import { from, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+
 
 interface Product {
   id?: string;
@@ -111,7 +111,7 @@ export class ApiService {
   
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
-      console.log(typeof docSnap.data());
+    
   
       // Create a new Product instance and populate it with the data
       const productData = docSnap.data();

@@ -12,7 +12,8 @@
 			<!-- (ngSubmit)="submitHandler(loginForm)" -->
 			<div class="input">
 				<input type="text" id="email" name="email" class="input-field" ngModel email required
-					[appEmail]="appEmailDomains" #emailInput="ngModel" />
+					#emailInput="ngModel" />
+					<!-- [appEmail]="appEmailDomains"  -->
 				<label for="email" class="input-label"><i class="fa-regular fa-envelope"></i> Email</label>
 			</div>
 
@@ -31,7 +32,7 @@
 			<!-- {{loginForm?.errors  | json}} -->
 			<div class="input">
 				<input type="password" id="password" name="password" class="input-field" ngModel required
-					#passwordInput="ngModel" [appMaxCount]="15" minlength="4" />
+					#passwordInput="ngModel" [appMaxCount]="15" minlength="6" />
 				<label for="password" class="input-label"><i class="fa-solid fa-lock"></i> Password</label>
 			</div>
 

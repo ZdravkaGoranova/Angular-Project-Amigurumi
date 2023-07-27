@@ -18,9 +18,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  userData!: Observable<any>;
+  userDataа!: Observable<any>;
 
-  user: User | undefined;
+  loggedInUserId: string | null = null;
+
+  user: User  | undefined;
+
 
   // gender: string = '';
 
@@ -59,6 +62,7 @@ export class UserService {
       this.user = undefined;
     }
   }
+
   login(email: string, password: string) {
     // this.fireauth.signInWithEmailAndPassword(email, password)
     //   .then(async () => {
@@ -86,16 +90,28 @@ export class UserService {
     //   .catch((error) => {
     //     alert(error.message);
     //   });
-    this.fireauth.signInWithEmailAndPassword(email, password).then(() => {
+    this.fireauth.signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
       // this.fullName = email;
       // this.user = {
       //   email: email,
       //   fullName: this.fullName,
         // gender: this.gender,
       // };
+     debugger;
+     const eml = userCredential.user?.email || '';
+    //  console.log(eml)
 
-      localStorage.setItem(this.USER_KYE, JSON.stringify(this.user));
-      debugger;
+      this.loggedInUserId = userCredential.user?.uid || '';
+      // console.log(this.loggedInUserId)
+      const userData={
+        email: eml,
+        id: this.loggedInUserId,
+      }
+      
+      this.user = userData;
+      localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
+  
       alert(':)))))))')
       this.router.navigate(['/profile'])
 
@@ -144,6 +160,27 @@ export class UserService {
         const user = userCredential.user;
         let userId = user.uid;
 
+      
+   
+         this.loggedInUserId = userCredential.user?.uid || null;
+         console.log(this.loggedInUserId)
+
+
+         
+
+         debugger;
+         const eml = userCredential.user?.email || '';
+        //  console.log(eml)
+    
+          this.loggedInUserId = userCredential.user?.uid || '';
+          // console.log(this.loggedInUserId)
+          const userData={
+            email: eml,
+            id: this.loggedInUserId,
+          }
+          
+          this.user = userData;
+
         // Set the custom user properties
         // user?.updateProfile({
         //   displayName: fullName,
@@ -155,8 +192,14 @@ export class UserService {
         //     // gender: gender,
         //   };
 
-        localStorage.setItem(this.USER_KYE, JSON.stringify(userCredential.user));
-        writeUserData(userId, fullName);
+
+
+        // this.user = {
+        //   email: user.email,
+        //   id: userId,
+        // };
+        localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
+        // writeUserData(userId, fullName);
 
         alert('Registration Successful');
         debugger;
@@ -166,15 +209,15 @@ export class UserService {
         console.log(error.message);
       });
 
-    function writeUserData(userId: string, fullName: string) {
-      const db = getDatabase();
+    // function writeUserData(userId: string, fullName: string) {
+    //   const db = getDatabase();
 
-      set(ref(db, 'users/' + userId), {
-        displayName: fullName
+    //   set(ref(db, 'users/' + userId), {
+    //     displayName: fullName
 
-      });
-      console.log(db)
-    }
+    //   });
+    //   console.log(db)
+    // }
 
   }
 

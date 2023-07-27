@@ -58,15 +58,17 @@ export class ProfileComponent {
   }
 
   get fullName(): string {
+    // return this.userService.user?.email|| '';
     return this.userService.user?.fullName || '';
   }
   get email(): string {
     return this.userService.user?.email || '';
   }
 
-  get gender(): string {
-    return this.userService.user?.gender || '';
-  }
+  // get gender(): string {
+   
+  //   return this.userService.user?.gender || '';
+  // }
   // get isMale(): boolean {
   //   return this.userService.isMale;
   // }

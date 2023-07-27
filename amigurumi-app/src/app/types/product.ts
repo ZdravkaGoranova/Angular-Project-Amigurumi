@@ -1,6 +1,6 @@
 export interface Product {
-    id: string;
-    // author: string;
+    id?: string;
+    owner: string;
     description: string;
     imageUrl: string;
     skillLevel: string;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,11 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   Firestore,
   collection,
-  addDoc,
-  collectionData,
-  getDocs,
   doc,
-  updateDoc,
   setDoc,
 
 } from '@angular/fire/firestore';
@@ -19,7 +15,7 @@ import {
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.css']
 })
-export class EditProductComponent {
+export class EditProductComponent implements OnInit {
   [x: string]: any;
 
   product: any = {
@@ -36,6 +32,26 @@ export class EditProductComponent {
 
   }
 
+  ngOnInit() {
+    // Извличане на productId от URL параметъра
+    const id = this.activatedRoute.snapshot.params['productId'];
+
+    // Извличане на продукта от базата данни
+    const collectionInstance = collection(this.firestore, 'products');
+    const productDoc = doc(collectionInstance, id);
+
+    // getDocs(productDoc).subscribe((snapshot) => {
+    //   if (!snapshot.empty) {
+    //     const productData = snapshot.docs[0].data();
+    //     this.product = {
+    //       ...productData,
+    //       id: snapshot.docs[0].id 
+    //     };
+    //   } else {
+
+    //   }
+    // });
+  }
   async submitHandler(form: NgForm) {
     try {
       const id = this.activatedRoute.snapshot.params['productId'];

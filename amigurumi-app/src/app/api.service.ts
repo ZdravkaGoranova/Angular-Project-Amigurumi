@@ -5,15 +5,18 @@ import { environment } from 'src/environments/environment.development';
 import { Firestore, getFirestore, collection, addDoc, collectionData, doc, updateDoc, deleteDoc, getDoc, getDocs } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+
+import { from, Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 interface Product {
   id?: string;
-  author: string;
+  owner: string;
   description: string;
   imageUrl: string;
   skillLevel: string;
   title: string;
+  category: string;
 
 
   // public usersLiked: [],
@@ -44,15 +47,15 @@ export class ApiService {
   }
 
 
-  getProducts() {
-    const { apiUrl } = environment
-    return this.http.get<Product[]>(`${apiUrl}.json`)
-  }
+  // getProducts() {
+  //   const { apiUrl } = environment
+  //   return this.http.get<Product[]>(`${apiUrl}.json`)
+  // }
 
-  getSingleProduct(id: string) {
-    const { apiUrl } = environment
-    return this.http.get<Product>(`${apiUrl}/${id}/.json`)
-  }
+  // getSingleProduct(id: string) {
+  //   const { apiUrl } = environment
+  //   return this.http.get<Product>(`${apiUrl}/${id}/.json`)
+  // }
 
   async getDataProducts(): Promise<Product[]> {
     debugger;
@@ -61,8 +64,8 @@ export class ApiService {
     debugger;
     if (data) {
       const products: Product[] = data.map((docData) => {
-        const { id, author, description, imageUrl, skillLevel, title } = docData;
-        return { id, author, description, imageUrl, skillLevel, title };
+        const { id, owner, description, imageUrl, skillLevel, title,category } = docData;
+        return { id, owner, description, imageUrl, skillLevel, title ,category};
       });
       return products;
     } else {
@@ -100,21 +103,72 @@ export class ApiService {
     await deleteDoc(doc(collectionInstance, id));
 
   }
-
-  async getCurrentProduct(id: string) {
+  async getCurrentProduct(id: string): Promise<Product | null> {
     const collectionInstance = collection(this.firestore, 'products');
-
+  debugger
     const docRef = doc(collectionInstance, id);
     const docSnap = await getDoc(docRef);
-    debugger;
+  
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
+      console.log(typeof docSnap.data());
+  
+      // Create a new Product instance and populate it with the data
+      const productData = docSnap.data();
+      const product: Product = {
+        id: docSnap.id,
+        owner: productData['owner'],
+        description: productData['description'],
+        imageUrl: productData['imageUrl'],
+        skillLevel: productData['skillLevel'],
+        title: productData['title'],
+        category: productData['category'],
+      };
+  console.log(product)
+      return product;
     } else {
-      // docSnap.data() will be undefined in this case
       console.log("No such document!");
+      return null;
     }
   }
+  // async getCurrentProduct(id: string) {
+  //   const collectionInstance = collection(this.firestore, 'products');
 
+  //   const docRef = doc(collectionInstance, id);
+  //   const docSnap = await getDoc(docRef);
+  //   debugger;
+  //   if (docSnap.exists()) {
+  //     console.log("Document data:", docSnap.data());
+  //     console.log(typeof docSnap.data())
+  //     return docSnap.data();
+  //   } else {
+
+  //     console.log("No such document!");
+  //   }
+  // }
+
+
+
+  // getCurrentProduct(id: string): Observable<Product> { // Return an Observable of type Product
+  //   const collectionInstance = collection(this.firestore, 'products');
+  //   const docRef = doc(collectionInstance, id);
+  //   return new Observable((observer) => {
+  //     getDoc(docRef)
+  //       .then((docSnap) => {
+  //         if (docSnap.exists()) {
+  //           const productData: Product = docSnap.data() as Product;
+  //           observer.next(productData);
+  //         } else {
+  //           observer.next(null);
+  //         }
+  //         observer.complete();
+  //       })
+  //       .catch((error) => {
+  //         observer.error(error);
+  //         observer.complete();
+  //       });
+  //   });
+  // }
   async getAll() {
     const collectionInstance = collection(this.firestore, 'products');
     debugger;

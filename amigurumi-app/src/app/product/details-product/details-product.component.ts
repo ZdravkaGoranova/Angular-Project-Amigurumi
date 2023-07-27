@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Product } from 'src/app/types/product';
 import { UserService } from 'src/app/user/user.service';
-
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-details-product',
   templateUrl: './details-product.component.html',
@@ -13,8 +14,9 @@ export class DetailsProductComponent implements OnInit {
 
   private symbols: number = 250;
   // product!: Product[] | undefined;
-  @Input() product!: Product;
+  // @Input() product!: Product;
   @Input() productDesc!: string;
+  product: Product | null = null;
 
   descToShow: string;
   productDescLen: number;
@@ -27,7 +29,7 @@ export class DetailsProductComponent implements OnInit {
   likeButtonTitle: string = 'Like';
 
   isDeleteProduct: boolean = false;
-  
+
   constructor(
 
     private activatedRoute: ActivatedRoute,
@@ -35,8 +37,7 @@ export class DetailsProductComponent implements OnInit {
     private userService: UserService
   ) {
 
-    console.log(this.activatedRoute.snapshot.data);
-    console.log(this.activatedRoute.snapshot.data['product']);
+
 
     this.activatedRoute.params.subscribe((v) => console.log(v))
 
@@ -49,16 +50,16 @@ export class DetailsProductComponent implements OnInit {
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
   }
-  fetchTheme(): void {
+  async fetchTheme(): Promise<void> {
+    debugger;
     const id = this.activatedRoute.snapshot.params['productId'];
-
-    // this.apiService.getSingleProduct(id).subscribe((product) => {
-    //   this.product = product;
-    //   console.log({ product });
-    // });
+    try {
+      this.product = await this.apiService.getCurrentProduct(id)!;
+    } catch (error) {
+      // Handle error if needed
+      console.error(error);
+    }
   }
-
-
   // readMore(): void {
   //   this.productDescLen += this.symbols;
   //   if (this.productDescLen >= this.productDesc.length) {

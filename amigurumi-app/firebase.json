@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "Prodject-Amigorumi",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

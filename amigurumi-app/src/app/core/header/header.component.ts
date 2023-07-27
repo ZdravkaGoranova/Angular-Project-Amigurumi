@@ -18,7 +18,8 @@ export class HeaderComponent {
   }
 
   get fullName(): string {
-    return this.userService.user?.fullName || '';
+    return this.userService.user?.email|| '';
+    // return this.userService.user?.fullName || '';
   }
 
   logout(): void {

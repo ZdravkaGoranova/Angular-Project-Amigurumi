@@ -1,7 +1,7 @@
 footer {
     margin-top: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content:space-evenly;
     flex-wrap: wrap;
     padding: 10px;
     background: rgb(87, 88, 187);

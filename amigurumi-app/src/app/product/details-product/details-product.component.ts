@@ -52,10 +52,10 @@ export class DetailsProductComponent implements OnInit {
   fetchTheme(): void {
     const id = this.activatedRoute.snapshot.params['productId'];
 
-    this.apiService.getSingleProduct(id).subscribe((product) => {
-      this.product = product;
-      console.log({ product });
-    });
+    // this.apiService.getSingleProduct(id).subscribe((product) => {
+    //   this.product = product;
+    //   console.log({ product });
+    // });
   }
 
 

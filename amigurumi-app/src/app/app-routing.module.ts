@@ -7,7 +7,7 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { DetailsProductComponent } from './product/details-product/details-product.component';
-import { ProductlResolver } from './product/product-detail.resolver';
+// import { ProductlResolver } from './product/product-detail.resolver';
 import { HomeComponent } from './home/home.component';
 import { NewProductComponent } from './product/new-product/new-product.component';
 const routes: Routes = [

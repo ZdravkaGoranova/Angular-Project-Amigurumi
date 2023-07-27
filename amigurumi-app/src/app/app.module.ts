@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AngularFireModule } from '@angular/fire/compat';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,15 @@ import { CoreModule } from './core/core.module';
 import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
 import { FormsModule } from '@angular/forms';
+import { appInterceptorProvider } from './app.interceptor';
+
+import { environment } from '../environments/environment';
+
+// import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+// import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -28,6 +38,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+
     HttpClientModule,
     FormsModule,
 
@@ -35,9 +46,14 @@ import { FormsModule } from '@angular/forms';
     UserModule,
     ProductModule,
 
+    AngularFireModule.initializeApp(environment.firebase),
+  
     AppRoutingModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(()=>getFirestore()),
   ],
-  providers: [],
+  providers: [appInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

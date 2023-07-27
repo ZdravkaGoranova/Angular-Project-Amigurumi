@@ -1,16 +1,14 @@
-export class Product {
-    constructor(
-  
-        public author: string,
-        public description: string,
-        public id: string,
-        public imageUrl: string,
-        public skillLevel: string,
-        public title: string,
-       
-    
-        // public usersLiked: [],
-        // public coments:  [],
-       
-    ) { }
+export interface Product {
+    id: string;
+    // author: string;
+    description: string;
+    imageUrl: string;
+    skillLevel: string;
+    title: string;
+    category: string;
+
+    // public usersLiked: [],
+    // public coments:  [],
+
+
 }

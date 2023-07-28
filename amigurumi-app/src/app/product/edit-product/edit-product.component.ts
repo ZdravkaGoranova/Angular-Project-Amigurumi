@@ -1,4 +1,4 @@
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,13 +12,14 @@ import {
   setDoc,
 
 } from '@angular/fire/firestore';
+import { ApiService } from 'src/app/api.service';
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.css']
 })
 
-export class EditProductComponent {
+export class EditProductComponent implements OnInit {
   // [x: string]: any;
 
   product: any = {
@@ -34,12 +35,19 @@ export class EditProductComponent {
     private firestore: Firestore,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-
+    private apiService: ApiService
   ) {
 
   }
+  ngOnInit(): void {
+    const id = this.activatedRoute.snapshot.params['productId'];
+    this.apiService.getCurrentProduct(id).then((p)=>{
+      this.product=p
+    })
 
-  async submitHandler(form: NgForm) : Promise<void> {
+
+  }
+  async submitHandler(form: NgForm): Promise<void> {
     try {
       const id = this.activatedRoute.snapshot.params['productId'];
       console.log(id)

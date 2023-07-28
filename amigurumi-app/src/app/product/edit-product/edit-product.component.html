@@ -22,7 +22,7 @@
                                 <!-- Title -->
                                 <div class="col-md-12">
                                     <label for="exampleInputPassword1" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="title" name="title" ngModel required
+                                    <input type="text" class="form-control" id="title" name="title" [(ngModel)]="product.title" required
                                         minlength="4" #titleInput="ngModel">
                                 </div>
                                 <!-- error msg-titleInput-->
@@ -41,7 +41,7 @@
                                 <!-- Description -->
                                 <div class="col-md-12">
                                     <label for="description" class="form-label">Description</label>
-                                    <input type="text" class="form-control" id="description" name="description" ngModel
+                                    <input type="text" class="form-control" id="description" name="description" [(ngModel)]="product.description"
                                         required minlength="15" #descriptionInput="ngModel">
                                 </div>
                                 <!-- error msg-descriptionInput-->
@@ -59,7 +59,7 @@
                                 <div class="col-md-12">
                                     <label for="exampleInputPassword3" class="form-label">Photo</label>
                                     <input type="text" class="form-control" id="exampleInputPassword3"
-                                    name="imageUrl" ngModel required
+                                    name="imageUrl" [(ngModel)]="product.imageUrl" required
                                         minlength="4" #photoInput="ngModel"
                                     >
                                 </div>

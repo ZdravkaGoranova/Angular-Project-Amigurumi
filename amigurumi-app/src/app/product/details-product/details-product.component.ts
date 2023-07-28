@@ -55,31 +55,30 @@ export class DetailsProductComponent implements OnInit {
     this.isOwner()
     console.log(this.isOwner())
   }
-  async checkIsOwner(): Promise<void> {
-    const id = this.activatedRoute.snapshot.params['productId'];
-    const product = await this.apiService.getCurrentProduct(id);
-    const lockedUserId = this.userService.user?.id;
-    this.isOwnerStatus === this.userService.isLogged && product?.ownerId === lockedUserId;
-    console.log(this.isOwnerStatus)
-  }
 
+async checkIsOwner(): Promise<void> {
+  const id = this.activatedRoute.snapshot.params['productId'];
+  const product = await this.apiService.getCurrentProduct(id);
+  const lockedUserId = this.userService.user?.id;
+  this.isOwnerStatus = this.userService.isLogged && product?.ownerId === lockedUserId;
+  console.log(this.isOwnerStatus);
+}
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
   }
 
+ 
+
   async isOwner(): Promise<boolean> {
     const id = this.activatedRoute.snapshot.params['productId'];
     const productOwner = await this.apiService.getCurrentProductOwner(id);
-    console.log(productOwner)
     const lockedUserId = this.userService.user?.id;
-    console.log(lockedUserId)
-    console.log(productOwner === lockedUserId)
-    debugger
-    this.isOwnerStatus === this.userService.isLogged && productOwner == lockedUserId;
+    this.isOwnerStatus = this.userService.isLogged && productOwner == lockedUserId;
+    console.log(productOwner === lockedUserId);
+    console.log(this.isOwnerStatus);
+    debugger;
     return this.userService.isLogged && productOwner == lockedUserId;
   }
-
-
 
   async fetchTheme(): Promise<void> {
 

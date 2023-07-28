@@ -18,8 +18,8 @@ import {
   styleUrls: ['./edit-product.component.css']
 })
 
-export class EditProductComponent implements OnInit {
-  [x: string]: any;
+export class EditProductComponent {
+  // [x: string]: any;
 
   product: any = {
     skillLevel: 'easy',
@@ -39,26 +39,6 @@ export class EditProductComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-
-    const id = this.activatedRoute.snapshot.params['productId'];
-    debugger;
-
-    const collectionInstance = collection(this.firestore, 'products');
-    const productDoc = doc(collectionInstance, id);
-
-    // getDocs(productDoc).subscribe((snapshot) => {
-    //   if (!snapshot.empty) {
-    //     const productData = snapshot.docs[0].data();
-    //     this.product = {
-    //       ...productData,
-    //       id: snapshot.docs[0].id 
-    //     };
-    //   } else {
-
-    //   }
-    // });
-  }
   async submitHandler(form: NgForm) : Promise<void> {
     try {
       const id = this.activatedRoute.snapshot.params['productId'];

@@ -126,7 +126,7 @@ export class ApiService {
     const collectionInstance = collection(this.firestore, 'products');
     const docRef = doc(collectionInstance, id);
     const docSnap = await getDoc(docRef);
-  
+  debugger;
     if (docSnap.exists()) {
       const productData = docSnap.data();
       const ownerId: string = productData['ownerId'];

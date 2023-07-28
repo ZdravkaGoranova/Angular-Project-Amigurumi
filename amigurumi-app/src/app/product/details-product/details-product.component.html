@@ -99,15 +99,17 @@
                         </div>
 
 
-                        <button class="btn btn-outline-primary btn-sm" *ngIf="isOwner" >
-                            <span class="material-symbols-outlined">
-                                edit
-                            </span>
+                      
 
-                            <a [routerLink]="['/products/edit', product?.id]" class="btn btn-primary"> <span>Edit</span>
+                            <a [routerLink]="['/products/edit', product?.id]" 
+                            *ngIf="isOwnerStatus"
+                            class=" btn btn-outline-primary btn-sm">
+                                <span class="material-symbols-outlined">
+                                edit
+                            </span> <span>Edit</span>
                             </a>
 
-                        </button>
+                   
 
                         <!-- <button class="btn-delete" (click)="deleteProduct()">
                               <span class="material-symbols-outlined">
@@ -121,7 +123,7 @@
                           </button> -->
 
                         <!--Delete Button trigger modal -->
-                        <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="isOwner"
+                        <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="isOwnerStatus"
                             data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <span class="material-symbols-outlined">
                                 delete</span>

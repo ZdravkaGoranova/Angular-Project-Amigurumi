@@ -7,7 +7,7 @@ export interface Product {
     title: string;
     category: string;
 
-    // public usersLiked: [],
+    usersLiked: [],
     // public coments:  [],
 
 

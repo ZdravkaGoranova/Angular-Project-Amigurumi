@@ -1,4 +1,4 @@
-import { Component, Input, OnInit ,Renderer2} from '@angular/core';
+import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Product } from 'src/app/types/product';
@@ -56,18 +56,16 @@ export class DetailsProductComponent implements OnInit {
     console.log(this.isOwner())
   }
 
-async checkIsOwner(): Promise<void> {
-  const id = this.activatedRoute.snapshot.params['productId'];
-  const product = await this.apiService.getCurrentProduct(id);
-  const lockedUserId = this.userService.user?.id;
-  this.isOwnerStatus = this.userService.isLogged && product?.ownerId === lockedUserId;
-  console.log(this.isOwnerStatus);
-}
+  async checkIsOwner(): Promise<void> {
+    const id = this.activatedRoute.snapshot.params['productId'];
+    const product = await this.apiService.getCurrentProduct(id);
+    const lockedUserId = this.userService.user?.id;
+    this.isOwnerStatus = this.userService.isLogged && product?.ownerId === lockedUserId;
+    console.log(this.isOwnerStatus);
+  }
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
   }
-
- 
 
   async isOwner(): Promise<boolean> {
     const id = this.activatedRoute.snapshot.params['productId'];
@@ -76,7 +74,7 @@ async checkIsOwner(): Promise<void> {
     this.isOwnerStatus = this.userService.isLogged && productOwner == lockedUserId;
     console.log(productOwner === lockedUserId);
     console.log(this.isOwnerStatus);
-    debugger;
+
     return this.userService.isLogged && productOwner == lockedUserId;
   }
 
@@ -121,11 +119,11 @@ async checkIsOwner(): Promise<void> {
 
   async editProduct(): Promise<void> {
     const id = this.activatedRoute.snapshot.params['productId'];
-    debugger;
+
     const collectionInstance = collection(this.firestore, 'products');
-    debugger
+
     const docRef = doc(collectionInstance, id);
- 
+
 
     const washingtonRef = doc(collectionInstance, id);
 
@@ -134,11 +132,34 @@ async checkIsOwner(): Promise<void> {
     });
 
   }
-  
+
   deleteProduct(): void {
     const id = this.activatedRoute.snapshot.params['productId'];
-    debugger;
+
     this.apiService.deleteProducts(id)
     this.router.navigate(['/profile']);
+  }
+  async lickedProduct(): Promise<void> {
+
+    const id = this.activatedRoute.snapshot.params['productId'];
+
+    const product = await this.apiService.getCurrentProduct(id);
+   
+    const lockedUserId = this.userService.user?.id;
+  
+    if (!product) {
+      console.log("Product not found!");
+      return;
+    } else {
+      const updatedUsersLiked = [...product.usersLiked, lockedUserId];
+      console.log(updatedUsersLiked)
+      // Актуализираме документа в Firestore с новия масив usersLiked
+      const collectionInstance = collection(this.firestore, 'products');
+      const washingtonRef = doc(collectionInstance, id);
+      await updateDoc(washingtonRef, {
+        usersLiked: updatedUsersLiked,
+      });
+    }
+
   }
 }

@@ -45,7 +45,8 @@
                     </div>
                     <div class="settings" *ngIf="isLoggedIn">
 
-                        <button class="btn btn-outline-primary btn-sm" (click)="toggleLike()" *ngIf="!isOwnerStatus">
+                        <button class="btn btn-outline-primary btn-sm" (click)="toggleLike();lickedProduct()"
+                            *ngIf="!isOwnerStatus">
                             <span class="material-symbols-outlined">
                                 thumb_up
                             </span>
@@ -99,17 +100,14 @@
                         </div>
 
 
-                      
-
-                            <a [routerLink]="['/products/edit', product?.id]" 
-                            *ngIf="isOwnerStatus"
+                        <a [routerLink]="['/products/edit', product?.id]" *ngIf="isOwnerStatus"
                             class=" btn btn-outline-primary btn-sm">
-                                <span class="material-symbols-outlined">
+                            <span class="material-symbols-outlined">
                                 edit
                             </span> <span>Edit</span>
-                            </a>
+                        </a>
 
-                   
+
 
                         <!-- <button class="btn-delete" (click)="deleteProduct()">
                               <span class="material-symbols-outlined">

@@ -32,6 +32,7 @@ export class ProfileComponent {
   product: Product[] | null = null;
 
   ownerProducts: Product[] = [];
+  likedProducts: Product[] = [];
 
   // profileDetails: Profile = {
   //   fullName: '',
@@ -50,6 +51,7 @@ export class ProfileComponent {
   ) {
 
     this.getUsersProducts();
+    this.getLickedProducts();
   }
 
   toggleEditMode(): void {
@@ -72,7 +74,7 @@ export class ProfileComponent {
   async getUsersProducts(): Promise<void> {
     const lockedUserId = this.userService.user?.id;
 
-    debugger
+
     const collectionInstance = collection(this.firestore, 'products');
 
 
@@ -89,6 +91,28 @@ export class ProfileComponent {
     }
     console.log(this.ownerProducts)
   }
+
+  async getLickedProducts(): Promise<void> {
+    const lockedUserId = this.userService.user?.id;
+
+    const collectionInstance = collection(this.firestore, 'products');
+
+    debugger
+    const q = query(collectionInstance, where("usersLiked", "array-contains", lockedUserId));
+    console.log(q)
+    try {
+      const querySnapshot = await getDocs(q);
+      const productsQ = querySnapshot.docs.map((doc) => doc.data() as Product);
+      console.log(productsQ);
+    
+      this.likedProducts.push(...productsQ);
+    } catch (e) {
+      console.error("Error getting products: ", e);
+    }
+    console.log(this.likedProducts)
+  }
+
+  
 
   get isLoggedIn(): boolean {
     return this.userService.isLogged;

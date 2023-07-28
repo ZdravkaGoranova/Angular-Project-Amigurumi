@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment.development';
+
 import { Product } from './types/product';
-import { Firestore, getFirestore, collection, addDoc, collectionData, doc, updateDoc, deleteDoc, getDoc, getDocs } from '@angular/fire/firestore';
+import { Firestore,  collection, addDoc, collectionData, doc,  deleteDoc, getDoc, getDocs } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
-import { from, Observable, of } from 'rxjs';
+import {  Observable, } from 'rxjs';
 
 
 @Injectable({
@@ -51,8 +51,8 @@ export class ApiService {
 
     if (data) {
       const products: Product[] = data.map((docData) => {
-        const { id, ownerId, description, imageUrl, skillLevel, title, category } = docData;
-        return { id, ownerId, description, imageUrl, skillLevel, title, category };
+        const { id, ownerId, description, imageUrl, skillLevel, title, category ,usersLiked} = docData;
+        return { id, ownerId, description, imageUrl, skillLevel, title, category ,usersLiked};
       });
       return products;
     } else {
@@ -92,7 +92,7 @@ export class ApiService {
   }
   async getCurrentProduct(id: string): Promise<Product | null> {
     const collectionInstance = collection(this.firestore, 'products');
-    debugger
+
     const docRef = doc(collectionInstance, id);
     const docSnap = await getDoc(docRef);
 
@@ -111,6 +111,7 @@ export class ApiService {
         skillLevel: productData['skillLevel'],
         title: productData['title'],
         category: productData['category'],
+        usersLiked:productData['usersLiked'],
       };
       console.log(product)
       return product;
@@ -124,7 +125,7 @@ export class ApiService {
     const collectionInstance = collection(this.firestore, 'products');
     const docRef = doc(collectionInstance, id);
     const docSnap = await getDoc(docRef);
-    debugger;
+
     if (docSnap.exists()) {
       const productData = docSnap.data();
       const ownerId: string = productData['ownerId'];

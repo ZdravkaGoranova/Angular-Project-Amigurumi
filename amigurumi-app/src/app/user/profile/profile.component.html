@@ -178,7 +178,8 @@
                   <!--IS have a products-->
                   <div class="list-group" *ngIf="ownerProducts.length > 0">
 
-                    <a [routerLink]="['/products', product.id]" class="list-group-item list-group-item-action active"
+                    <a [routerLink]="['/products', product.id]" 
+                    class="list-group-item list-group-item-action"
                       aria-current="true" *ngFor="let product of ownerProducts">
                       {{ product.title }}
                     </a>
@@ -206,14 +207,17 @@
                     class="text-sm text-uppercase font-weight-bold">Learn More&nbsp;<i
                       class="fe-icon-arrow-right"></i></span>
 
-                  <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                      The current link item
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                    <a class="list-group-item list-group-item-action disabled">A disabled link item</a>
+                  <!--IS have a liked products-->
+                  <div class="list-group" *ngIf="likedProducts.length > 0">
+
+                    <a [routerLink]="['/products', product.id]"  class="list-group-item list-group-item-action"
+                     *ngFor="let product of likedProducts">{{
+                      product.title }}</a>
+
+                  </div>
+                  <!--No likeds-->
+                  <div class="alert alert-danger" role="alert" *ngIf="likedProducts.length <=0">
+                    <p>No lecked products from this user!</p>
                   </div>
                 </div>
               </a>

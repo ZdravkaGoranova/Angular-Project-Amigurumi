@@ -67,6 +67,7 @@ export class NewProductComponent {
       await updateDoc(washingtonRef, {
         id: newProductId,
         ownerId:lockedUserId,
+        usersLiked:[]
       });
 
       console.log("Document written with ID: ", docRef.id);

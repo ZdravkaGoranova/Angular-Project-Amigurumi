@@ -168,21 +168,28 @@
                   style="width: 90px; height: 90px; margin-top: -45px;"><i
                     class="fa-solid fa-list-check fa-3x head-icon" style="color: blue;"></i></div>
                 <div class="card-body text-center">
-                  <h3 class="card-title pt-1">My Project</h3>
+                  <h3 class="card-title pt-1">My Products</h3>
                   <p class="card-text text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                     exercitation ullamco laboris nisi ut aliquip.</p><span
                     class="text-sm text-uppercase font-weight-bold">Learn More&nbsp;<i
                       class="fe-icon-arrow-right"></i></span>
 
+                  <!--IS have a products-->
                   <div class="list-group" *ngIf="ownerProducts.length > 0">
 
-                    <a [routerLink]="['/products', product.id]" class="list-group-item list-group-item-action active" aria-current="true"
-                      *ngFor="let product of ownerProducts">
+                    <a [routerLink]="['/products', product.id]" class="list-group-item list-group-item-action active"
+                      aria-current="true" *ngFor="let product of ownerProducts">
                       {{ product.title }}
                     </a>
 
                   </div>
+
+                  <!--No products-->
+                  <div class="alert alert-danger" role="alert" *ngIf="ownerProducts.length <=0">
+                    <p>No products created from this user!</p>
+                  </div>
+
                 </div>
               </a>
             </div>

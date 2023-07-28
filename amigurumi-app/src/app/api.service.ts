@@ -1,27 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
-// import { Product } from './types/product';
+import { Product } from './types/product';
 import { Firestore, getFirestore, collection, addDoc, collectionData, doc, updateDoc, deleteDoc, getDoc, getDocs } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
 import { from, Observable, of } from 'rxjs';
 
-
-interface Product {
-  id?: string;
-  owner: string;
-  description: string;
-  imageUrl: string;
-  skillLevel: string;
-  title: string;
-  category: string;
-
-
-  // public usersLiked: [],
-  // public coments:  [],
-}
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +30,9 @@ export class ApiService {
 
   addData(form: any) {
     console.log(form.value)
+
+
+
   }
 
 
@@ -58,14 +47,14 @@ export class ApiService {
   // }
 
   async getDataProducts(): Promise<Product[]> {
-    debugger;
+   
     const collectionInstance = collection(this.firestore, 'products');
     const data = await collectionData(collectionInstance).toPromise();
-    debugger;
+   
     if (data) {
       const products: Product[] = data.map((docData) => {
-        const { id, owner, description, imageUrl, skillLevel, title,category } = docData;
-        return { id, owner, description, imageUrl, skillLevel, title ,category};
+        const { id, ownerId, description, imageUrl, skillLevel, title, category } = docData;
+        return { id, ownerId, description, imageUrl, skillLevel, title, category };
       });
       return products;
     } else {
@@ -105,32 +94,50 @@ export class ApiService {
   }
   async getCurrentProduct(id: string): Promise<Product | null> {
     const collectionInstance = collection(this.firestore, 'products');
-  debugger
+    debugger
     const docRef = doc(collectionInstance, id);
     const docSnap = await getDoc(docRef);
-  
+
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
-    
-  
+
+
       // Create a new Product instance and populate it with the data
       const productData = docSnap.data();
+      
       const product: Product = {
         id: docSnap.id,
-        owner: productData['owner'],
+        ownerId: productData['owner'],
         description: productData['description'],
         imageUrl: productData['imageUrl'],
         skillLevel: productData['skillLevel'],
         title: productData['title'],
         category: productData['category'],
       };
-  console.log(product)
+      console.log(product)
       return product;
     } else {
       console.log("No such document!");
       return null;
     }
   }
+
+  async getCurrentProductOwner(id: string): Promise<string | null> {
+    const collectionInstance = collection(this.firestore, 'products');
+    const docRef = doc(collectionInstance, id);
+    const docSnap = await getDoc(docRef);
+  
+    if (docSnap.exists()) {
+      const productData = docSnap.data();
+      const ownerId: string = productData['ownerId'];
+      return ownerId;
+    } else {
+      console.log("No such document!");
+      return null;
+    }
+  }
+
+
   // async getCurrentProduct(id: string) {
   //   const collectionInstance = collection(this.firestore, 'products');
 
@@ -171,7 +178,7 @@ export class ApiService {
   // }
   async getAll() {
     const collectionInstance = collection(this.firestore, 'products');
-    debugger;
+ 
     const querySnapshot = await getDocs(collectionInstance);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots

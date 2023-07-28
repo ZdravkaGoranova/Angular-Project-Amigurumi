@@ -8,12 +8,12 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getDatabase, ref, set, child, get, } from "firebase/database";
 import { getAuth, getIdToken, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import {
-  Firestore, collection, addDoc,
-  collectionData, doc, updateDoc, deleteDoc, getDoc
+  Firestore, 
 } from '@angular/fire/firestore';
 
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ApiService } from '../api.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +22,7 @@ export class UserService {
 
   loggedInUserId: string | null = null;
 
-  user: User  | undefined;
+  user: User | undefined;
 
 
   // gender: string = '';
@@ -33,9 +33,8 @@ export class UserService {
 
   get isLogged(): boolean {
     return !!this.user;
-
-
   }
+
   // get isMale(): boolean {
   //   return this.user?.gender === 'male';
   // }
@@ -50,7 +49,7 @@ export class UserService {
     private fireauth: AngularFireAuth,
     private router: Router,
     private firestore: Firestore,
-
+    private apiService: ApiService
   ) {
 
     // this.getData();
@@ -62,6 +61,21 @@ export class UserService {
       this.user = undefined;
     }
   }
+
+  // isProductOwner(productId: string): boolean {
+  //   const loggedInUser = this.getUser();
+  //   if (!loggedInUser) {
+  //     return false;
+  //   }
+
+    // Get the product by its ID
+    // const product = this.apiService.getCurrentProduct(productId);
+
+    // console.log(product.ownerId)
+    // Check if the logged-in user is the owner of the product
+    // return product && product.ownerId === loggedInUser.id;
+  // }
+
 
   login(email: string, password: string) {
     // this.fireauth.signInWithEmailAndPassword(email, password)
@@ -91,36 +105,36 @@ export class UserService {
     //     alert(error.message);
     //   });
     this.fireauth.signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // this.fullName = email;
-      // this.user = {
-      //   email: email,
-      //   fullName: this.fullName,
+      .then((userCredential) => {
+        // this.fullName = email;
+        // this.user = {
+        //   email: email,
+        //   fullName: this.fullName,
         // gender: this.gender,
-      // };
-     debugger;
-     const eml = userCredential.user?.email || '';
-    //  console.log(eml)
+        // };
+ 
+        const eml = userCredential.user?.email || '';
+        //  console.log(eml)
 
-      this.loggedInUserId = userCredential.user?.uid || '';
-      // console.log(this.loggedInUserId)
-      const userData={
-        email: eml,
-        id: this.loggedInUserId,
-      }
-      
-      this.user = userData;
-      localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
-  
-      alert(':)))))))')
-      this.router.navigate(['/profile'])
+        this.loggedInUserId = userCredential.user?.uid || '';
+        // console.log(this.loggedInUserId)
+        const userData = {
+          email: eml,
+          id: this.loggedInUserId,
+        }
 
-    }, err => {
+        this.user = userData;
+        localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
 
-      alert(err.message);
+        alert(':)))))))')
+        this.router.navigate(['/profile'])
 
-      this.router.navigate(['/login'])
-    })
+      }, err => {
+
+        alert(err.message);
+
+        this.router.navigate(['/login'])
+      })
 
     // this.user = {
     //   email: 'niki@abv.bg',
@@ -133,8 +147,7 @@ export class UserService {
   }
 
   register(fullName: string, email: string, password: string) {
-    // register(fullName: string, email: string, password: string, gender: string) {
-    debugger;
+
     const auth = getAuth();
     let uid = '';
 
@@ -156,30 +169,27 @@ export class UserService {
     createUserWithEmailAndPassword(auth, email, password)
       // this.fireauth.createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        debugger;
+ 
         const user = userCredential.user;
         let userId = user.uid;
 
-      
-   
-         this.loggedInUserId = userCredential.user?.uid || null;
-         console.log(this.loggedInUserId)
 
 
-         
+        this.loggedInUserId = userCredential.user?.uid || null;
+        console.log(this.loggedInUserId)
 
-         debugger;
-         const eml = userCredential.user?.email || '';
+
+        const eml = userCredential.user?.email || '';
         //  console.log(eml)
-    
-          this.loggedInUserId = userCredential.user?.uid || '';
-          // console.log(this.loggedInUserId)
-          const userData={
-            email: eml,
-            id: this.loggedInUserId,
-          }
-          
-          this.user = userData;
+
+        this.loggedInUserId = userCredential.user?.uid || '';
+        // console.log(this.loggedInUserId)
+        const userData = {
+          email: eml,
+          id: this.loggedInUserId,
+        }
+
+        this.user = userData;
 
         // Set the custom user properties
         // user?.updateProfile({
@@ -202,8 +212,7 @@ export class UserService {
         // writeUserData(userId, fullName);
 
         alert('Registration Successful');
-        debugger;
-
+    
         this.router.navigate(['/profile']);
       }).catch((error) => {
         console.log(error.message);

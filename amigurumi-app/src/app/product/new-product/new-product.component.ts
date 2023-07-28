@@ -15,6 +15,8 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
+import { UserService } from 'src/app/user/user.service';
+
 @Component({
   selector: 'app-new-product',
   templateUrl: './new-product.component.html',
@@ -31,8 +33,8 @@ export class NewProductComponent {
 
   constructor(
     private firestore: Firestore,
-    private router: Router
-
+    private router: Router,
+    private userService: UserService
   ) {
     this.getDataPro();
     this.readData();
@@ -49,18 +51,22 @@ export class NewProductComponent {
 
       const newProductId = docRef.id;
       console.log(newProductId);
-     
+
+      // const lockedUserId = localStorage
+      const lockedUserId = this.userService.user?.id;
+      // console.log(lockedUserId);
       const updatedProductData = {
         ...form.value,
-        id: newProductId, // Add the ID to the product data
-      };
+        id: newProductId, 
+      };lockedUserId
       // console.log(updatedProductData);
   
       const washingtonRef = doc(collectionInstance, newProductId);
       // console.log(washingtonRef);
    
       await updateDoc(washingtonRef, {
-        id: newProductId
+        id: newProductId,
+        ownerId:lockedUserId,
       });
 
       console.log("Document written with ID: ", docRef.id);

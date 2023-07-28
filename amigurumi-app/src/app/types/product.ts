@@ -1,6 +1,6 @@
 export interface Product {
     id?: string;
-    owner: string;
+    ownerId: string;
     description: string;
     imageUrl: string;
     skillLevel: string;

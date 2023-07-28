@@ -50,7 +50,7 @@ export class ProductListComponent implements OnInit {
   async ngOnInit(): Promise<void> {
  
       const collectionInstance = collection(this.firestore, 'products');
-      debugger;
+
       const querySnapshot = await getDocs(collectionInstance);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots

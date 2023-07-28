@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
+
 
 import {
   Firestore,
@@ -15,10 +17,15 @@ import {
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.css']
 })
+
 export class EditProductComponent implements OnInit {
   [x: string]: any;
 
   product: any = {
+    skillLevel: 'easy',
+    category: 'baby'
+  };
+  user: { skillLevel: string; category: string } = {
     skillLevel: 'easy',
     category: 'baby'
   };
@@ -33,10 +40,10 @@ export class EditProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Извличане на productId от URL параметъра
-    const id = this.activatedRoute.snapshot.params['productId'];
 
-    // Извличане на продукта от базата данни
+    const id = this.activatedRoute.snapshot.params['productId'];
+    debugger;
+
     const collectionInstance = collection(this.firestore, 'products');
     const productDoc = doc(collectionInstance, id);
 
@@ -52,7 +59,7 @@ export class EditProductComponent implements OnInit {
     //   }
     // });
   }
-  async submitHandler(form: NgForm) {
+  async submitHandler(form: NgForm) : Promise<void> {
     try {
       const id = this.activatedRoute.snapshot.params['productId'];
       console.log(id)
@@ -80,8 +87,6 @@ export class EditProductComponent implements OnInit {
         category: form.value.category,
 
       });
-
-
 
 
       console.log("Document written with ID: ", washingtonRef.id);

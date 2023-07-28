@@ -5,13 +5,14 @@ import { DetailsProductComponent } from './details-product/details-product.compo
 import { NewProductComponent } from './new-product/new-product.component';
 import { ProductRoutingModule } from './product-routing.module';
 import { FormsModule } from '@angular/forms';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
     NewProductComponent,
     DetailsProductComponent,
     CardProductComponent,
- 
+    EditProductComponent
   ],
   imports: [
     CommonModule,

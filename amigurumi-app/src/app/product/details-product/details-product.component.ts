@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit ,Renderer2} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Product } from 'src/app/types/product';
 import { UserService } from 'src/app/user/user.service';
+import { Firestore, getFirestore, collection, addDoc, collectionData, doc, updateDoc, deleteDoc, getDoc, getDocs } from '@angular/fire/firestore';
+
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 @Component({
@@ -18,6 +20,8 @@ export class DetailsProductComponent implements OnInit {
   @Input() productDesc!: string;
   product: Product | null = null;
 
+  isOwnerStatus: boolean = false;
+
   descToShow: string;
   productDescLen: number;
   showReadMoreBtn: boolean = true;
@@ -31,27 +35,54 @@ export class DetailsProductComponent implements OnInit {
   isDeleteProduct: boolean = false;
 
   constructor(
-
+    private firestore: Firestore,
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
   ) {
 
 
 
-    this.activatedRoute.params.subscribe((v) => console.log(v))
+    // this.activatedRoute.params.subscribe((v) => console.log(v))
 
     this.productDescLen = 0;
     this.descToShow = "";
   }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.fetchTheme();
+    await this.checkIsOwner();
+    this.isOwner()
+    console.log(this.isOwner())
   }
+  async checkIsOwner(): Promise<void> {
+    const id = this.activatedRoute.snapshot.params['productId'];
+    const product = await this.apiService.getCurrentProduct(id);
+    const lockedUserId = this.userService.user?.id;
+    this.isOwnerStatus === this.userService.isLogged && product?.ownerId === lockedUserId;
+    console.log(this.isOwnerStatus)
+  }
+
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
   }
+
+  async isOwner(): Promise<boolean> {
+    const id = this.activatedRoute.snapshot.params['productId'];
+    const productOwner = await this.apiService.getCurrentProductOwner(id);
+    console.log(productOwner)
+    const lockedUserId = this.userService.user?.id;
+    console.log(lockedUserId)
+    console.log(productOwner === lockedUserId)
+    debugger
+    this.isOwnerStatus === this.userService.isLogged && productOwner == lockedUserId;
+    return this.userService.isLogged && productOwner == lockedUserId;
+  }
+
+
+
   async fetchTheme(): Promise<void> {
-    debugger;
+
     const id = this.activatedRoute.snapshot.params['productId'];
     try {
       this.product = await this.apiService.getCurrentProduct(id)!;
@@ -89,10 +120,26 @@ export class DetailsProductComponent implements OnInit {
     this.showHideBtn = false;
   }
 
-  editProduct(): void {
+  async editProduct(): Promise<void> {
+    const id = this.activatedRoute.snapshot.params['productId'];
+    debugger;
+    const collectionInstance = collection(this.firestore, 'products');
+    debugger
+    const docRef = doc(collectionInstance, id);
+ 
+
+    const washingtonRef = doc(collectionInstance, id);
+
+    await updateDoc(washingtonRef, {
+      capital: true
+    });
 
   }
+  
   deleteProduct(): void {
-
+    const id = this.activatedRoute.snapshot.params['productId'];
+    debugger;
+    this.apiService.deleteProducts(id)
+    this.router.navigate(['/profile']);
   }
 }

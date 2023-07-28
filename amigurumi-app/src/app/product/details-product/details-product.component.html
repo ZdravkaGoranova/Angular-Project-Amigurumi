@@ -28,16 +28,16 @@
                             account_circle
                         </span>
                         <span>
-                            {{product?.owner}}</span>
+                            {{product?.ownerId}}</span>
                     </div>
                     <div class="prd-skillLevel">
-                      
-                        <i class="fa-brands fa-galactic-republic"></i>  Category: {{product?.category}}
+
+                        <i class="fa-brands fa-galactic-republic"></i> Category: {{product?.category}}
 
                     </div>
                     <div class="prd-skillLevel">
-                       
-                        <i class="fa-solid fa-star"></i>    Skill Level: {{product?.skillLevel}}
+
+                        <i class="fa-solid fa-star"></i> Skill Level: {{product?.skillLevel}}
 
                     </div>
                     <div class="desc">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="settings" *ngIf="isLoggedIn">
 
-                        <button class="btn btn-outline-primary btn-sm" (click)="toggleLike()">
+                        <button class="btn btn-outline-primary btn-sm" (click)="toggleLike()" *ngIf="!isOwnerStatus">
                             <span class="material-symbols-outlined">
                                 thumb_up
                             </span>
@@ -98,63 +98,66 @@
                             </div>
                         </div>
 
-                        <div class="ownProduct">
-                            <button class="btn btn-outline-primary btn-sm" (click)="editProduct()">
-                                <span class="material-symbols-outlined">
-                                    edit
-                                </span>
-                                <span>Edit</span>
-                            </button>
 
-                            <!-- <button class="btn-delete" (click)="deleteProduct()">
+                        <button class="btn btn-outline-primary btn-sm" *ngIf="isOwner" >
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+
+                            <a [routerLink]="['/products/edit', product?.id]" class="btn btn-primary"> <span>Edit</span>
+                            </a>
+
+                        </button>
+
+                        <!-- <button class="btn-delete" (click)="deleteProduct()">
                               <span class="material-symbols-outlined">
                     delete</span>
                               <span>Delete</span>
                           </button> -->
-                            <!-- <button class="btn-delete" *ngIf="isDeleteProduct">
+                        <!-- <button class="btn-delete" *ngIf="isDeleteProduct">
                               <span class="material-symbols-outlined">
                                   delete</span>
                               <span>Delete</span>
                           </button> -->
 
-                            <!--Delete Button trigger modal -->
-                            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                <span class="material-symbols-outlined">
-                                    delete</span>
-                                <span>Delete</span>
-                            </button>
+                        <!--Delete Button trigger modal -->
+                        <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="isOwner"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <span class="material-symbols-outlined">
+                                delete</span>
+                            <span>Delete</span>
+                        </button>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to delete this product?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary"
-                                                (click)="deleteProduct()">Yes</button>
-                                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this product?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="deleteProduct()">Yes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
 
                     <div class="btn-back">
                         <a [routerLink]="['..']" class="btn btn-outline-dark btn-sm">Back</a>
                         <!-- <a [routerLink]="['..']" class="btn btn-outline-secondary btn-sm">Back</a>-->
-                    </div> 
+                    </div>
 
 
                     <div class="alert alert-primary" role="alert">

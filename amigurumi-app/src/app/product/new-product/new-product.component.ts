@@ -58,7 +58,7 @@ export class NewProductComponent {
       const updatedProductData = {
         ...form.value,
         id: newProductId, 
-      };lockedUserId
+      };
       // console.log(updatedProductData);
   
       const washingtonRef = doc(collectionInstance, newProductId);

@@ -13,6 +13,7 @@ import {
 
 } from '@angular/fire/firestore';
 import { ApiService } from 'src/app/api.service';
+import { UserService } from 'src/app/user/user.service';
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
@@ -35,7 +36,8 @@ export class EditProductComponent implements OnInit {
     private firestore: Firestore,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private userService: UserService
   ) {
 
   }
@@ -55,7 +57,7 @@ export class EditProductComponent implements OnInit {
       const collectionInstance = collection(this.firestore, 'products');
       const washingtonRef = doc(collectionInstance, id);
 
-
+      const lockedUserId = this.userService.user?.id;
       // const docRef =  doc(collectionInstance, id);
       // await updateDoc(docRef, {
 
@@ -73,7 +75,8 @@ export class EditProductComponent implements OnInit {
         skillLevel: form.value.skillLevel,
         title: form.value.title,
         category: form.value.category,
-
+        ownerId:lockedUserId,
+        id: id,
       });
 
 

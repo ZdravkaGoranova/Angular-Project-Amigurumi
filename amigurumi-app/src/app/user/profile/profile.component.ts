@@ -2,6 +2,13 @@ import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import {
+  Firestore, getFirestore,
+  collection, addDoc, collectionData,
+  doc, updateDoc, deleteDoc, getDoc,
+  getDocs, query, where
+} from '@angular/fire/firestore';
+import { Product } from 'src/app/types/product';
 
 interface Profile {
   fullName: string;
@@ -16,10 +23,15 @@ interface Profile {
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
+
   user: any = {
     gender: 'male' // или 'female'
   };
   isEditMode: boolean = false;
+
+  product: Product[] | null = null;
+
+  ownerProducts: Product[] = [];
 
   // profileDetails: Profile = {
   //   fullName: '',
@@ -33,8 +45,12 @@ export class ProfileComponent {
   };
   constructor(
     private userService: UserService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private firestore: Firestore,
+  ) {
+
+    this.getUsersProducts();
+  }
 
   toggleEditMode(): void {
     this.isEditMode = !this.isEditMode;
@@ -42,7 +58,7 @@ export class ProfileComponent {
 
   saveProfileHandler(form: NgForm): void {
     console.log(form.value)
- 
+
 
     if (form.invalid) {
       return;
@@ -51,6 +67,27 @@ export class ProfileComponent {
 
     this.profileDetails = { ...form.value } as Profile;
     this.toggleEditMode();
+  }
+
+  async getUsersProducts(): Promise<void> {
+    const lockedUserId = this.userService.user?.id;
+
+    debugger
+    const collectionInstance = collection(this.firestore, 'products');
+
+
+    const q = query(collectionInstance, where("ownerId", "==", lockedUserId));
+    console.log(q)
+    try {
+      const querySnapshot = await getDocs(q);
+      const productsQ = querySnapshot.docs.map((doc) => doc.data() as Product);
+      console.log(productsQ);
+      this.ownerProducts.push(...productsQ);
+
+    } catch (e) {
+      console.error("Error getting products: ", e);
+    }
+    console.log(this.ownerProducts)
   }
 
   get isLoggedIn(): boolean {
@@ -66,7 +103,7 @@ export class ProfileComponent {
   }
 
   // get gender(): string {
-   
+
   //   return this.userService.user?.gender || '';
   // }
   // get isMale(): boolean {

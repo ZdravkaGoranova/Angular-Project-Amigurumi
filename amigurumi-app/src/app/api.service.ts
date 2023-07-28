@@ -31,8 +31,6 @@ export class ApiService {
   addData(form: any) {
     console.log(form.value)
 
-
-
   }
 
 
@@ -47,10 +45,10 @@ export class ApiService {
   // }
 
   async getDataProducts(): Promise<Product[]> {
-   
+
     const collectionInstance = collection(this.firestore, 'products');
     const data = await collectionData(collectionInstance).toPromise();
-   
+
     if (data) {
       const products: Product[] = data.map((docData) => {
         const { id, ownerId, description, imageUrl, skillLevel, title, category } = docData;
@@ -104,7 +102,7 @@ export class ApiService {
 
       // Create a new Product instance and populate it with the data
       const productData = docSnap.data();
-      
+
       const product: Product = {
         id: docSnap.id,
         ownerId: productData['owner'],
@@ -126,7 +124,7 @@ export class ApiService {
     const collectionInstance = collection(this.firestore, 'products');
     const docRef = doc(collectionInstance, id);
     const docSnap = await getDoc(docRef);
-  debugger;
+    debugger;
     if (docSnap.exists()) {
       const productData = docSnap.data();
       const ownerId: string = productData['ownerId'];
@@ -137,48 +135,9 @@ export class ApiService {
     }
   }
 
-
-  // async getCurrentProduct(id: string) {
-  //   const collectionInstance = collection(this.firestore, 'products');
-
-  //   const docRef = doc(collectionInstance, id);
-  //   const docSnap = await getDoc(docRef);
-  //   debugger;
-  //   if (docSnap.exists()) {
-  //     console.log("Document data:", docSnap.data());
-  //     console.log(typeof docSnap.data())
-  //     return docSnap.data();
-  //   } else {
-
-  //     console.log("No such document!");
-  //   }
-  // }
-
-
-
-  // getCurrentProduct(id: string): Observable<Product> { // Return an Observable of type Product
-  //   const collectionInstance = collection(this.firestore, 'products');
-  //   const docRef = doc(collectionInstance, id);
-  //   return new Observable((observer) => {
-  //     getDoc(docRef)
-  //       .then((docSnap) => {
-  //         if (docSnap.exists()) {
-  //           const productData: Product = docSnap.data() as Product;
-  //           observer.next(productData);
-  //         } else {
-  //           observer.next(null);
-  //         }
-  //         observer.complete();
-  //       })
-  //       .catch((error) => {
-  //         observer.error(error);
-  //         observer.complete();
-  //       });
-  //   });
-  // }
   async getAll() {
     const collectionInstance = collection(this.firestore, 'products');
- 
+
     const querySnapshot = await getDocs(collectionInstance);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots

@@ -8,6 +8,8 @@ import {
   collectionData,
   getDocs,
   getFirestore,
+  query,
+  where,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 @Component({
@@ -40,6 +42,9 @@ export class ProductListComponent implements OnInit {
   likeIsShown: boolean = false;
   likeButtonTitle: string = 'Like';
 
+  searchKeyword: string = '';
+  searcProducts: Product[] = [];
+  // isSearcProducts: boolean =true;
 
   constructor(private apiService: ApiService,
     private firestore: Firestore,
@@ -61,6 +66,38 @@ export class ProductListComponent implements OnInit {
   
       console.log(this.products)
     }
+  
+    
+    async searchProducts(keyword: string): Promise<void> {
+      debugger
+      this.searcProducts = [];
+      console.log(this.searcProducts)
+      const collectionInstance = collection(this.firestore, 'products');
+      const lowerCaseKeyword = keyword.toLowerCase();
+      const q = query(collectionInstance,
+        //  where('title', '>=', lowerCaseKeyword),
+        //   where('title', '<=', lowerCaseKeyword + '\uf8ff'),
+          where('category', '>=', lowerCaseKeyword),
+          where('category', '<=', lowerCaseKeyword + '\uf8ff'));
+      try {
+        const querySnapshot = await getDocs(q);
+        this.searcProducts = querySnapshot.docs.map((doc) => doc.data() as Product);
+    debugger
+// if(this.searchProducts.length >0){
+// this.isSearcProducts=true;
+// }
+// else if(this.searchProducts.length <=0){
+//   this.isSearcProducts=false;
+//   }
+
+        
+      } catch (e) {
+        console.error("Error searching products: ", e);
+      
+      }
+      console.log(this.searcProducts)
+    }
+
   }
     // async getAll() {
     //   const collectionInstance = collection(this.firestore, 'products');

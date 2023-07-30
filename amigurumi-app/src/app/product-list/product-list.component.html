@@ -2,20 +2,49 @@
     <div class="row">
         <div class="col-12">
             <!-- Page title -->
-            <div class="my-5">
-                <h3>Amigurumi Catalog:</h3>
-                <nav class=" welcome-info navbar bg-body-tertiary">
-                    <div class="container-fluid">
-                      <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-primary" type="submit">Search</button>
-                      </form>
-                    </div>
-                  </nav>
-                <hr>
-            </div>
-            <!-- Form START -->
 
+            <div class="col-6">
+                <div class="my-5">
+                    <h3>Amigurumi Catalog:</h3>
+                    <hr>
+                </div>
+
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="my-3">
+                        <h3>Search by category:</h3>
+                        <hr>
+                        <div class="containe">
+                            <div class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                                    [(ngModel)]="searchKeyword">
+                                <button class="btn btn-outline-primary" type="submit"
+                                    (click)="searchProducts(searchKeyword)">Search</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--IS have a Search products-->
+
+                    <div class="list-group" *ngIf="searcProducts.length > 0 ">
+
+                        <a [routerLink]="['/products', product.id]" class="list-group-item list-group-item-action"
+                            *ngFor="let product of searcProducts">
+                           {{product.title }}</a>
+                    </div>
+
+                    <!--No Search products-->
+                    <div class="alert alert-danger" role="alert" *ngIf="searcProducts.length <=0">
+                        <p>No lecked products from this category {{searchKeyword}}!</p>
+                    </div>
+
+                </div>
+
+            </div>
+            <hr>
+            <!-- Form START -->
             <ul>
                 <!-- <app-card-product *ngFor="let p of products"  [product]="p|| ''"
         [productDesc]="p.description || ''"
@@ -34,19 +63,23 @@
                             <img src="{{product.imageUrl}}" class="card-img-top" alt="product image">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">{{product.title}}</h5>
+                            <h5 class="card-title">Title:  {{product.title}}</h5>
+                            <hr>
+                            <p class="card-text">
+                                <i class="fa-brands fa-galactic-republic"></i> Category:{{product.category}}
 
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of
-                                the
-                                card's content.</p>
+                            </p>
+                            <hr>
+                            <!-- <p class="card-text">
+                                <i class="fa-solid fa-star"></i> Skill Level: {{product?.skillLevel}}
+                            </p> -->
 
-                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
+                            <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
                                     Title</cite>
-                            </footer>
+                            </footer> -->
 
 
-                            <button> <a [routerLink]="product.id" class="btn btn-primary" > Details Page</a></button>
+                            <button> <a [routerLink]="product.id" class="btn btn-primary"> Details Page</a></button>
                             <!-- [style]="{backgroundColor:'#6658d3'}" -->
                         </div>
                     </div>

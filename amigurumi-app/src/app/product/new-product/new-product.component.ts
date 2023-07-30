@@ -25,7 +25,7 @@ import { UserService } from 'src/app/user/user.service';
 export class NewProductComponent {
 
   productData!: Observable<any>;
-
+  imageUrl: string | null = null;
   user: any = {
     skillLevel: 'easy',
     category: 'baby'
@@ -67,7 +67,8 @@ export class NewProductComponent {
       await updateDoc(washingtonRef, {
         id: newProductId,
         ownerId:lockedUserId,
-        usersLiked:[]
+        usersLiked:[],
+        coments:[]
       });
 
       console.log("Document written with ID: ", docRef.id);

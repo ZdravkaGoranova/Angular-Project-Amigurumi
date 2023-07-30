@@ -168,19 +168,10 @@
                                 <h4 class="mb-4 mt-0">Upload amigurumi photo</h4>
                                 <div class="text-center">
 
-                                    <div class="square position-relative display-2 mb-3">
-                                        <i
-                                            class="fas fa-regular fa-image position-absolute top-50 start-50 translate-middle text-secondary"></i>
-                                    </div>
-                                    <!-- Button -->
-                                    <div class="d-flex justify-content-evenly">
-                                        <input type="file" id="customFile" name="file" hidden="">
-                                        <label class="btn btn-primary" for="customFile">Upload</label>
-                                        <button type="button" class="btn btn-info">Remove</button>
-                                    </div>
-                                    <!-- Content -->
-                                    <p class="text-muted mt-3 mb-0"><span class="me-1">Note:</span>Minimum size 300px x
-                                        300px</p>
+                                    <input type="text" class="form-control" id="exampleInputPassword3"
+                                    name="imageUrl" [(ngModel)]="product.imageUrl" required
+                                    minlength="4" #photoInput="ngModel">
+                                 
                                 </div>
                             </div>
                         </div>
@@ -189,18 +180,20 @@
                 </div> <!-- Row END -->
                 {{form.value |json}}
                 <!-- button -->
-                <div class="d-flex flex-row mb-3">
-                    <button type="submit" class="btn btn-primary btn-lg" 
-                    [disabled]="form.invalid"
-                    [style]="{backgroundColor:form.invalid ? '#e25562':' #6658d3'}"
-                    >Add new Amigurumi</button>
+          
 
+                <div class="d-flex flex-row gap-2 mb-3">
+                    <button type="submit" class="btn btn-outline-dark">
+                        <a [routerLink]="['../../']" class=" custom-btn">Back</a></button>
+
+                    <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid"
+                        [style]="{backgroundColor:form.invalid ? '#e25562':' #6658d3'}">Add new Amigurumi</button>
+                  
                 </div>
+
+
             </form> <!-- Form END -->
-            <div class="btn-back">
-                <a [routerLink]="['../../']" class="btn btn-outline-dark ">Back</a>
-              
-            </div>
+         
            
         </div>
     </div>

@@ -65,4 +65,15 @@ body{margin-top:20px;
         border-radius: 3px;
         font-style: italic;
     }
-    
+    .custom-btn {
+        background-color: transparent;
+        border-color: transparent;
+        color: black;
+        text-decoration: none; /* Премахва подчертаването на връзката */
+        padding: 0; /* Премахва вътрешният padding на бутона, за да няма излишни отстъпи около текста */
+      }
+      
+      /* Стилове при ховер */
+      .custom-btn:hover {
+        color: white;
+      }

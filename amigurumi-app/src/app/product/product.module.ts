@@ -18,6 +18,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     CommonModule,
     ProductRoutingModule,
     FormsModule,
+ 
     // RouterModule.forChild([
     //   {
     //     path: 'catalog',

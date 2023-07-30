@@ -41,8 +41,6 @@ export class ProfileComponent {
   likedProducts: Product[] = [];
 
 
-
- 
   // profileDetails: Profile = {
   //   fullName: "John",
   //   email: "john.doe@gmail.com",

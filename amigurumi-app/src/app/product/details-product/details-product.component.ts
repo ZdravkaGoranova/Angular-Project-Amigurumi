@@ -2,11 +2,15 @@ import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Product } from 'src/app/types/product';
+import { Comment } from 'src/app/types/comment';
 import { UserService } from 'src/app/user/user.service';
-import { Firestore, getFirestore, collection, addDoc, collectionData, doc, updateDoc, deleteDoc, getDoc, getDocs } from '@angular/fire/firestore';
 
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  Firestore, getFirestore,
+  collection, addDoc, collectionData,
+  doc, updateDoc, deleteDoc, getDoc,
+  getDocs, query, where
+} from '@angular/fire/firestore';
 @Component({
   selector: 'app-details-product',
   templateUrl: './details-product.component.html',
@@ -35,6 +39,9 @@ export class DetailsProductComponent implements OnInit {
 
   isDeleteProduct: boolean = false;
 
+  newComment: string = '';
+  commentsProduct: Comment[] = [];
+
   constructor(
     private firestore: Firestore,
     private activatedRoute: ActivatedRoute,
@@ -43,12 +50,11 @@ export class DetailsProductComponent implements OnInit {
     private router: Router,
   ) {
 
-
-
     // this.activatedRoute.params.subscribe((v) => console.log(v))
 
     this.productDescLen = 0;
     this.descToShow = "";
+    this.getCommentsProducts()
   }
   async ngOnInit(): Promise<void> {
     this.fetchTheme();
@@ -138,17 +144,18 @@ export class DetailsProductComponent implements OnInit {
     const id = this.activatedRoute.snapshot.params['productId'];
 
     this.apiService.deleteProducts(id)
-  
+
     this.router.navigate(['/profile']);
   }
+
   async lickedProduct(): Promise<void> {
 
     const id = this.activatedRoute.snapshot.params['productId'];
 
     const product = await this.apiService.getCurrentProduct(id);
-   
+
     const lockedUserId = this.userService.user?.id;
-  
+
     if (!product) {
       console.log("Product not found!");
       return;
@@ -163,5 +170,68 @@ export class DetailsProductComponent implements OnInit {
       });
     }
 
+  }
+
+  async addComment(): Promise<void> {
+    if (this.newComment.trim() === '') {
+      // Проверка за празен коментар
+      alert('Please enter a comment.');
+      return;
+    }
+    debugger
+    const id = this.activatedRoute.snapshot.params['productId'];
+
+    const collectionInstance = collection(this.firestore, 'products', id, 'comments');
+    const newComment = {
+      text: this.newComment,
+      user: {
+        name: this.userService.user?.email,
+        userId: this.userService.user?.id,
+      },
+      timestamp: new Date(),
+    };
+
+    try {
+      await addDoc(collectionInstance, newComment);
+      console.log('Comment added successfully!');
+      await this.getCommentsProducts();
+    } catch (error) {
+      console.error('Error adding comment:', error);
+    }
+
+    this.newComment = ''; // Нулиране на полето за коментар след добавяне
+  }
+  // async getCommentsProducts(): Promise<void> {
+  //   debugger
+  //   const id = this.activatedRoute.snapshot.params['productId'];
+
+  //   const collectionInstance = collection(this.firestore, 'products', id, 'comments');
+
+  //   const comments = collectionData(collectionInstance);
+  //   console.log('Comments:', comments); 
+   
+  // }
+  async getCommentsProducts(): Promise<void> {
+    debugger;
+    const id = this.activatedRoute.snapshot.params['productId'];
+  
+    const collectionInstance = collection(this.firestore, 'products', id, 'comments');
+  
+    try {
+      const querySnapshot = await getDocs(collectionInstance);
+      const comments: any[] = [];
+      
+      querySnapshot.forEach((doc) => {
+        // Извличане на данните от документа
+        const data = doc.data();
+        comments.push(data);
+      });
+  
+      console.log('Comments:', comments);
+      // Запазване на коментарите в променлива за използване в шаблона
+      this.commentsProduct = comments;
+    } catch (error) {
+      console.error('Error getting comments:', error);
+    }
   }
 }

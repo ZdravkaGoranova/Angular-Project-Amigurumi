@@ -183,3 +183,21 @@ button:hover {
     margin-top: 0.5rem !important;
     margin-bottom: 0.5rem !important;
 }
+hr {
+    margin: 0.2rem 0;
+    color: inherit;
+    border: 0;
+    border-top: var(--bs-border-width) solid;
+    opacity: 0.25;
+}
+.comments-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .list-group {
+    flex: 0 0 calc(50% - 20px); /* Задава ширина на елемента, така че да заема 50% от родителя с 20px разстояние от двете страни */
+    margin: 10px; /* Добавя разстояние от дясно и ляво на колоните */
+  }
+  

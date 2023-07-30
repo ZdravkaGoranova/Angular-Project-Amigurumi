@@ -79,21 +79,20 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
-                                            <div class="mb-3">
-                                                <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                                <input type="text" class="form-control" id="recipient-name">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="message-text" class="col-form-label">Message:</label>
-                                                <textarea class="form-control" id="message-text"></textarea>
-                                            </div>
-                                        </form>
+
+
+                                        <div class="mb-3">
+                                            <label for="message-text" class="col-form-label">Message:</label>
+                                            <textarea class="form-control" id="comment" name="comment"
+                                                [(ngModel)]="newComment"></textarea>
+                                        </div>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Post new comment</button>
+                                        <button type="button" class="btn btn-primary" (click)="addComment()"
+                                            data-bs-dismiss="modal">Post new comment</button>
                                     </div>
                                 </div>
                             </div>
@@ -144,15 +143,14 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary"
-                                            (click)="deleteProduct()" data-bs-dismiss="modal">Yes</button>
+                                        <button type="button" class="btn btn-primary" (click)="deleteProduct()"
+                                            data-bs-dismiss="modal">Yes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-
 
                     <div class="btn-back">
                         <a [routerLink]="['..']" class="btn btn-outline-dark btn-sm">Back</a>
@@ -160,93 +158,55 @@
                     </div>
 
 
-                    <div class="alert alert-primary" role="alert">
-                        No customer comments for this product!
-                    </div>
-
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                    aria-controls="flush-collapseOne">
-                                    Accordion Item #1
-                                </button>
-                            </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <blockquote class="blockquote mb-0">
-                                        <p>A well-known quote, contained in a blockquote element.</p>
-                                        <footer class="blockquote-footer">Someone famous in <cite
-                                                title="Source Title">Source
-                                                Title</cite></footer>
-                                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins
-                                                ago</small></p>
-
-                                    </blockquote>
-
-                                </div>
-                            </div>
+                    <div *ngIf="commentsProduct.length <=0">
+                        <div class="alert alert-primary" role="alert">
+                            No customer comments for this product!
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                    aria-controls="flush-collapseTwo">
-                                    Accordion Item #2
-                                </button>
-                            </h2>
-                            <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
-                                        <div class="card-header">Header</div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">Primary card title</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and
-                                                make up the
-                                                bulk of the card's content.</p>
-                                            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins
-                                                    ago</small>
-                                            </p>
+                    </div>
+                </div>
+                <!-- <div *ngIf="commentsProduct.length >0">
+                        <div class="accordion accordion-flush" id="accordionFlushExample"
+                            *ngFor="let comment of commentsProduct">
 
-                                        </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                        Accordion Item #1
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <blockquote class="blockquote mb-0">
+                                            <p class="text-primary">{{comment.text }}</p>
+                                            <footer class="blockquote-footer">{{comment.user[0]}} <cite
+                                                    title="Source Title">
+                                                    <p class="card-text text-body-tertiary">
+                                                        <small class="text-body-secondary">
+                                                            <br>
+                                                            Posted on: {{ comment.timestamp.toDate() | date:
+                                                            'yyyy-MM-dd' }} at {{ comment.timestamp.toDate() | date:
+                                                            'HH:mm' }}
+                                                            <br>
+                                                            Day of the week: {{ comment.timestamp.toDate() | date:
+                                                            'EEEE' }}
+                                                        </small>
+                                                    </p>
+                                                </cite></footer>
+
+
+                                        </blockquote>
+
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapseThree" aria-expanded="false"
-                                    aria-controls="flush-collapseThree">
-                                    Accordion Item #3
-                                </button>
-                            </h2>
-                            <div id="flush-collapseThree" class="accordion-collapse collapse"
-                                data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <div class="card border-primary mb-3" style="max-width: 18rem;">
-                                        <div class="card-header">Header</div>
-                                        <div class="card-body text-primary">
-                                            <h5 class="card-title">Primary card title</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and
-                                                make up the
-                                                bulk of the card's content.</p>
-                                            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins
-                                                    ago</small>
-                                            </p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <!-- <div class="accordion" id="accordionExample">
+                    </div> -->
+                <!-- <div class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -284,8 +244,29 @@
           </div>
         </div>
       </div> -->
-                </div>
+                <div  class="comments-container" *ngIf="commentsProduct.length >0">
+                    <div class="list-group" *ngFor="let comment of commentsProduct">
 
+
+                        <a class="list-group-item list-group-item-action mb-2">
+                            <p class="mb-1 text-primary text-opacity-95">Comment by: {{ comment.user.name}}</p>
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1 text-primary-emphasis">{{comment.text}}</h5>
+
+                            </div>
+                            <hr>
+                            <p class="card-text ">
+                                <small class="text-body-tertiary">
+
+                                    Posted on: {{ comment.timestamp.toDate() | date: 'yyyy-MM-dd' }} at {{
+                                    comment.timestamp.toDate() | date: 'HH:mm' }}
+
+                                    Day: {{ comment.timestamp.toDate() | date: 'EEEE' }}
+                                </small>
+                            </p>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

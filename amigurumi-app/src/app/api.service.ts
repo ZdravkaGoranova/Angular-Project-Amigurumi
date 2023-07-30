@@ -88,7 +88,7 @@ export class ApiService {
     const collectionInstance = collection(this.firestore, 'products');
 
     await deleteDoc(doc(collectionInstance, id));
-
+ 
   }
   async getCurrentProduct(id: string): Promise<Product | null> {
     const collectionInstance = collection(this.firestore, 'products');

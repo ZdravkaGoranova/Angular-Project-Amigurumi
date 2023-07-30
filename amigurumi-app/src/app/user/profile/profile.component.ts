@@ -34,16 +34,16 @@ export class ProfileComponent {
   ownerProducts: Product[] = [];
   likedProducts: Product[] = [];
 
-  // profileDetails: Profile = {
-  //   fullName: '',
-  //   email: '',
-  //   gender: ''
-  // };
   profileDetails: Profile = {
-    fullName: "John",
-    email: "john.doe@gmail.com",
-    gender: "male",
+    fullName: '',
+    email: '',
+    gender: ''
   };
+  // profileDetails: Profile = {
+  //   fullName: "John",
+  //   email: "john.doe@gmail.com",
+  //   gender: "male",
+  // };
   constructor(
     private userService: UserService,
     private router: Router,

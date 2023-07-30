@@ -22,6 +22,7 @@ export class DetailsProductComponent implements OnInit {
 
   isOwnerStatus: boolean = false;
 
+
   descToShow: string;
   productDescLen: number;
   showReadMoreBtn: boolean = true;
@@ -137,6 +138,7 @@ export class DetailsProductComponent implements OnInit {
     const id = this.activatedRoute.snapshot.params['productId'];
 
     this.apiService.deleteProducts(id)
+  
     this.router.navigate(['/profile']);
   }
   async lickedProduct(): Promise<void> {

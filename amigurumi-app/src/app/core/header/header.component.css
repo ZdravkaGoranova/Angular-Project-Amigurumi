@@ -1,5 +1,5 @@
 /* Responsive styles for screens smaller than 768px (e.g., mobile devices) */
-@media (max-width: 991px) {
+@media (max-width: 1620px) {
     header {
         flex-direction: column;
         /* Stack the elements vertically */

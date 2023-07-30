@@ -31,14 +31,18 @@ export class ProfileComponent {
 
   product: Product[] | null = null;
 
-  ownerProducts: Product[] = [];
-  likedProducts: Product[] = [];
-
   profileDetails: Profile = {
     fullName: '',
     email: '',
     gender: ''
   };
+
+  ownerProducts: Product[] = [];
+  likedProducts: Product[] = [];
+
+
+
+ 
   // profileDetails: Profile = {
   //   fullName: "John",
   //   email: "john.doe@gmail.com",

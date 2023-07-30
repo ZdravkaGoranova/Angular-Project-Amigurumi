@@ -51,8 +51,8 @@ export class ApiService {
 
     if (data) {
       const products: Product[] = data.map((docData) => {
-        const { id, ownerId, description, imageUrl, skillLevel, title, category ,usersLiked} = docData;
-        return { id, ownerId, description, imageUrl, skillLevel, title, category ,usersLiked};
+        const { id, ownerId, description, imageUrl, skillLevel, title, category ,usersLiked,coments} = docData;
+        return { id, ownerId, description, imageUrl, skillLevel, title, category ,usersLiked,coments};
       });
       return products;
     } else {
@@ -112,6 +112,7 @@ export class ApiService {
         title: productData['title'],
         category: productData['category'],
         usersLiked:productData['usersLiked'],
+        coments:productData['coments']
       };
       console.log(product)
       return product;

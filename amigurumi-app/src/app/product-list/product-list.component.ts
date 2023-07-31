@@ -28,19 +28,18 @@ export class ProductListComponent implements OnInit {
   @Input() productDesc!: string;
 
   products: Product[] = [];
-  isLoading: boolean = true;
+
   private symbols: number = 250;
   db = getFirestore();
 
   colRef = collection(this.db, 'products');
 
-  // author
-  descToShow: string;
-  productDescLen: number;
-  showReadMoreBtn: boolean = true;
-  showHideBtn: boolean = false;
-  imageIsShown: boolean = true;
-  imageButtonTitle: string = 'Show Image';
+  // descToShow: string;
+  // productDescLen: number;
+  // showReadMoreBtn: boolean = true;
+  // showHideBtn: boolean = false;
+  // imageIsShown: boolean = true;
+  // imageButtonTitle: string = 'Show Image';
 
   likeIsShown: boolean = false;
   likeButtonTitle: string = 'Like';
@@ -52,8 +51,8 @@ export class ProductListComponent implements OnInit {
   constructor(private apiService: ApiService,
     private firestore: Firestore,
     ) {
-    this.productDescLen = 0;
-    this.descToShow = "";
+    // this.productDescLen = 0;
+    // this.descToShow = "";
   }
   async ngOnInit(): Promise<void> {
  

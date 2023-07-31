@@ -28,6 +28,15 @@ export class DetailsProductComponent implements OnInit {
 
   isLoalding: boolean = true;
 
+  isLiked: boolean = false;
+  likeButtonTitle: string = 'Like';
+  likeIsShown: boolean = false;
+
+  isDeleteProduct: boolean = false;
+
+  newComment: string = '';
+  commentsProduct: Comment[] = [];
+
   // descToShow: string;
   // productDescLen: number;
   // showReadMoreBtn: boolean = true;
@@ -35,14 +44,7 @@ export class DetailsProductComponent implements OnInit {
   // imageIsShown: boolean = true;
   // imageButtonTitle: string = 'Show Image';
 
-  likeIsShown: boolean = false;
-  likeButtonTitle: string = 'Like';
-
-  isDeleteProduct: boolean = false;
-
-  newComment: string = '';
-  commentsProduct: Comment[] = [];
-
+  
   constructor(
     private firestore: Firestore,
     private activatedRoute: ActivatedRoute,
@@ -61,7 +63,7 @@ export class DetailsProductComponent implements OnInit {
     this.fetchTheme();
     await this.checkIsOwner();
     this.isOwner()
-    this.isLoalding=false;
+    this.isLoalding = false;
     // console.log(this.isOwner())
   }
 
@@ -99,11 +101,14 @@ export class DetailsProductComponent implements OnInit {
   }
 
   toggleLike(): void {
-    this.likeIsShown = !this.likeIsShown;
-    this.likeButtonTitle = this.likeIsShown ? 'Like' : 'You already liked!';
+   
+    if (!this.isLiked) {
 
+      this.isLiked = true; // Disable the button
+      this.likeButtonTitle = this.likeIsShown ? 'Like' : 'You already liked!';
+    }
   }
- 
+
   async editProduct(): Promise<void> {
     const id = this.activatedRoute.snapshot.params['productId'];
 
@@ -148,6 +153,7 @@ export class DetailsProductComponent implements OnInit {
       await updateDoc(washingtonRef, {
         usersLiked: updatedUsersLiked,
       });
+      this.isLiked = true;
     }
 
   }
@@ -185,19 +191,19 @@ export class DetailsProductComponent implements OnInit {
   async getCommentsProducts(): Promise<void> {
     debugger;
     const id = this.activatedRoute.snapshot.params['productId'];
-  
+
     const collectionInstance = collection(this.firestore, 'products', id, 'comments');
-  
+
     try {
       const querySnapshot = await getDocs(collectionInstance);
       const comments: any[] = [];
-      
+
       querySnapshot.forEach((doc) => {
         // Извличане на данните от документа
         const data = doc.data();
         comments.push(data);
       });
-  
+
       console.log('Comments:', comments);
       // Запазване на коментарите в променлива за използване в шаблона
       this.commentsProduct = comments;
@@ -207,7 +213,7 @@ export class DetailsProductComponent implements OnInit {
   }
 
 
-    // hideDesc(): void {
+  // hideDesc(): void {
   //   this.productDescLen = 0;
   //   this.descToShow = "";
   //   this.showReadMoreBtn = true;

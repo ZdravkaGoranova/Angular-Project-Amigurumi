@@ -29,7 +29,18 @@
         flex-wrap: wrap;
     }
 }
-
+.container{
+    /* flex: 1;
+    padding-bottom: 50px;
+    min-height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-bottom: 70px; 
+  
+    /* opacity: 1;
+    color: rgba(237, 240, 244, 0.2) !important; */
+}
 li {
 
 
@@ -251,3 +262,6 @@ hr {
     align-items: center;
     /* height: 100vh;  */
   }
+  .container {
+    padding-bottom: 6rem;
+}

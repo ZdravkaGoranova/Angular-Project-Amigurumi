@@ -55,14 +55,19 @@
                     </div>
                     <div class="settings" *ngIf="isLoggedIn">
 
-                        <button class="btn btn-outline-primary btn-sm" (click)="toggleLike();lickedProduct()"
-                            *ngIf="!isOwnerStatus">
-                            <span class="material-symbols-outlined">
-                                thumb_up
-                            </span>
-                            <span>{{likeButtonTitle}}</span>
+                       
+                            <button class="btn btn-outline-primary btn-sm" (click)="toggleLike();lickedProduct()"
+                                *ngIf="!isOwnerStatus"
+                                
+                                [disabled]="isLiked"
+                                >
+                                <span class="material-symbols-outlined">
+                                    thumb_up
+                                </span>
+                                <span>{{likeButtonTitle}}</span>
 
-                        </button>
+                            </button>
+                     
                         <!-- <button class="btn-comment">
                             <span class="material-symbols-outlined">
                              rate_review
@@ -301,3 +306,4 @@
             </div>
         </div>
     </div>
+</div>

@@ -45,18 +45,20 @@
             </div>
             <hr>
 
-            <!-- <div *ngIf="isLoalding">
-                <app-loader></app-loader>
-            </div> -->
             <div class="center-wrapper" *ngIf="isLoalding">
                 <div class="lds-dual-ring">
-                    
+
                     <app-loader></app-loader>
                 </div>
-              </div>
-              
+            </div>
+
+            <div *ngIf="!isLoalding && (!products || products.length === 0)" class="no-products">
+                <h3>No products added to the catalog!</h3>
+            </div>
+
+
             <!-- Form START -->
-            <ul *ngIf="!isLoalding">
+            <ul *ngIf="!isLoalding && products && products.length > 0">
                 <!-- <app-card-product *ngFor="let p of products"  [product]="p|| ''"
         [productDesc]="p.description || ''"
      
@@ -66,7 +68,6 @@
     [productDesc]="p.description || ''" -->
 
                 <li *ngFor="let product of products ">
-
 
                     <!-- [routerLink]="['product','detail',product.id]"> -->
                     <div class="card" style="width: 18rem;">
@@ -94,7 +95,6 @@
                             <!-- [style]="{backgroundColor:'#6658d3'}" -->
                         </div>
                     </div>
-
 
 
                     <!-- <link rel="stylesheet"
@@ -150,8 +150,6 @@
 
                 </ul>
             </div> -->
-
-
 
             </ul>
         </div>

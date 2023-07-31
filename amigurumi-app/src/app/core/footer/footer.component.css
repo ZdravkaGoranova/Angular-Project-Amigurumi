@@ -1,12 +1,17 @@
 footer {
-    margin-top: auto;
-    display: flex;
-    justify-content:space-evenly;
-    flex-wrap: wrap;
+ 
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     padding: 10px;
-    background: rgb(87, 88, 187);
+
+    background-color: rgb(87, 88, 187);
     color: white;
-    
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
     /* text-align: center; */
     /* background: #FDB6BA; */
     /* background: #BDDCD7; */

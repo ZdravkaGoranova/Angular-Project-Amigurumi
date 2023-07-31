@@ -95,3 +95,6 @@ body {
   .custom-btn:hover {
     color: white;
   }
+  .container {
+    padding-bottom: 6rem;
+}

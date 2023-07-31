@@ -161,7 +161,15 @@
 
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <section class="container pt-3 mb-3 ">
-          <div class="row pt-5 mt-30">
+
+          <div class="center-wrapper" *ngIf="isLoalding">
+            <div class="lds-dual-ring">
+
+              <app-loader></app-loader>
+            </div>
+          </div>
+          
+          <div class="row pt-5 mt-30" *ngIf="!isLoalding">
             <div class="col-lg-6 col-sm-6 mb-30 pb-5  ">
               <a class="card" href="#">
                 <div class="box-shadow bg-white rounded-circle mx-auto text-center"
@@ -178,8 +186,7 @@
                   <!--IS have a products-->
                   <div class="list-group" *ngIf="ownerProducts.length > 0">
 
-                    <a [routerLink]="['/products', product.id]" 
-                    class="list-group-item list-group-item-action"
+                    <a [routerLink]="['/products', product.id]" class="list-group-item list-group-item-action"
                       aria-current="true" *ngFor="let product of ownerProducts">
                       {{ product.title }}
                     </a>
@@ -207,11 +214,14 @@
                     class="text-sm text-uppercase font-weight-bold">Learn More&nbsp;<i
                       class="fe-icon-arrow-right"></i></span>
 
+                 
+
+                
                   <!--IS have a liked products-->
                   <div class="list-group" *ngIf="likedProducts.length > 0">
 
-                    <a [routerLink]="['/products', product.id]"  class="list-group-item list-group-item-action"
-                     *ngFor="let product of likedProducts">{{
+                    <a [routerLink]="['/products', product.id]" class="list-group-item list-group-item-action"
+                      *ngFor="let product of likedProducts">{{
                       product.title }}</a>
 
                   </div>

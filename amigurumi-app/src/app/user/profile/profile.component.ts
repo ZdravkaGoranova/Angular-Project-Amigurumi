@@ -40,7 +40,7 @@ export class ProfileComponent {
   ownerProducts: Product[] = [];
   likedProducts: Product[] = [];
 
-
+  isLoalding: boolean = true;
   // profileDetails: Profile = {
   //   fullName: "John",
   //   email: "john.doe@gmail.com",
@@ -74,22 +74,23 @@ export class ProfileComponent {
   }
 
   async getUsersProducts(): Promise<void> {
-    const lockedUserId = this.userService.user?.id;
 
+    const lockedUserId = this.userService.user?.id;
 
     const collectionInstance = collection(this.firestore, 'products');
 
-
     const q = query(collectionInstance, where("ownerId", "==", lockedUserId));
     console.log(q)
+
     try {
       const querySnapshot = await getDocs(q);
       const productsQ = querySnapshot.docs.map((doc) => doc.data() as Product);
       console.log(productsQ);
       this.ownerProducts.push(...productsQ);
-
+   this.isLoalding=false;
     } catch (e) {
       console.error("Error getting products: ", e);
+      this.isLoalding=false;
     }
     console.log(this.ownerProducts)
   }
@@ -99,19 +100,20 @@ export class ProfileComponent {
 
     const collectionInstance = collection(this.firestore, 'products');
 
-    debugger
     const q = query(collectionInstance, where("usersLiked", "array-contains", lockedUserId));
     console.log(q)
+  
     try {
       const querySnapshot = await getDocs(q);
       const productsQ = querySnapshot.docs.map((doc) => doc.data() as Product);
       console.log(productsQ);
-    
+      this.isLoalding=false;
       this.likedProducts.push(...productsQ);
     } catch (e) {
       console.error("Error getting products: ", e);
     }
     console.log(this.likedProducts)
+    this.isLoalding=false;
   }
 
   

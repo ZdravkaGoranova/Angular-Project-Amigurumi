@@ -9,9 +9,17 @@
                 <h3>Amigurumi Details:</h3>
                 <hr>
             </div>
+
+            <div class="center-wrapper" *ngIf="isLoalding">
+                <div class="lds-dual-ring">
+
+                    <app-loader></app-loader>
+                </div>
+            </div>
+
             <!-- Form START -->
 
-            <div class="row g-0 custom-bg-style position-relative">
+            <div class="row g-0 custom-bg-style position-relative" *ngIf="!isLoalding">
 
 
                 <div class="col-md-6 mb-md-0 p-md-4">
@@ -24,21 +32,23 @@
                     <h5 id="title">{{product?.title}}</h5>
                     <div class="prd-author">
 
-                        <span class="material-symbols-outlined">
+                        <span class="material-symbols-outlined custom-icon">
                             account_circle
                         </span>
                         <span>
                             {{product?.ownerId}}</span>
                     </div>
-                    <div class="prd-skillLevel">
+                    <div class="skills-category">
+                        <div class="prd-skillLevel">
 
-                        <i class="fa-brands fa-galactic-republic"></i> Category: {{product?.category}}
+                            <i class="fa-brands fa-galactic-republic custom-icon"></i> Category: {{product?.category}}
 
-                    </div>
-                    <div class="prd-skillLevel">
+                        </div>
+                        <div class="prd-skillLevel">
 
-                        <i class="fa-solid fa-star"></i> Skill Level: {{product?.skillLevel}}
+                            <i class="fa-solid fa-star custom-icon"></i> Skill Level: {{product?.skillLevel}}
 
+                        </div>
                     </div>
                     <div class="desc">
                         <span class="card-text"> {{product?.description}}</span>
@@ -107,18 +117,6 @@
                         </a>
 
 
-
-                        <!-- <button class="btn-delete" (click)="deleteProduct()">
-                              <span class="material-symbols-outlined">
-                    delete</span>
-                              <span>Delete</span>
-                          </button> -->
-                        <!-- <button class="btn-delete" *ngIf="isDeleteProduct">
-                              <span class="material-symbols-outlined">
-                                  delete</span>
-                              <span>Delete</span>
-                          </button> -->
-
                         <!--Delete Button trigger modal -->
                         <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="isOwnerStatus"
                             data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -163,6 +161,13 @@
                             No customer comments for this product!
                         </div>
                     </div>
+
+                    <div *ngIf="commentsProduct.length >0">
+                        <div class="alert alert-primary" role="alert">
+                            Comments List ...
+                        </div>
+                    </div>
+
                 </div>
                 <!-- <div *ngIf="commentsProduct.length >0">
                         <div class="accordion accordion-flush" id="accordionFlushExample"
@@ -244,27 +249,53 @@
           </div>
         </div>
       </div> -->
-                <div  class="comments-container" *ngIf="commentsProduct.length >0">
+                <div class="comments-container" *ngIf="commentsProduct.length >0">
+                    <!-- <div class="alert alert-primary" role="alert">
+                        List ot comments:
+                       </div> -->
                     <div class="list-group" *ngFor="let comment of commentsProduct">
 
-
-                        <a class="list-group-item list-group-item-action mb-2">
-                            <p class="mb-1 text-primary text-opacity-95">Comment by: {{ comment.user.name}}</p>
+                        <a class="list-group-item list-group-item mb-2">
+                            <p class="mb-1 text-body-tertiary text-opacity-95 card-header ">
+                                Comment by: {{ comment.user.name}}
+                            </p>
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1 text-primary-emphasis">{{comment.text}}</h5>
+                                <h5 class="mb-1 text-primary">{{comment.text}}</h5>
 
                             </div>
                             <hr>
-                            <p class="card-text ">
+                            <p class="card-text">
                                 <small class="text-body-tertiary">
 
-                                    Posted on: {{ comment.timestamp.toDate() | date: 'yyyy-MM-dd' }} at {{
-                                    comment.timestamp.toDate() | date: 'HH:mm' }}
-
-                                    Day: {{ comment.timestamp.toDate() | date: 'EEEE' }}
+                                    {{ comment.timestamp.toDate() | date: 'EEEE' }}
+                                    <i class="fas fa-clock"></i>
+                                    {{ comment.timestamp.toDate() | date: 'HH:mm' }}
+                                    <i class="fas fa-calendar"></i>
+                                    {{ comment.timestamp.toDate() | date: 'yyyy-MM-dd' }}
                                 </small>
                             </p>
                         </a>
+
+                        <!-- <div class="card border-primary mb-3" style="max-width: 18rem;">
+                            <div class="card-header  border-primary ">
+                                <p class="mb-1 text-primary text-opacity-50 ">
+                                    Comment by: {{ comment.user.name}}</p>
+                                </div>
+                            <div class="card-body text-primary">
+                                <h5 class="card-title">{{comment.text}}</h5>
+                            
+                            </div>
+                            <div class="card-footer bg-transparent border-primary">
+                                <p class="card-text">
+                                    <small class="text-body-tertiary">
+                                        
+                                       {{ comment.timestamp.toDate() | date: 'EEEE' }}
+                                        <i class="fas fa-clock"></i>  {{ comment.timestamp.toDate() | date: 'HH:mm' }}
+                                        <i class="fas fa-calendar"></i>  {{ comment.timestamp.toDate() | date: 'yyyy-MM-dd' }} 
+                                    </small>
+                                </p>
+                            </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

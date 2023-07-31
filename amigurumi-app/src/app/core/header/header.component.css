@@ -1,27 +1,27 @@
-/* Responsive styles for screens smaller than 768px (e.g., mobile devices) */
+
 @media (max-width: 1620px) {
     header {
         flex-direction: column;
-        /* Stack the elements vertically */
+     
         align-items: center;
-        /* Center the elements vertically */
+        
         padding: 10px;
-        /* Add some padding for better spacing */
+      
     }
 
     .mini-navbar ul {
         display: none;
-        /* Hide the navigation links initially */
+    
     }
 
     .welcome {
         display: none;
-        /* Hide the welcome section initially */
+        
     }
 
     .logo-text {
         font-size: 24px;
-        /* Change the font size of the logo text */
+    
         color: white;
 
     }
@@ -30,17 +30,17 @@
 @media (max-width: 768px) {
     header {
         flex-direction: column;
-        /* Stack the elements vertically */
+   
         align-items: center;
-        /* Center the elements vertically */
+       
         padding: 10px;
-        /* Add some padding for better spacing */
+        
     }
 
 
     .mini-navbar ul {
         display: none;
-        /* Hide the navigation links initially */
+       
     }
 
     .welcome {
@@ -54,39 +54,30 @@
     }
 }
 
-/* Responsive styles for screens larger than 768px (e.g., tablets and desktops) */
+
 @media (min-width: 769px) {
     .mini-navbar ul {
         display: flex;
-        /* Show the navigation links as a flexbox container */
     }
-
     .welcome {
         display: none;
-        /* Hide the welcome section initially */
     }
-
-    /* Add any other specific styles for larger screens here */
 }
 
 @media (max-width: 480px) {
     header {
         flex-direction: column;
-        /* Stack the elements vertically */
+     
         align-items: center;
-        /* Center the elements vertically */
         padding: 10px;
-        /* Add some padding for better spacing */
     }
 
     .mini-navbar ul {
         display: none;
-        /* Hide the navigation links initially */
     }
 
     .welcome {
         display: none;
-        /* Hide the welcome section initially */
     }
 
     .logo-text, .welcome .btn-group a ,.nav-item {

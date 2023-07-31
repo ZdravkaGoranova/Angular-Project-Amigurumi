@@ -7,6 +7,29 @@
     font-weight: bold;
 } */
 
+/* comments-container */
+
+@media (max-width: 768px) {
+    .comments-container {
+        justify-content: center;
+        /* Центриране на полето с информация при по-малка или равна на 768px ширина на екрана */
+    }
+
+    .list-group {
+        flex: 0 0 100%;
+        /* При по-малка ширина на екрана, елементите на списъка да заемат цялата ширина на родителя */
+
+    }
+}
+
+
+@media (max-width: 7487px) {
+    .skills-category {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
 li {
 
 
@@ -40,7 +63,7 @@ img {
     margin-top: 20px;
     margin-bottom: 10px;
     border-radius: 4px;
-    border: 1px ;
+    border: 1px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     /* opacity: 0.5; */
     /* transform: opacity 0.3s ease-in; */
@@ -116,7 +139,7 @@ button:hover {
 .btn-edit,
 .btn-delete,
 .btn-like,
-.btn-comment ,
+.btn-comment,
 .btn.btn-outline-primary {
 
     display: flex;
@@ -183,6 +206,7 @@ button:hover {
     margin-top: 0.5rem !important;
     margin-bottom: 0.5rem !important;
 }
+
 hr {
     margin: 0.2rem 0;
     color: inherit;
@@ -190,14 +214,40 @@ hr {
     border-top: var(--bs-border-width) solid;
     opacity: 0.25;
 }
+
 .comments-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.list-group {
+    flex: 0 0 calc(50% - 20px);
+    /* Задава ширина на елемента, така че да заема 50% от родителя с 20px разстояние от двете страни */
+    margin: 10px;
+    /* Добавя разстояние от дясно и ляво на колоните */
+}
+
+.card-title {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.custom-icon {
+    color: rgba(217, 128, 250, 1);
+}
+
+.skills-category {
+    display: flex;
+    gap: 0.8em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh;  */
   }
-  
-  .list-group {
-    flex: 0 0 calc(50% - 20px); /* Задава ширина на елемента, така че да заема 50% от родителя с 20px разстояние от двете страни */
-    margin: 10px; /* Добавя разстояние от дясно и ляво на колоните */
-  }
-  

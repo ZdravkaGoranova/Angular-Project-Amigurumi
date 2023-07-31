@@ -26,13 +26,14 @@ export class DetailsProductComponent implements OnInit {
 
   isOwnerStatus: boolean = false;
 
+  isLoalding: boolean = true;
 
-  descToShow: string;
-  productDescLen: number;
-  showReadMoreBtn: boolean = true;
-  showHideBtn: boolean = false;
-  imageIsShown: boolean = true;
-  imageButtonTitle: string = 'Show Image';
+  // descToShow: string;
+  // productDescLen: number;
+  // showReadMoreBtn: boolean = true;
+  // showHideBtn: boolean = false;
+  // imageIsShown: boolean = true;
+  // imageButtonTitle: string = 'Show Image';
 
   likeIsShown: boolean = false;
   likeButtonTitle: string = 'Like';
@@ -52,15 +53,16 @@ export class DetailsProductComponent implements OnInit {
 
     // this.activatedRoute.params.subscribe((v) => console.log(v))
 
-    this.productDescLen = 0;
-    this.descToShow = "";
+    // this.productDescLen = 0;
+    // this.descToShow = "";
     this.getCommentsProducts()
   }
   async ngOnInit(): Promise<void> {
     this.fetchTheme();
     await this.checkIsOwner();
     this.isOwner()
-    console.log(this.isOwner())
+    this.isLoalding=false;
+    // console.log(this.isOwner())
   }
 
   async checkIsOwner(): Promise<void> {
@@ -95,35 +97,13 @@ export class DetailsProductComponent implements OnInit {
       console.error(error);
     }
   }
-  // readMore(): void {
-  //   this.productDescLen += this.symbols;
-  //   if (this.productDescLen >= this.productDesc.length) {
-  //     this.showReadMoreBtn = false;
-  //     this.showHideBtn = true;
-  //     this.descToShow = this.productDesc;
-  //   } else {
-  //     this.descToShow = this.productDesc.substr(0, this.productDescLen);
 
-  //   }
-  // }
-
-  toggleImage(): void {
-    this.imageIsShown = !this.imageIsShown;
-    this.imageButtonTitle = this.imageIsShown ? 'Hide Image' : 'Show Image';
-
-  }
   toggleLike(): void {
     this.likeIsShown = !this.likeIsShown;
     this.likeButtonTitle = this.likeIsShown ? 'Like' : 'You already liked!';
 
   }
-  hideDesc(): void {
-    this.productDescLen = 0;
-    this.descToShow = "";
-    this.showReadMoreBtn = true;
-    this.showHideBtn = false;
-  }
-
+ 
   async editProduct(): Promise<void> {
     const id = this.activatedRoute.snapshot.params['productId'];
 
@@ -201,16 +181,7 @@ export class DetailsProductComponent implements OnInit {
 
     this.newComment = ''; // Нулиране на полето за коментар след добавяне
   }
-  // async getCommentsProducts(): Promise<void> {
-  //   debugger
-  //   const id = this.activatedRoute.snapshot.params['productId'];
 
-  //   const collectionInstance = collection(this.firestore, 'products', id, 'comments');
-
-  //   const comments = collectionData(collectionInstance);
-  //   console.log('Comments:', comments); 
-   
-  // }
   async getCommentsProducts(): Promise<void> {
     debugger;
     const id = this.activatedRoute.snapshot.params['productId'];
@@ -234,4 +205,29 @@ export class DetailsProductComponent implements OnInit {
       console.error('Error getting comments:', error);
     }
   }
+
+
+    // hideDesc(): void {
+  //   this.productDescLen = 0;
+  //   this.descToShow = "";
+  //   this.showReadMoreBtn = true;
+  //   this.showHideBtn = false;
+  // }
+  // readMore(): void {
+  //   this.productDescLen += this.symbols;
+  //   if (this.productDescLen >= this.productDesc.length) {
+  //     this.showReadMoreBtn = false;
+  //     this.showHideBtn = true;
+  //     this.descToShow = this.productDesc;
+  //   } else {
+  //     this.descToShow = this.productDesc.substr(0, this.productDescLen);
+
+  //   }
+  // }
+
+  // toggleImage(): void {
+  //   this.imageIsShown = !this.imageIsShown;
+  //   this.imageButtonTitle = this.imageIsShown ? 'Hide Image' : 'Show Image';
+
+  // }
 }

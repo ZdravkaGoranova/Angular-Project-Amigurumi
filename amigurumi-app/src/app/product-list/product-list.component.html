@@ -32,7 +32,7 @@
 
                         <a [routerLink]="['/products', product.id]" class="list-group-item list-group-item-action"
                             *ngFor="let product of searcProducts">
-                           {{product.title }}</a>
+                            {{product.title }}</a>
                     </div>
 
                     <!--No Search products-->
@@ -44,8 +44,19 @@
 
             </div>
             <hr>
+
+            <!-- <div *ngIf="isLoalding">
+                <app-loader></app-loader>
+            </div> -->
+            <div class="center-wrapper" *ngIf="isLoalding">
+                <div class="lds-dual-ring">
+                    
+                    <app-loader></app-loader>
+                </div>
+              </div>
+              
             <!-- Form START -->
-            <ul>
+            <ul *ngIf="!isLoalding">
                 <!-- <app-card-product *ngFor="let p of products"  [product]="p|| ''"
         [productDesc]="p.description || ''"
      
@@ -63,7 +74,7 @@
                             <img src="{{product.imageUrl}}" class="card-img-top" alt="product image">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Title:  {{product.title}}</h5>
+                            <h5 class="card-title">Title: {{product.title}}</h5>
                             <hr>
                             <p class="card-text">
                                 <i class="fa-brands fa-galactic-republic"></i> Category:{{product.category}}

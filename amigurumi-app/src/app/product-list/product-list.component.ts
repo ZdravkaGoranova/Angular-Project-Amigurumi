@@ -20,6 +20,9 @@ import { Observable } from 'rxjs';
 
 export class ProductListComponent implements OnInit {
   // productData: Product[]=[];
+
+  isLoalding: boolean = true;
+
   productData!: Observable<Product[]>;
   @Input() product!: Product;
   @Input() productDesc!: string;
@@ -57,21 +60,20 @@ export class ProductListComponent implements OnInit {
       const collectionInstance = collection(this.firestore, 'products');
 
       const querySnapshot = await getDocs(collectionInstance);
+
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // this.products.push(doc.data)
         this.products.push(doc.data() as Product);
         console.log(doc.id, " => ", doc.data());
       });
-  
+      this.isLoalding=false;
       console.log(this.products)
     }
   
-    
     async searchProducts(keyword: string): Promise<void> {
-      debugger
+     
       this.searcProducts = [];
-      console.log(this.searcProducts)
+      console.log(this.searcProducts);
+
       const collectionInstance = collection(this.firestore, 'products');
       const lowerCaseKeyword = keyword.toLowerCase();
       const q = query(collectionInstance,
@@ -82,22 +84,22 @@ export class ProductListComponent implements OnInit {
       try {
         const querySnapshot = await getDocs(q);
         this.searcProducts = querySnapshot.docs.map((doc) => doc.data() as Product);
-    debugger
-// if(this.searchProducts.length >0){
-// this.isSearcProducts=true;
-// }
-// else if(this.searchProducts.length <=0){
-//   this.isSearcProducts=false;
-//   }
+  
+        this.isLoalding=false;
 
-        
-      } catch (e) {
-        console.error("Error searching products: ", e);
-      
-      }
+              // if(this.searchProducts.length >0){
+              // this.isSearcProducts=true;
+              // }
+              // else if(this.searchProducts.length <=0){
+              //   this.isSearcProducts=false;
+              //   }
+
+          } catch (e) {
+            console.error("Error searching products: ", e);
+            this.isLoalding=false;
+          }
       console.log(this.searcProducts)
     }
-
   }
     // async getAll() {
     //   const collectionInstance = collection(this.firestore, 'products');

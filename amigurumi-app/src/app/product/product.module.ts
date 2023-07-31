@@ -6,6 +6,7 @@ import { NewProductComponent } from './new-product/new-product.component';
 import { ProductRoutingModule } from './product-routing.module';
 import { FormsModule } from '@angular/forms';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     CommonModule,
     ProductRoutingModule,
     FormsModule,
- 
+    SharedModule
     // RouterModule.forChild([
     //   {
     //     path: 'catalog',

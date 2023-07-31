@@ -160,3 +160,9 @@ a {
     height: 400px; /* Adjust the height as needed */
     object-fit: cover;
 }
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh;  */
+  }

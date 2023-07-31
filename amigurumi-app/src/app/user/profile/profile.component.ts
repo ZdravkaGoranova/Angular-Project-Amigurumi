@@ -13,7 +13,7 @@ import { Product } from 'src/app/types/product';
 interface Profile {
   fullName: string;
   email: string;
-  gender: string;
+  // gender: string;
 }
 
 
@@ -34,7 +34,7 @@ export class ProfileComponent {
   profileDetails: Profile = {
     fullName: '',
     email: '',
-    gender: ''
+    // gender: ''
   };
 
   ownerProducts: Product[] = [];
@@ -124,7 +124,7 @@ export class ProfileComponent {
 
   get fullName(): string {
     // return this.userService.user?.email|| '';
-    return this.userService.user?.id || '';
+    return this.userService.user?.fullName || '';
   }
   get email(): string {
     return this.userService.user?.email || '';

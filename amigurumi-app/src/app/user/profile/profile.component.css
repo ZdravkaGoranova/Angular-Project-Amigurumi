@@ -188,3 +188,6 @@ input.ng-invalid.ng-touched {
     align-items: center;
     /* height: 100vh;  */
   }
+  .container {
+    padding-bottom: 6rem;
+}

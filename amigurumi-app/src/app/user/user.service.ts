@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { User } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireAuth, } from '@angular/fire/compat/auth';
 
 // import { getDatabase, ref, set, child, get } from "firebase/database";
 import { getDatabase, ref, set, child, get, } from "firebase/database";
-import { getAuth, getIdToken, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, updateProfile, getIdToken, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import {
-  Firestore, 
+  Firestore,
 } from '@angular/fire/firestore';
 
 import { Router } from '@angular/router';
@@ -60,6 +60,7 @@ export class UserService {
     } catch (error) {
       this.user = undefined;
     }
+
   }
 
   // isProductOwner(productId: string): boolean {
@@ -68,12 +69,12 @@ export class UserService {
   //     return false;
   //   }
 
-    // Get the product by its ID
-    // const product = this.apiService.getCurrentProduct(productId);
+  // Get the product by its ID
+  // const product = this.apiService.getCurrentProduct(productId);
 
-    // console.log(product.ownerId)
-    // Check if the logged-in user is the owner of the product
-    // return product && product.ownerId === loggedInUser.id;
+  // console.log(product.ownerId)
+  // Check if the logged-in user is the owner of the product
+  // return product && product.ownerId === loggedInUser.id;
   // }
 
 
@@ -112,7 +113,7 @@ export class UserService {
         //   fullName: this.fullName,
         // gender: this.gender,
         // };
- 
+
         const eml = userCredential.user?.email || '';
         //  console.log(eml)
 
@@ -121,8 +122,9 @@ export class UserService {
         const userData = {
           email: eml,
           id: this.loggedInUserId,
+          fullName: userCredential.user?.displayName
         }
-
+        debugger
         this.user = userData;
         localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
 
@@ -130,9 +132,7 @@ export class UserService {
         this.router.navigate(['/profile'])
 
       }, err => {
-
         alert(err.message);
-
         this.router.navigate(['/login'])
       })
 
@@ -166,57 +166,104 @@ export class UserService {
     // this.fullName = fullName;
     // this.gender = gender;
 
+    debugger
     createUserWithEmailAndPassword(auth, email, password)
-      // this.fireauth.createUserWithEmailAndPassword(email, password)
+
       .then((userCredential) => {
- 
         const user = userCredential.user;
-        let userId = user.uid;
-
-
-
-        this.loggedInUserId = userCredential.user?.uid || null;
-        console.log(this.loggedInUserId)
-
-
-        const eml = userCredential.user?.email || '';
-        //  console.log(eml)
-
-        this.loggedInUserId = userCredential.user?.uid || '';
-        // console.log(this.loggedInUserId)
-        const userData = {
-          email: eml,
-          id: this.loggedInUserId,
+        debugger
+        if (user) {
+          // The user is not null, update the profile
+          updateProfile(user, {
+            displayName: fullName,
+            photoURL: "https://example.com/jane-q-user/profile.jpg"
+          }).then(() => {
+            // Profile updated successfully
+            this.loggedInUserId = user.uid;
+            const userData = {
+              email: user.email || '',
+              id: this.loggedInUserId,
+              fullName: fullName,
+            };
+            this.user = userData;
+            debugger
+            localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
+            alert('Registration Successful');
+            this.router.navigate(['/profile']);
+          }).catch((error) => {
+            // Handle the error
+            console.log(error.message);
+          });
+        } else {
+          // The user is null, handle the error
+          console.log("User is null");
         }
-
-        this.user = userData;
-
-        // Set the custom user properties
-        // user?.updateProfile({
-        //   displayName: fullName,
-
-        // }).then(() => {
-        //   this.user = {
-        //     email: email,
-        //     fullName: fullName,
-        //     // gender: gender,
-        //   };
-
-
-
-        // this.user = {
-        //   email: user.email,
-        //   id: userId,
-        // };
-        localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
-        // writeUserData(userId, fullName);
-
-        alert('Registration Successful');
-    
-        this.router.navigate(['/profile']);
       }).catch((error) => {
+        // Handle the registration error
         console.log(error.message);
       });
+
+    // createUserWithEmailAndPassword(auth, email, password)
+
+    //   .then((userCredential) => {
+
+    //     const user = userCredential.user;
+    //     let userId = user.uid;
+
+    //     this.loggedInUserId = userCredential.user?.uid || null;
+    //     console.log(this.loggedInUserId)
+
+
+    //     const eml = userCredential.user?.email || '';
+
+
+    //     this.loggedInUserId = userCredential.user?.uid || '';
+
+    //     const userData = {
+    //       email: eml,
+    //       id: this.loggedInUserId,
+    //     }
+
+    //     this.user = userData;
+
+
+    //     // user?.updateProfile({
+    //     //   displayName: fullName,
+
+    //     // }).then(() => {
+    //     //   this.user = {
+    //     //     email: email,
+    //     //     fullName: fullName,
+    //     //     // gender: gender,
+    //     //   };
+
+
+
+    //     // this.user = {
+    //     //   email: user.email,
+    //     //   id: userId,
+    //     // };
+    //     localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
+
+
+    //     alert('Registration Successful');
+
+    //     this.router.navigate(['/profile']);
+    //   }).catch((error) => {
+    //     console.log(error.message);
+    //   });
+
+
+    //   updateProfile(auth.currentUser, {
+    //     displayName: fullName, photoURL: "https://example.com/jane-q-user/profile.jpg"
+    //   }).then(() => {
+
+    //   }).catch((error) => {
+
+    //   });
+
+
+
 
     // function writeUserData(userId: string, fullName: string) {
     //   const db = getDatabase();

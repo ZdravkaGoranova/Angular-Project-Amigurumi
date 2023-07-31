@@ -24,6 +24,7 @@ import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,8 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
   ],
   imports: [
     BrowserModule,
+
+    SharedModule,
 
     HttpClientModule,
     FormsModule,

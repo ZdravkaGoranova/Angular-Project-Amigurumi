@@ -67,16 +67,16 @@
         <div class="welcome">
             <div class="btn-group" role="group" aria-label="Basic outlined example" *ngIf="!isLoggedIn">
 
-                <a routerLink="/login" class="btn btn-outline-primary"><i
+                <a routerLink="/auth/login" class="btn btn-outline-primary"><i
                         class="fa-solid fa-right-to-bracket fa-fade"></i>
                     Login</a>
-                <a routerLink="/register" class="btn btn-outline-primary">Register</a>
+                <a routerLink="/auth/register" class="btn btn-outline-primary">Register</a>
 
             </div>
             <div class="btn-group" role="group" aria-label="Basic outlined example" *ngIf="isLoggedIn">
 
-                <a routerLink="/profile" class="btn btn-outline-primary">Welcome {{fullName}}!</a>
-                <a routerLink="/register" class="btn btn-outline-primary" (click)="logout()"> Logout <i
+                <a routerLink="/auth/profile" class="btn btn-outline-primary">Welcome {{fullName}}!</a>
+                <a routerLink="/auth/register" class="btn btn-outline-primary" (click)="logout()"> Logout <i
                         class="fa-solid fa-arrow-right-from-bracket"></i></a>
 
             </div>
@@ -90,7 +90,7 @@
                 aria-selected="true">Home</button>
         </li>
         <li class="nav-item" role="presentation" *ngIf="isLoggedIn">
-            <button routerLink="/profile" class="nav-link" id="profile-tab" data-bs-toggle="tab"
+            <button routerLink="/auth/profile" class="nav-link" id="profile-tab" data-bs-toggle="tab"
                 data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane"
                 aria-selected="false">Profile</button>
         </li>

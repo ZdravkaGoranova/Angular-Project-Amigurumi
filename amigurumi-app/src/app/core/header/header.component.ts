@@ -26,4 +26,17 @@ export class HeaderComponent {
     this.userService.logout();
     this.router.navigate(['/']);
   }
+
+  // logout(): void {
+  //   this.userService.logout().subscribe({
+  //     next: () => {
+  //       this.router.navigate(['/auth/login']);
+  //     }error: () => {
+  //       this.router.navigate(['/auth/login']);
+  //     }
+  //   }
+
+  //   );
+
+  // }
 }

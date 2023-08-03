@@ -21,12 +21,14 @@ import { UserService } from 'src/app/user/user.service';
 })
 
 export class EditProductComponent implements OnInit {
-  // [x: string]: any;
 
+  imageUrl: string | null = null;
+  
   product: any = {
     skillLevel: 'easy',
     category: 'baby'
   };
+  
   user: { skillLevel: string; category: string } = {
     skillLevel: 'easy',
     category: 'baby'
@@ -53,7 +55,7 @@ export class EditProductComponent implements OnInit {
     try {
       const id = this.activatedRoute.snapshot.params['productId'];
       console.log(id)
-      debugger
+   
       const collectionInstance = collection(this.firestore, 'products');
       const washingtonRef = doc(collectionInstance, id);
 
@@ -68,6 +70,7 @@ export class EditProductComponent implements OnInit {
       //   category: form.value.category,
 
       // });
+      this.imageUrl=form.value.imageUrl;
 
       await setDoc(doc(collectionInstance, id), {
         description: form.value.description,
@@ -85,9 +88,7 @@ export class EditProductComponent implements OnInit {
       console.error("Error adding document: ", e);
     }
 
-
     this.router.navigate(['/products']);
-
 
   }
 }

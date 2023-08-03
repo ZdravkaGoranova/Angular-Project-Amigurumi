@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+
 import {
-  Firestore, getFirestore,
-  collection, addDoc, collectionData,
-  doc, updateDoc, deleteDoc, getDoc,
+  Firestore,
+  collection,
   getDocs, query, where
 } from '@angular/fire/firestore';
+
+
 import { Product } from 'src/app/types/product';
+
 
 interface Profile {
   fullName: string;
@@ -16,17 +19,18 @@ interface Profile {
   // gender: string;
 }
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent {
 
   user: any = {
-    gender: 'male' // или 'female'
+    // gender: 'male',
   };
+
   isEditMode: boolean = false;
 
   product: Product[] | null = null;
@@ -36,22 +40,27 @@ export class ProfileComponent {
     email: '',
     // gender: ''
   };
+  // t = this.userService.user$.forEach((u)=>u?.fullName);
 
   ownerProducts: Product[] = [];
   likedProducts: Product[] = [];
 
   isLoalding: boolean = true;
-  // profileDetails: Profile = {
-  //   fullName: "John",
-  //   email: "john.doe@gmail.com",
-  //   gender: "male",
-  // };
+
   constructor(
     private userService: UserService,
     private router: Router,
     private firestore: Firestore,
   ) {
 
+    const lockedUseremail = this.userService.user?.email;
+    const lockedUserfullName = this.userService.user?.fullName;
+
+    this.user = {
+      email: lockedUseremail,
+      fullName: lockedUserfullName,
+    }
+    // console.log(this.t)
     this.getUsersProducts();
     this.getLickedProducts();
   }
@@ -63,18 +72,19 @@ export class ProfileComponent {
   saveProfileHandler(form: NgForm): void {
     console.log(form.value)
 
-
     if (form.invalid) {
       return;
     }
-    // this.router.navigate(['/']);
+    
+    const { fullName } = form.value;
+    this.userService.updateUser(fullName);
 
-    this.profileDetails = { ...form.value } as Profile;
+    // this.profileDetails = { ...form.value } as Profile;
     this.toggleEditMode();
+    this.router.navigate(['/auth/profile']);
   }
 
   async getUsersProducts(): Promise<void> {
-
     const lockedUserId = this.userService.user?.id;
 
     const collectionInstance = collection(this.firestore, 'products');
@@ -85,38 +95,38 @@ export class ProfileComponent {
     try {
       const querySnapshot = await getDocs(q);
       const productsQ = querySnapshot.docs.map((doc) => doc.data() as Product);
-      console.log(productsQ);
+
       this.ownerProducts.push(...productsQ);
-   this.isLoalding=false;
+      this.isLoalding = false;
     } catch (e) {
-      console.error("Error getting products: ", e);
-      this.isLoalding=false;
+      console.error("Error getting users products: ", e);
+      this.isLoalding = false;
     }
     console.log(this.ownerProducts)
   }
 
   async getLickedProducts(): Promise<void> {
+    this.likedProducts = [];
     const lockedUserId = this.userService.user?.id;
 
     const collectionInstance = collection(this.firestore, 'products');
 
     const q = query(collectionInstance, where("usersLiked", "array-contains", lockedUserId));
-    console.log(q)
-  
+
     try {
       const querySnapshot = await getDocs(q);
       const productsQ = querySnapshot.docs.map((doc) => doc.data() as Product);
-      console.log(productsQ);
-      this.isLoalding=false;
+
+      this.isLoalding = false;
+
       this.likedProducts.push(...productsQ);
     } catch (e) {
-      console.error("Error getting products: ", e);
+      console.error("Error getting liked products: ", e);
     }
     console.log(this.likedProducts)
-    this.isLoalding=false;
+    this.isLoalding = false;
   }
 
-  
 
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
@@ -130,6 +140,14 @@ export class ProfileComponent {
     return this.userService.user?.email || '';
   }
 
+  get isMale(): boolean {
+    return this.user.gender === 'male';
+  }
+
+}
+
+
+
   // get gender(): string {
 
   //   return this.userService.user?.gender || '';
@@ -137,7 +155,3 @@ export class ProfileComponent {
   // get isMale(): boolean {
   //   return this.userService.isMale;
   // }
-  get isMale(): boolean {
-    return this.user.gender === 'male';
-  }
-}

@@ -1,58 +1,74 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 
 import { AngularFireAuth, } from '@angular/fire/compat/auth';
 
-// import { getDatabase, ref, set, child, get } from "firebase/database";
-import { getDatabase, ref, set, child, get, } from "firebase/database";
-import { getAuth, updateProfile, getIdToken, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, updateProfile, updateEmail,
+   createUserWithEmailAndPassword,
+    signOut, signInWithEmailAndPassword } from "firebase/auth";
+
 import {
-  Firestore,
-} from '@angular/fire/firestore';
+      Firestore,collection,
+      getDocs, query, where
+    } from '@angular/fire/firestore';
+
+import { tap } from 'rxjs/operators';
 
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Subscription, from } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import { ApiService } from '../api.service';
+import { Product } from 'src/app/types/product';
+
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  userDataа!: Observable<any>;
+export class UserService   {
 
-  loggedInUserId: string | null = null;
-
+  private user$$ = new BehaviorSubject <User | undefined>(undefined);
+  user$ = this.user$$.asObservable();
   user: User | undefined;
 
+  userDataа!: Observable<any>;
 
-  // gender: string = '';
-
-
+  // loggedInUserId: string | null = null;
+  private loggedInUserId: string = '';
   USER_KYE = '[user]';
+
+  ownerProducts: Product[] = [];
+  likedProducts: Product[] = [];
+
 
 
   get isLogged(): boolean {
     return !!this.user;
   }
 
+  subscription:Subscription;
+
+  // gender: string = '';
   // get isMale(): boolean {
   //   return this.user?.gender === 'male';
   // }
 
-  // get isFemale(): boolean {
-  //   return this.user?.gender === 'female';
-  // }
 
   constructor(
 
     private http: HttpClient,
     private fireauth: AngularFireAuth,
     private router: Router,
+    private userService: UserService,
     private firestore: Firestore,
-    private apiService: ApiService
+    private apiService: ApiService,
+
   ) {
 
-    // this.getData();
+    this.subscription=this.user$.subscribe((user)=>{
+      this.user=user;
+    });
+
     try {
       const lsUser = localStorage.getItem(this.USER_KYE) || '';
       this.user = JSON.parse(lsUser);
@@ -63,219 +79,206 @@ export class UserService {
 
   }
 
-  // isProductOwner(productId: string): boolean {
-  //   const loggedInUser = this.getUser();
-  //   if (!loggedInUser) {
-  //     return false;
-  //   }
-
-  // Get the product by its ID
-  // const product = this.apiService.getCurrentProduct(productId);
-
-  // console.log(product.ownerId)
-  // Check if the logged-in user is the owner of the product
-  // return product && product.ownerId === loggedInUser.id;
-  // }
-
+ 
 
   login(email: string, password: string) {
-    // this.fireauth.signInWithEmailAndPassword(email, password)
-    //   .then(async () => {
-    //     const userRef = doc(this.firestore, 'users', email);
-    //     const userSnapshot = await getDoc(userRef);
-
-    //     if (userSnapshot.exists()) {
-    //       const userData = userSnapshot.data();
-    //       console.log(userData)
-    //       debugger;
-    //       this.user = {
-    //         email: email,
-
-    //         fullName: 'userData.fullName',
-    //         // gender:' userData.gender',
-
-    //       };
-
-    //       localStorage.setItem(this.USER_KYE, JSON.stringify(this.user));
-    //       this.router.navigate(['/profile']);
-    //     } else {
-    //       alert('User not found in Firestore.');
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     alert(error.message);
-    //   });
-    this.fireauth.signInWithEmailAndPassword(email, password)
+    const auth = getAuth();
+    
+    signInWithEmailAndPassword(auth,email, password)
       .then((userCredential) => {
-        // this.fullName = email;
-        // this.user = {
-        //   email: email,
-        //   fullName: this.fullName,
-        // gender: this.gender,
-        // };
-
-        const eml = userCredential.user?.email || '';
-        //  console.log(eml)
-
+       
         this.loggedInUserId = userCredential.user?.uid || '';
-        // console.log(this.loggedInUserId)
+       
         const userData = {
-          email: eml,
+          email: userCredential.user?.email || '',
           id: this.loggedInUserId,
           fullName: userCredential.user?.displayName
         }
-        debugger
+       
         this.user = userData;
         localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
 
-        alert(':)))))))')
-        this.router.navigate(['/profile'])
+        alert(' Successful Login')
+        this.router.navigate(['/auth/profile'])
 
       }, err => {
         alert(err.message);
-        this.router.navigate(['/login'])
+        this.router.navigate(['/auth/login'])
       })
 
-    // this.user = {
-    //   email: 'niki@abv.bg',
-    //   fullName: 'Niki',
-    //   gender: 'male',
-    // };
-
-    // localStorage.setItem(this.USER_KYE, JSON.stringify(this.user));
-    // return this.http.post('/api/login', { email, password });
   }
-
+  
+//Моя вариянт --Promise<void>
   register(fullName: string, email: string, password: string) {
-
     const auth = getAuth();
-    let uid = '';
-
-    // const collectionInstance = collection(this.firestore, 'users');
-    // addDoc(collectionInstance, { fullName, email, password, gender })
-    //   .then(() => {
-    //     console.log('Datasaved successful')
-    //     this.router.navigate(['/profile']);
-    //   })
-    //   .catch((err) => {
-    //     alert(err.message);
-    //     this.router.navigate(['/register']);
-    //   })
-
-
-    // this.fullName = fullName;
-    // this.gender = gender;
-
-    debugger
-    createUserWithEmailAndPassword(auth, email, password)
+ 
+  return  createUserWithEmailAndPassword(auth, email, password)
 
       .then((userCredential) => {
         const user = userCredential.user;
         debugger
         if (user) {
-          // The user is not null, update the profile
+          
           updateProfile(user, {
             displayName: fullName,
-            photoURL: "https://example.com/jane-q-user/profile.jpg"
+            photoURL: ""
           }).then(() => {
-            // Profile updated successfully
+           
             this.loggedInUserId = user.uid;
+
             const userData = {
               email: user.email || '',
               id: this.loggedInUserId,
               fullName: fullName,
             };
             this.user = userData;
-            debugger
+            this.user$$.next(this.user);
+
             localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
+
             alert('Registration Successful');
-            this.router.navigate(['/profile']);
+
+            this.router.navigate(['/auth/profile']);
+            
           }).catch((error) => {
-            // Handle the error
+            alert(error.message);
             console.log(error.message);
           });
+
         } else {
-          // The user is null, handle the error
           console.log("User is null");
         }
       }).catch((error) => {
-        // Handle the registration error
+         alert(error.message);
         console.log(error.message);
-      });
+      })
+  }
 
-    // createUserWithEmailAndPassword(auth, email, password)
+//Observable
+//  registerS(fullName: string, email: string, password: string) {
+//   const auth = getAuth();
+  
+//     return from(createUserWithEmailAndPassword(auth, email, password))
+//       .pipe(
+//         tap((userCredential) => {
 
-    //   .then((userCredential) => {
+//           const user = userCredential.user;
+//           if (user) {
+//             return updateProfile(user, {
+//               displayName: fullName,
 
-    //     const user = userCredential.user;
-    //     let userId = user.uid;
+//             }).then(() => {
 
-    //     this.loggedInUserId = userCredential.user?.uid || null;
-    //     console.log(this.loggedInUserId)
+//               this.loggedInUserId = user.uid;
 
+//               const userData = {
+//                 email: user.email || '',
+//                 id: this.loggedInUserId,
+//                 fullName: fullName,
+//               };
+              
+//               this.user$$.next(userData);
+//               localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
 
-    //     const eml = userCredential.user?.email || '';
+//               alert('Registration Successful');
+//               this.router.navigate(['/auth/profile']);
+//               return userData;
 
+//             }).catch((error) => {
+//               console.log(error.message);
+//               throw error;
+//             });
+//           } else {
+//             console.log("User is null");
+//             throw new Error("User is null");
+//           }
+//         })
+//       );
+//   }
+  
+//Моя вариянт
+  
 
-    //     this.loggedInUserId = userCredential.user?.uid || '';
+  updateUser(fullName:string){
+  const auth = getAuth();
+  const user = auth.currentUser;
 
-    //     const userData = {
-    //       email: eml,
-    //       id: this.loggedInUserId,
-    //     }
+  if (user) {
+  
+    updateProfile(user, {
+      displayName: fullName,
+      
+    }).then(() => {
+      alert('DisplayName updated!');
+      const userData = {
+        email:user.email || '',
+        id: this.loggedInUserId,
+        fullName: fullName,
+      };
+      this.user = userData;
+    this.user$$.next(this.user);
 
-    //     this.user = userData;
-
-
-    //     // user?.updateProfile({
-    //     //   displayName: fullName,
-
-    //     // }).then(() => {
-    //     //   this.user = {
-    //     //     email: email,
-    //     //     fullName: fullName,
-    //     //     // gender: gender,
-    //     //   };
-
-
-
-    //     // this.user = {
-    //     //   email: user.email,
-    //     //   id: userId,
-    //     // };
-    //     localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
-
-
-    //     alert('Registration Successful');
-
-    //     this.router.navigate(['/profile']);
-    //   }).catch((error) => {
-    //     console.log(error.message);
-    //   });
-
-
-    //   updateProfile(auth.currentUser, {
-    //     displayName: fullName, photoURL: "https://example.com/jane-q-user/profile.jpg"
-    //   }).then(() => {
-
-    //   }).catch((error) => {
-
-    //   });
-
-
-
-
-    // function writeUserData(userId: string, fullName: string) {
-    //   const db = getDatabase();
-
-    //   set(ref(db, 'users/' + userId), {
-    //     displayName: fullName
-
-    //   });
-    //   console.log(db)
-    // }
+    }).catch((error) => {
+      alert('An error occurred')
+    });
 
   }
+}
+
+  logout(): void {
+
+    const auth = getAuth();
+    signOut(auth).then(() => {
+ 
+      localStorage.removeItem('user');
+      localStorage.removeItem(this.USER_KYE);
+      this.user = undefined;
+      this.router.navigate(['/']);
+    }).catch((error) => { alert(error.message) }
+    )
+    this.user = undefined;
+   
+  }
+
+  //Observable
+  // logout(): void {
+
+  //   const auth = getAuth();
+  //   signOut(auth).then(() => {
+ 
+  //     localStorage.removeItem('user');
+  //     localStorage.removeItem(this.USER_KYE);
+  //     this.user = undefined;
+  //     this.router.navigate(['/']);
+  //   }).catch((error) => { alert(error.message) }
+  //   ).pipe(tap(()=>this.user$$.next(undefined)))
+  // }
+
+  // ngOnDestroy(): void {
+  //   this.subscription.unsubscribe();
+  //   };
+}
+
+
+// async getUserById(userId: string): Promise<User | null> {
+//   const docRef = doc(collection(this.firestore, 'users'), userId);
+//   const docSnap = await getDoc(docRef);
+// debugger
+//   if (docSnap.exists()) {
+//     const userData = docSnap.data();
+//     return {
+//       email: userData['email'],
+//       id: userId,
+//       fullName: userData['displayName'] || '',
+//       // Add other properties as needed
+      
+//     };
+//   } else {
+//     console.log("User not found!");
+//     return null;
+//   }
+// }
+
 
   // getData() {
   //   const collectionInstance = collection(this.firestore, 'users');
@@ -304,37 +307,19 @@ export class UserService {
   //     console.log('Data  delete')
   //   })
   // }
+ // isProductOwner(productId: string): boolean {
+  //   const loggedInUser = this.getUser();
+  //   if (!loggedInUser) {
+  //     return false;
+  //   }
 
-  logout(): void {
+  // Get the product by its ID
+  // const product = this.apiService.getCurrentProduct(productId);
 
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      this.router.navigate(['/']);
-      localStorage.removeItem('user');
-      localStorage.removeItem(this.USER_KYE);
-      this.user = undefined;
-    }).catch((error) => { alert(error.message) }
-    )
-    // this.user = undefined;
-    // localStorage.removeItem(this.USER_KYE);
+  // console.log(product.ownerId)
+  // Check if the logged-in user is the owner of the product
+  // return product && product.ownerId === loggedInUser.id;
+  // }
 
-    // this.fireauth.signOut().then(() => {
-    //   localStorage.removeItem(this.USER_KYE);
-
-    //   this.user = undefined;
-    // this.fullName = '';
-    // this.gender = '';
-
-
-    // localStorage.removeItem(this.USER_KYE);
-
-
-    // localStorage.removeItem('token');
-    //     this.router.navigate(['/login'])
-    //   }, err => {
-    //     alert(err.message)
-    //   })
-
-  }
-
-}
+   // localStorage.setItem(this.USER_KYE, JSON.stringify(this.user));
+    // return this.http.post('/api/login', { email, password });

@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserRoutingModule } from './user-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule,  } from '@angular/forms';
 import { MaxCountDirective } from './max-count.directive';
 import { SharedModule } from '../shared/shared.module';
 
@@ -20,7 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     UserRoutingModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule
+    
   ]
 })
 export class UserModule { }

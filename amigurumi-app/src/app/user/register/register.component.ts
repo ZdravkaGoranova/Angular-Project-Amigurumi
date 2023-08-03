@@ -1,90 +1,64 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, NgForm } from '@angular/forms';
-import { UserService } from '../user.service';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { UserService } from '../user.service';
+import { ErrorService } from '../../core/error/error.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
-  user: any = {
-    gender: 'male' // или 'female'
-  };
+export class RegisterComponent  {
+  // user: any = {
+  //   gender: 'male' // или 'female'
+  // };
 
-
+  errorMsg = '';
+  successMsg = '';
 
   constructor(
-    private fb: FormBuilder,
+
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private errorService: ErrorService
   ) {
 
   }
-  //another way to get register form whithout passing it as a parameter of the callback
-  // @ViewChild('registerForm') registerForm: NgForm | undefined;
 
-  // submitHandler(): void {
-  //   if (!this.registerForm) {
-  //     return
-  //   }
-  //   const form = this.registerForm;
-  ngOnInit(): void {
-    //will be render only the static contect whith the dynamic components
-    // this.registerForm?.valueChanges?.subscribe(console.log);
-  }
-  ngAfterViewInit(): void {
-    // will be render the final content 
-
-    // if (this.registerForm) {
-    //   this.registerForm.form.valueChanges.subscribe((x) => {
-    //     console.log(x);
-    //   })
-    // }
-
-  }
-
-  submitHandler(form: NgForm): void {
-    console.log(form.value)
-
-    if (form.invalid) {
-      return;
-    }
-
-    // form.setValue({
-    //   fullName: '', email: '', password: '', gender: '',
-    // })
-
-    const value: { fullName: string; email: string; password: string; gender: string; } = form.value
-    console.log({ value })
-    console.log(value.email)
-    console.log(value.fullName)
-    console.log(value.gender)
-    console.log(value.password)
-  }
-
-  register(fullName: string, email: string, password: string, ): void {
-  // register(fullName: string, email: string, password: string, gender: string): void {
-    if (email == '') {
-      alert('Plese enter email')
-      return;
-    }
-
-    if (password == '') {
-      alert('Plese enter password')
-      return;
-    }
+  register(fullName: string, email: string, password: string): void {
 
     this.userService.register(fullName, email, password);
-    // this.userService.register(fullName, email, password,gender);
-    // this.email = '';
-    // this.password = '';
 
-    // this.userService.login( email, password).subscribe(()=>{
-    //   this.router.navigate(['/']);
-    // });
-    // this.router.navigate(['/']);
+    // console.log(form.value)
+    //   if (form.invalid) {
+    //     return;
+    //   }
+    //   form.setValue({
+    //     fullName: '', email: '', password: '', gender: '',
+    //   })
+
+    // --Promise<void>/Observable
+    // this.userService.register(fullName, email, password)
+    // .subscribe(
+    //   () => {
+    //     this.successMsg = 'Registration Successful';
+    //     this.router.navigate(['/auth/profile']);
+    //   },
+    //   (error) => {
+    //     this.errorMsg = error.message;
+
+    //     //Error component
+    //     // this.errorService.setError(error);
+    //     // this.router.navigate(['error'])
+    //     // console.error(error.message);
+
+    //     // alert('User registration failed!');
+    //   }
+    // );
+
   }
-
 }
+

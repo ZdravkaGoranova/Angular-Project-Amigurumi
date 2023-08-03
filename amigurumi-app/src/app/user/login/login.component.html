@@ -2,14 +2,11 @@
 
 	<div class="card">
 		<div class="card-image">
-			<h2 class="card-heading">
-				Log in
-				
-			</h2>
-		
+			<h2 class="card-heading">Log in</h2>
 		</div>
+		
 		<form class="card-form" #loginForm="ngForm" class="card-form" >
-			<!-- (ngSubmit)="submitHandler(loginForm)" -->
+	
 			<div class="input">
 				<input type="text" id="email" name="email" class="input-field" ngModel email required
 					#emailInput="ngModel" />
@@ -25,17 +22,16 @@
 				<div class="error" *ngIf="emailInput.errors?.['email']">Invalid Email!
 					{{emailInput.errors?.['email'].requiredLength}}
 				</div>
-				<div class="error" *ngIf="emailInput.errors?.['appEmailValidator']">appEmailValidator-Invalid Email!
+				<!-- <div class="error" *ngIf="emailInput.errors?.['appEmailValidator']">appEmailValidator-Invalid Email!
 					{{emailInput.errors?.['appEmailValidator'].requiredLength}}
-				</div>
+				</div> -->
 			</ng-container>
-			<!-- {{loginForm?.errors  | json}} -->
+			
 			<div class="input">
 				<input type="password" id="password" name="password" class="input-field" ngModel required
 					#passwordInput="ngModel" [appMaxCount]="15" minlength="6" />
 				<label for="password" class="input-label"><i class="fa-solid fa-lock"></i> Password</label>
 			</div>
-
 
 			<!--password error msg-passwordInput-->
 			<ng-container *ngIf="passwordInput.touched">
@@ -60,7 +56,7 @@
 
 		</form>
 		<div class="card-info">
-			<p>If you already have a registration, please <a routerLink="/register">Register</a></p>
+			<p>If you already have a registration, please <a routerLink="/auth/register">Register</a></p>
 		</div>
 	</div>
 </div>

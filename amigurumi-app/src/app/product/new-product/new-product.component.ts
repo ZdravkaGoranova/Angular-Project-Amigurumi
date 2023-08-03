@@ -51,8 +51,7 @@ export class NewProductComponent {
 
       const newProductId = docRef.id;
       console.log(newProductId);
-
-      // const lockedUserId = localStorage
+  
       const lockedUserId = this.userService.user?.id;
       // console.log(lockedUserId);
       const updatedProductData = {

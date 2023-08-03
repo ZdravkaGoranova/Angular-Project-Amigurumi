@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Product } from './types/product';
-import { Firestore,  collection, addDoc, collectionData, doc,  deleteDoc, getDoc, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, getDoc, getDocs } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
-import {  Observable, } from 'rxjs';
+import { Observable, } from 'rxjs';
 
 
 @Injectable({
@@ -51,8 +51,8 @@ export class ApiService {
 
     if (data) {
       const products: Product[] = data.map((docData) => {
-        const { id, ownerId, description, imageUrl, skillLevel, title, category ,usersLiked,coments} = docData;
-        return { id, ownerId, description, imageUrl, skillLevel, title, category ,usersLiked,coments};
+        const { id, ownerId, description, imageUrl, skillLevel, title, category, usersLiked, coments } = docData;
+        return { id, ownerId, description, imageUrl, skillLevel, title, category, usersLiked, coments };
       });
       return products;
     } else {
@@ -83,12 +83,11 @@ export class ApiService {
     //   });
   }
 
-
   async deleteProducts(id: string) {
     const collectionInstance = collection(this.firestore, 'products');
 
     await deleteDoc(doc(collectionInstance, id));
- 
+
   }
   async getCurrentProduct(id: string): Promise<Product | null> {
     const collectionInstance = collection(this.firestore, 'products');
@@ -99,20 +98,18 @@ export class ApiService {
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
 
-
-      // Create a new Product instance and populate it with the data
       const productData = docSnap.data();
 
       const product: Product = {
         id: docSnap.id,
-        ownerId: productData['owner'],
+        ownerId: productData['ownerId'],
         description: productData['description'],
         imageUrl: productData['imageUrl'],
         skillLevel: productData['skillLevel'],
         title: productData['title'],
         category: productData['category'],
-        usersLiked:productData['usersLiked'],
-        coments:productData['coments']
+        usersLiked: productData['usersLiked'],
+        coments: productData['coments']
       };
       console.log(product)
       return product;
@@ -130,6 +127,7 @@ export class ApiService {
     if (docSnap.exists()) {
       const productData = docSnap.data();
       const ownerId: string = productData['ownerId'];
+      console.log(ownerId)
       return ownerId;
     } else {
       console.log("No such document!");
@@ -137,14 +135,14 @@ export class ApiService {
     }
   }
 
-  async getAll() {
-    const collectionInstance = collection(this.firestore, 'products');
+  // async getAll() {
+  //   const collectionInstance = collection(this.firestore, 'products');
 
-    const querySnapshot = await getDocs(collectionInstance);
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-    });
-  }
+  //   const querySnapshot = await getDocs(collectionInstance);
+  //   querySnapshot.forEach((doc) => {
+
+  //     console.log(doc.id, " => ", doc.data());
+  //   });
+  // }
 
 }

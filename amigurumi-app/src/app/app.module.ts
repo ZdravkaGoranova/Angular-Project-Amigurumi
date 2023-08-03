@@ -46,7 +46,7 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
 
     CoreModule,
-    UserModule,
+    // UserModule,
     ProductModule,
 
     AngularFireModule.initializeApp(environment.firebase),

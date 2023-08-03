@@ -36,7 +36,7 @@
                             account_circle
                         </span>
                         <span>
-                            {{product?.ownerId}}</span>
+                            {{product?.ownerId}}{{ownerEmailOrDisplayName}}</span>
                     </div>
                     <div class="skills-category">
                         <div class="prd-skillLevel">
@@ -271,6 +271,9 @@
                             <hr>
                             <p class="card-text">
                                 <small class="text-body-tertiary">
+
+                                  
+                                    <!-- {{ comment.timestamp.toDate() | elapsedTime }} -->
 
                                     {{ comment.timestamp.toDate() | date: 'EEEE' }}
                                     <i class="fas fa-clock"></i>

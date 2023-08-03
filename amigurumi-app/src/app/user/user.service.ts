@@ -57,12 +57,7 @@ export class UserService   {
   constructor(
 
     private http: HttpClient,
-    private fireauth: AngularFireAuth,
     private router: Router,
-    private userService: UserService,
-    private firestore: Firestore,
-    private apiService: ApiService,
-
   ) {
 
     this.subscription=this.user$.subscribe((user)=>{
@@ -79,7 +74,6 @@ export class UserService   {
 
   }
 
- 
 
   login(email: string, password: string) {
     const auth = getAuth();

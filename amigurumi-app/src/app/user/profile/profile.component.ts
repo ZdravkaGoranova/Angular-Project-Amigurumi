@@ -75,7 +75,7 @@ export class ProfileComponent {
     if (form.invalid) {
       return;
     }
-    
+
     const { fullName } = form.value;
     this.userService.updateUser(fullName);
 
@@ -127,6 +127,7 @@ export class ProfileComponent {
     this.isLoalding = false;
   }
 
+ 
 
   get isLoggedIn(): boolean {
     return this.userService.isLogged;

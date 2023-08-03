@@ -7,12 +7,12 @@ import { UserService } from 'src/app/user/user.service';
 import { ElapsedTimePipe } from '../../shared/pipes/elapsed-time.pipe';
 import * as moment from 'moment';
 import {
-  Firestore, getFirestore,
-  collection, addDoc, collectionData,
-  doc, updateDoc, deleteDoc, getDoc,
-  getDocs, query, where,
+  Firestore,
+  collection, addDoc,
+  doc, updateDoc,
+  getDocs,
 } from '@angular/fire/firestore';
-import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
+
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
@@ -44,7 +44,7 @@ export class DetailsProductComponent implements OnInit {
 
 
   ownerEmailOrDisplayName: string | null | undefined = null;
-
+ 
   // descToShow: string;
   // productDescLen: number;
   // showReadMoreBtn: boolean = true;
@@ -62,6 +62,7 @@ export class DetailsProductComponent implements OnInit {
     private afAuth: AngularFireAuth
   ) {
     this.checkIsOwner();
+    this.isProductLiked()
     // this.activatedRoute.params.subscribe((v) => console.log(v))
 
     // this.productDescLen = 0;
@@ -75,9 +76,11 @@ export class DetailsProductComponent implements OnInit {
     this.isLoalding = false;
     console.log(this.ownerEmailOrDisplayName)
     const id = this.activatedRoute.snapshot.params['productId'];
-    debugger
+
     const productData = await this.apiService.getCurrentProduct(id);
-    const ownerId = productData?.ownerId; // Ensure productData is of type Product, not a string.
+
+
+    const ownerId = productData?.ownerId;
     // if (ownerId) {
     //   const ownerData = await this.getOwnerEmailOrDisplayName(ownerId);
     //   console.log(ownerData);
@@ -138,7 +141,7 @@ export class DetailsProductComponent implements OnInit {
   //     console.error('Error getting user by ID:', error);
   //     return null;
   //   }
- 
+
   // }
 
 
@@ -271,9 +274,30 @@ export class DetailsProductComponent implements OnInit {
 
   }
 
+  //   const isLiked = productLikes?.some(item => {
+  //     return item.author?._id === userId || item?._ownerId === userId;
+  // });
+async isProductLiked(): Promise<void> {
+    const lockedUserId = this.userService.user?.id;
+    console.log(lockedUserId)
+    const id = this.activatedRoute.snapshot.params['productId'];
+
+    const productData = await this.apiService.getCurrentProduct(id);
+    console.log(productData?.usersLiked)
+    debugger
+    if ( lockedUserId && productData?.usersLiked) {
+    
+      this.isLiked = (productData.usersLiked as string[]).includes(lockedUserId );
+      console.log(this.isLiked);
+      this.likeIsShown=false;
+     
+    }
+  
+  }
+
   async addComment(): Promise<void> {
     if (this.newComment.trim() === '') {
-   
+
       alert('Please enter a comment.');
       return;
     }
@@ -298,11 +322,11 @@ export class DetailsProductComponent implements OnInit {
       console.error('Error adding comment:', error);
     }
 
-    this.newComment = ''; 
+    this.newComment = '';
   }
 
   async getCommentsProducts(): Promise<void> {
-    debugger;
+ 
     const id = this.activatedRoute.snapshot.params['productId'];
 
     const collectionInstance = collection(this.firestore, 'products', id, 'comments');
@@ -312,13 +336,13 @@ export class DetailsProductComponent implements OnInit {
       const comments: any[] = [];
 
       querySnapshot.forEach((doc) => {
-       
+
         const data = doc.data();
         comments.push(data);
       });
 
       console.log('Comments:', comments);
-     
+
       this.commentsProduct = comments;
     } catch (error) {
       console.error('Error getting comments:', error);

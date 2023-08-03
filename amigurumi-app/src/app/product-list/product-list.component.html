@@ -75,10 +75,10 @@
                             <img src="{{product.imageUrl}}" class="card-img-top" alt="product image">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Title: {{product.title}}</h5>
+                            <h5 class="card-title"><b>Title: </b> {{product.title }}</h5>
                             <hr>
                             <p class="card-text">
-                                <i class="fa-brands fa-galactic-republic"></i> Category:{{product.category}}
+                                <i class="fa-brands fa-galactic-republic"></i> <b>Category: </b>{{product.category}}
 
                             </p>
                             <hr>
@@ -86,11 +86,9 @@
                                 <i class="fa-solid fa-star"></i> Skill Level: {{product?.skillLevel}}
                             </p> -->
 
-                            <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
-                                    Title</cite>
-                            </footer> -->
 
-
+                            <p><b>Description: </b> {{product.description |slice : 25}}</p>
+                            <hr>
                             <button> <a [routerLink]="product.id" class="btn btn-primary"> Details Page</a></button>
                             <!-- [style]="{backgroundColor:'#6658d3'}" -->
                         </div>

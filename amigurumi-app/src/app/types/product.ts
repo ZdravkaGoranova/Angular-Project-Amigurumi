@@ -6,7 +6,7 @@ export interface Product {
     skillLevel: string;
     title: string;
     category: string;
-
+  
     usersLiked: [],
     coments: [],
 

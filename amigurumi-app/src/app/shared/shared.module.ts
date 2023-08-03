@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { LoaderComponent } from './loader/loader.component';
 
 import { AppEmailDirective } from './validators/app-email.directive';
+import { SlicePipe } from './pipes/slice.pipe';
+import { ElapsedTimePipe } from './pipes/elapsed-time.pipe';
+
 
 
 
@@ -10,6 +13,8 @@ import { AppEmailDirective } from './validators/app-email.directive';
   declarations: [
     LoaderComponent,
     AppEmailDirective,
+    SlicePipe,
+    ElapsedTimePipe,
 
   ],
   imports: [
@@ -17,6 +22,9 @@ import { AppEmailDirective } from './validators/app-email.directive';
   ],
   exports: [
     AppEmailDirective,
-    LoaderComponent]
+    LoaderComponent,
+    SlicePipe,
+    ElapsedTimePipe
+  ]
 })
 export class SharedModule { }

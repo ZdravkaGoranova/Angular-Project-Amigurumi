@@ -44,7 +44,7 @@ The front end of the project has been deploy in Firebase:   https://amugurumiuse
 ![](/HomePage.jpg)
 
 ## Register Page
-![](/PageRegister.jpg)
+![](/PageRegister.png)
 
 ## Login Page 
 ![](/PageLogin.jpg)
@@ -60,7 +60,7 @@ The front end of the project has been deploy in Firebase:   https://amugurumiuse
 
 ## Create  Page and Validation
 ![](CreatePageValidation.jpg)
-![](CreateValidation.jpg)
+![](CreateValidation.png)
 
 ## Edit Page
 ![](/EditPage.jpg)

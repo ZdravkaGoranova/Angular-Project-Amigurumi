@@ -88,7 +88,7 @@ export class EditProductComponent implements OnInit {
       console.error("Error adding document: ", e);
     }
 
-    this.router.navigate(['/products']);
+    this.router.navigate(['/catalog/products']);
 
   }
 }

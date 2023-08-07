@@ -5,7 +5,6 @@ import { Product } from '../types/product';
 import {
   Firestore,
   collection,
-  collectionData,
   getDocs,
   getFirestore,
   query,
@@ -29,7 +28,6 @@ export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
 
-  private symbols: number = 250;
   db = getFirestore();
 
   colRef = collection(this.db, 'products');
@@ -46,7 +44,8 @@ export class ProductListComponent implements OnInit {
 
   searchKeyword: string = '';
   searcProducts: Product[] = [];
-  // isSearcProducts: boolean =true;
+  isSearched: boolean = false;
+
 
   constructor(private apiService: ApiService,
     private firestore: Firestore,
@@ -55,7 +54,7 @@ export class ProductListComponent implements OnInit {
     // this.descToShow = "";
   }
   async ngOnInit(): Promise<void> {
- 
+
       const collectionInstance = collection(this.firestore, 'products');
 
       const querySnapshot = await getDocs(collectionInstance);
@@ -69,7 +68,7 @@ export class ProductListComponent implements OnInit {
     }
   
     async searchProducts(keyword: string): Promise<void> {
-     
+ 
       this.searcProducts = [];
       console.log(this.searcProducts);
 
@@ -82,17 +81,16 @@ export class ProductListComponent implements OnInit {
           where('category', '<=', lowerCaseKeyword + '\uf8ff'));
       try {
         const querySnapshot = await getDocs(q);
+        debugger
         this.searcProducts = querySnapshot.docs.map((doc) => doc.data() as Product);
   
         this.isLoalding=false;
-
-              // if(this.searchProducts.length >0){
-              // this.isSearcProducts=true;
-              // }
-              // else if(this.searchProducts.length <=0){
-              //   this.isSearcProducts=false;
-              //   }
-
+        if (this.searcProducts.length > 0) {
+          this.isSearched = true;
+        } else {
+          this.isSearched = true;
+        }
+        console.log(this.searcProducts.length)
           } catch (e) {
             console.error("Error searching products: ", e);
             this.isLoalding=false;
@@ -100,6 +98,7 @@ export class ProductListComponent implements OnInit {
       console.log(this.searcProducts)
     }
   }
+
     // async getAll() {
     //   const collectionInstance = collection(this.firestore, 'products');
     //   debugger;

@@ -26,20 +26,28 @@
                         </div>
                     </div>
 
-                    <!--IS have a Search products-->
-
-                    <div class="list-group" *ngIf="searcProducts.length > 0 ">
-
-                        <a [routerLink]="['/products', product.id]" class="list-group-item list-group-item-action"
-                            *ngFor="let product of searcProducts">
-                            {{product.title }}</a>
-                    </div>
 
                     <!--No Search products-->
-                    <div class="alert alert-danger" role="alert" *ngIf="searcProducts.length <=0">
-                        <p>No lecked products from this category {{searchKeyword}}!</p>
+
+                    <div class="alert alert-danger" role="alert" *ngIf="isSearched && searcProducts.length <= 0">
+                        <p>No lecked products from this <b>Category: {{searchKeyword}}</b>!</p>
                     </div>
 
+
+                    <!--IS have a Search products-->
+                    <div *ngIf="isSearched && searcProducts.length > 0 && searchKeyword.length > 0">
+
+                        <div class="alert alert-primary" role="alert">
+                            <p>The searhed products from <b>Category: </b> <b>{{searchKeyword}}</b> is here!</p>
+                        </div>
+
+                        <div class="list-group">
+                            <a [routerLink]="['/catalog/products', product.id]"
+                                class="list-group-item list-group-item-action" *ngFor="let product of searcProducts">
+                                {{product.title}}
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -52,6 +60,7 @@
                 </div>
             </div>
 
+            <!-- No products added to the catalog -->
             <div *ngIf="!isLoalding && (!products || products.length === 0)" class="no-products">
                 <h3>No products added to the catalog!</h3>
             </div>

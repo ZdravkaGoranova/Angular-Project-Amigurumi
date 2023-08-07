@@ -2,24 +2,15 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 
-import { AngularFireAuth, } from '@angular/fire/compat/auth';
-
-import { getAuth, updateProfile, updateEmail,
+import { getAuth, updateProfile, 
    createUserWithEmailAndPassword,
     signOut, signInWithEmailAndPassword } from "firebase/auth";
-
-import {
-      Firestore,collection,
-      getDocs, query, where
-    } from '@angular/fire/firestore';
-
-import { tap } from 'rxjs/operators';
 
 import { Router } from '@angular/router';
 import { Subscription, from } from 'rxjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { ApiService } from '../api.service';
+
 import { Product } from 'src/app/types/product';
 
 @Injectable({
@@ -40,8 +31,6 @@ export class UserService   {
   ownerProducts: Product[] = [];
   likedProducts: Product[] = [];
 
-
-
   get isLogged(): boolean {
     return !!this.user;
   }
@@ -52,7 +41,6 @@ export class UserService   {
   // get isMale(): boolean {
   //   return this.user?.gender === 'male';
   // }
-
 
   constructor(
 
@@ -77,7 +65,7 @@ export class UserService   {
 
   login(email: string, password: string) {
     const auth = getAuth();
-    
+    debugger
     signInWithEmailAndPassword(auth,email, password)
       .then((userCredential) => {
        

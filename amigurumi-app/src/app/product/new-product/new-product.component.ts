@@ -62,8 +62,9 @@ export class NewProductComponent {
   
       const washingtonRef = doc(collectionInstance, newProductId);
       // console.log(washingtonRef);
-   
+      debugger
       await updateDoc(washingtonRef, {
+  
         id: newProductId,
         ownerId:lockedUserId,
         usersLiked:[],
@@ -76,7 +77,7 @@ export class NewProductComponent {
     }
    
 
-    this.router.navigate(['/products']);
+    this.router.navigate(['/catalog/products']);
 
     // Reset the form after submission (optional)
     form.reset();
@@ -93,7 +94,7 @@ export class NewProductComponent {
     //   return;
     // }
 
-    this.router.navigate(['/products']);
+    this.router.navigate(['/catalog/products']);
     // form.setValue({
     //   fullName: '', email: '', password: '', gender: '',
     // })

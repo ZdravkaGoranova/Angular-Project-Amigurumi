@@ -153,7 +153,7 @@
                   <!--IS have a products-->
                   <div class="list-group" *ngIf="ownerProducts.length > 0">
 
-                    <a [routerLink]="['/products', product.id]" class="list-group-item list-group-item-action"
+                    <a [routerLink]="['/catalog/products', product.id]" class="list-group-item list-group-item-action"
                       aria-current="true" *ngFor="let product of ownerProducts">
                       {{ product.title }}
                     </a>
@@ -182,7 +182,7 @@
                   <!--IS have a liked products-->
                   <div class="list-group" *ngIf="likedProducts.length > 0">
 
-                    <a [routerLink]="['/products', product.id]" class="list-group-item list-group-item-action"
+                    <a [routerLink]="['/catalog/products', product.id]" class="list-group-item list-group-item-action"
                       *ngFor="let product of likedProducts">{{
                       product.title }}</a>
 

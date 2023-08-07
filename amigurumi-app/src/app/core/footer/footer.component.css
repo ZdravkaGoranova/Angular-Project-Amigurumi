@@ -12,14 +12,6 @@ footer {
     justify-content: space-evenly;
     flex-wrap: wrap;
 
-    /* text-align: center; */
-    /* background: #FDB6BA; */
-    /* background: #BDDCD7; */
-    /* background: #61BFBE; */
-    
-    /* background: linear-gradient(0deg, rgba(0, 128, 182, 1) 0%, rgba(0, 128, 182, 1) 35%, rgba(0, 212, 255, 1) 100%); 
-     */
-   
 }
 
 footer ul {
@@ -33,7 +25,7 @@ footer ul {
 
 footer ul li,
 footer ul li a {
-    /* display: block;*/
+ 
     display: block;
     text-decoration: none;
     opacity: 0.7;

@@ -3,8 +3,6 @@
     flex: 1;
     padding-bottom: 50px;
     min-height: 66.5vh;
-    
-  
     /* opacity: 1;
     color: rgba(237, 240, 244, 0.2) !important; */
 }
@@ -12,7 +10,7 @@
   margin-top: 50px;
     width: 70%;
     background-color: rgba(246, 246, 246, 0.8) !important;
-    /* background-color: rgba(244, 155, 228, 0.3) !important; */
+
     margin-left: auto;
 }
 .divImage {
@@ -27,7 +25,7 @@
 
 .carousel-item {
     height: 400px;
-    /* Фиксирана височина на родителския контейнер */
+  
 }
 
 .carouselExampleCaptions {
@@ -43,34 +41,3 @@
     text-align:start;
    
 }
-/* .carousel {
-    margin: 20px;
-}
-
-.carousel-inner {
-    height: 100%;
-  }
-  
-  .carousel-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 400px;
-  }
-  
-  .carousel-item img {
-    max-height: 100%;
-    width: auto;
-  }
-.carousel-caption {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-}
-
-.carousel-indicators {
-    font-style: italic;
-    list-style: none;
-} */
-

@@ -50,7 +50,7 @@ img {
 	font-weight: 700;
 	color: #735400;
 	line-height: 1.222;
-	small {
+	:is(small) {
 		display: block;
 		font-size: .75em;
 		font-weight: 400;
@@ -120,7 +120,7 @@ img {
 	text-align: center;
 	font-size: .875rem;
 	color: #8597a3;
-	a {
+	:is(a) {
 		display: block;
 		color: #6658d3;
 		text-decoration: none;

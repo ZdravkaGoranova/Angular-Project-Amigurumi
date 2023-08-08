@@ -35,23 +35,19 @@ import { SharedModule } from './shared/shared.module';
 
     HomeComponent,
     ProductListComponent,
-
   ],
   imports: [
     BrowserModule,
-
+    CoreModule,
     SharedModule,
-
+    AppRoutingModule,
     HttpClientModule,
     FormsModule,
 
-    CoreModule,
     // UserModule,
     ProductModule,
 
     AngularFireModule.initializeApp(environment.firebase),
-  
-    AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(()=>getFirestore()),

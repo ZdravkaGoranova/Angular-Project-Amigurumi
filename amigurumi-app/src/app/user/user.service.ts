@@ -65,7 +65,7 @@ export class UserService   {
 
   login(email: string, password: string) {
     const auth = getAuth();
-    debugger
+    
     signInWithEmailAndPassword(auth,email, password)
       .then((userCredential) => {
        

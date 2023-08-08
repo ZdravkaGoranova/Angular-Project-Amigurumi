@@ -17,12 +17,12 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
-     // canActivate: [AuthGuard],
+ 
   
   }, {
     path: 'catalog',
     loadChildren: () => import('./product/product.module').then((m) => m.ProductModule),
-     // canActivate: [AuthGuard],
+ 
   },
   { path: 'error', component: ErrorComponent },
 

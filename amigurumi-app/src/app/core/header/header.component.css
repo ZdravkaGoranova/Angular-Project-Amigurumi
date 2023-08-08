@@ -65,20 +65,43 @@
         display: none;
     }
 
-    .logo-text,
+  
     .welcome .btn-group a,
     .nav-item {
         font-size: 14px;
     }
+
+    .logo-text {
+        display: none; 
+    }
+
+    header ul {
+        justify-content:flex-start;
+        margin: 0;
+    }
+
+    header ul {
+       
+        margin: 0;
+    }
+    
 }
 
 header {
+ 
+    position:relative;
+    top: 0;
+    left: 0;
 
+ 
     background: rgb(87, 88, 187);
     background: linear-gradient(0deg, rgba(87, 88, 187, 1) 38%,
             rgba(217, 128, 250, 1) 95%);
     display: flex;
     justify-content: space-between;
+    align-items: center; 
+
+    /* z-index: 1000;  */
 }
 
 header ul {
@@ -226,3 +249,16 @@ nav {
 .nav-link {
     color: white;
 }
+
+
+
+/* .bagOwnStyle {
+
+    background: rgb(87, 88, 187);
+    background: linear-gradient(0deg, rgba(87, 88, 187, 1) 38%,
+            rgba(217, 128, 250, 1) 95%);
+    
+}
+a {
+    color: white;
+} */

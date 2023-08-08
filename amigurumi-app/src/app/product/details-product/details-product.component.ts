@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Product } from 'src/app/types/product';
@@ -284,7 +284,7 @@ async isProductLiked(): Promise<void> {
 
     const productData = await this.apiService.getCurrentProduct(id);
     console.log(productData?.usersLiked)
-    debugger
+
     if ( lockedUserId && productData?.usersLiked) {
     
       this.isLiked = (productData.usersLiked as string[]).includes(lockedUserId );
@@ -301,7 +301,7 @@ async isProductLiked(): Promise<void> {
       alert('Please enter a comment.');
       return;
     }
-    debugger
+
     const id = this.activatedRoute.snapshot.params['productId'];
 
     const collectionInstance = collection(this.firestore, 'products', id, 'comments');

@@ -1,6 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
+@media (max-width: 480px) {
+    /* h3 {
+        font-size: 16px;
+    } */
 
+    button.btn-search {
+        font-size: 14px;
+    }
+
+  
+}
 
 ul {
     display: flex;
@@ -168,5 +178,6 @@ a {
 }
 
 .container {
-    padding-bottom: 4rem;
+    padding-bottom: 6rem;
+    /* padding-top: 6rem; */
 }

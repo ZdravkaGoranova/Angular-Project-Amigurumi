@@ -73,10 +73,11 @@ body{margin-top:20px;
         padding: 0; 
       }
       
-      /* Стилове при ховер */
+     
       .custom-btn:hover {
         color: white;
       }
       .container {
-        padding-bottom: 6rem;
+        padding-bottom: 10rem;
+        /* padding-top: 6rem; */
     }

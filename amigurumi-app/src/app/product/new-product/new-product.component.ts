@@ -62,7 +62,7 @@ export class NewProductComponent {
   
       const washingtonRef = doc(collectionInstance, newProductId);
       // console.log(washingtonRef);
-      debugger
+
       await updateDoc(washingtonRef, {
   
         id: newProductId,

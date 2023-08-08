@@ -13,17 +13,19 @@
             <div class="row justify-content-center">
                 <div class="col-6">
                     <div class="my-3">
-                        <h3>Search by category:</h3>
-                        <hr>
-                        <div class="containe">
+                       
+                        <div class="containe d-flex justify-content-evenly">
+                            <h3>Search by category:  </h3>
                             <div class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                                <input class="form-control me-2 " type="search" placeholder="animals" aria-label="Search"
                                     [(ngModel)]="searchKeyword">
                                 <button class="btn btn-outline-primary" type="submit"
                                     (click)="searchProducts(searchKeyword)">Search</button>
 
                             </div>
                         </div>
+                        <hr>
+             
                     </div>
 
 

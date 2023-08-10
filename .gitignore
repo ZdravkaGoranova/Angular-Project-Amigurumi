@@ -1,0 +1,17 @@
+
+*.json
+*.ts
+*.html
+*.css
+*.ttf
+*.ico
+*.woff2
+*.txt
+*.js
+*.cache
+*.png
+*.pack
+src/assets/.gitkeep
+.firebaserc
+.editorconfig
+*.old

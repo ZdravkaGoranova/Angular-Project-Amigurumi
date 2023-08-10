@@ -1,0 +1,229 @@
+<div class="container">
+  <div class="main-body">
+
+    <div class="row gutters-sm">
+
+      <div class="my-5">
+        <h3>My Profile</h3>
+        <hr>
+      </div>
+      <div class="col-md-4 mb-3 ">
+
+        <!-- READ ONLY MODE -->
+        <ng-container *ngIf="!isEditMode">
+          <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+
+                <img src="https://www.freeiconspng.com/thumbs/person-icon/icon-user-blue-symbol-people-person-generic--public-domain--21.png" alt="Admin"
+                  class="rounded-circle p-4  alert alert-primary"  width="180" >
+
+                <!-- <img *ngIf="isMale" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                  class="rounded-circle p-1 bg-primary" width="180">
+                <img *ngIf="!isMale" src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="Admin"
+                  class="rounded-circle p-1 bg-primary" width="180"> -->
+
+
+                <div class="mt-3 ">
+                  <h4>{{ fullName }}'s profile</h4>
+
+                  <p class="text-secondary mb-1 custom-p"><i class="fa-regular fa-envelope"></i>
+                     Email: {{email }}</p>
+
+                  <!-- <p class="text-secondary mb-1 custom-p"><i class="fa-solid fa-venus-mars"></i> Gender: {{gender}}</p> -->
+                  <!-- <p class="text-secondary mb-1 custom-p"><i class="fa-solid fa-venus-mars"></i> 
+                    Gender: {{gender}}</p> -->
+
+                  <button class="btn btn-outline-primary" (click)="toggleEditMode()">Edit</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- EDIT MODE -->
+        <ng-container *ngIf="isEditMode">
+          <form  #form="ngForm">
+            <!-- <form class="card-form" #loginForm="ngForm" class="card-form" (ngSubmit)="submitHandler(loginForm)"></form> -->
+            <div class="card mt-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+
+              <div class="d-flex flex-column align-items-center text-center ">
+                <h3>User Info:</h3>
+
+                <!-- <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" -->
+                <img src="https://www.freeiconspng.com/thumbs/person-icon/icon-user-blue-symbol-people-person-generic--public-domain--21.png" alt="Admin"
+                class="rounded-circle p-6  alert alert-primary"  width="180">
+
+                <!-- <img *ngIf="isMale" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                  class="rounded-circle p-1 bg-primary" width="180">
+                <img *ngIf="!isMale" src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="Admin"
+                  class="rounded-circle p-1 bg-primary" width="180"> -->
+              </div>
+
+              <h5 class=" align-items-center text-center ">{{fullName}}'s profile</h5>
+
+              <ul class="list-group list-group-flush">
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user-large"></i> </span>
+                  <input type="text" class="form-control" name="fullName" id="fullName"  [(ngModel)]="user.fullName"  required
+                     #fullNameInput="ngModel" minlength="4">
+
+                </div>
+                <!--fullName error msg-->
+                <ng-container *ngIf="fullNameInput.touched">
+                  <div class="error" *ngIf="fullNameInput.errors?.['required'] ">
+
+                    Full name is required!
+                  </div>
+                  <div class="error" *ngIf="fullNameInput.errors?.['minlength']">
+
+                    Invalid Full name, because length is short
+                    than
+                    {{fullNameInput.errors?.['minlength'].requiredLength}} ...
+                  </div>
+                </ng-container>
+
+                <!-- <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-envelope"></i> </span>
+       
+                  <input type="text" class="form-control" name="email" id="email" [(ngModel)]="user.email" email
+                    required #emailInput="ngModel">
+
+                </div> -->
+
+                <!--email error msg-->
+                <!-- <ng-container *ngIf="emailInput.touched">
+                  <div class="error" *ngIf="emailInput.errors?.['required']">
+
+                    Email is required!
+                  </div>
+
+                  <div class="error" *ngIf="emailInput.errors?.['email']">Invalid Email!
+                    {{emailInput.errors?.['email'].requiredLength}} ...
+                  </div>
+                </ng-container> -->
+
+              
+              </ul>
+              <div class="row">
+                <div class="d-flex justify-content-evenly">
+                  <!-- <a class="btn btn-info " target="__blank"
+                >Cancel</a>
+              <a class="btn btn-info " target="__blank"
+                >Save</a> -->
+
+                  <button type="button" class="btn btn-outline-primary" (click)="toggleEditMode()">Cancel</button>
+                  <button type="button" class="btn btn-outline-primary" (click)="saveProfileHandler(form)"
+                    [disabled]="form.invalid">Save changes</button>
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </ng-container>
+
+      </div>
+      <div class="col-md-8">
+
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <section class="container pt-3 mb-3 ">
+
+          <div class="center-wrapper" *ngIf="isLoalding">
+            <div class="lds-dual-ring">
+
+              <app-loader></app-loader>
+              
+            </div>
+          </div>
+
+          <div class="row pt-5 mt-30" *ngIf="!isLoalding">
+            <div class="col-lg-6 col-sm-6 mb-30 pb-5  ">
+              <a class="card" href="#">
+                <div class="box-shadow bg-white rounded-circle mx-auto text-center"
+                  style="width: 90px; height: 90px; margin-top: -45px;"><i
+                    class="fa-solid fa-list-check fa-3x head-icon" ></i></div>
+
+                <div class="card-body text-center">
+                  <h3 class="card-title pt-1">My Products</h3>
+
+                  <span class="text-sm text-uppercase font-weight-bold">Learn More&nbsp;<i
+                      class="fe-icon-arrow-right"></i></span>
+
+                  <!--IS have a products-->
+                  <div class="list-group" *ngIf="ownerProducts.length > 0">
+
+                    <a [routerLink]="['/catalog/products', product.id]" class="list-group-item list-group-item-action"
+                      aria-current="true" *ngFor="let product of ownerProducts">
+                      {{ product.title }}
+                    </a>
+
+                  </div>
+
+                  <!--No products-->
+                  <div class="alert alert-danger" role="alert" *ngIf="ownerProducts.length <=0">
+                    <p>No products created from this user!</p>
+                  </div>
+
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6 col-sm-6 mb-30 pb-5">
+              <a class="card" href="#">
+                <div class="box-shadow bg-white rounded-circle mx-auto text-center"
+                  style="width: 90px; height: 90px; margin-top: -45px;"> <i
+                    class="fa-regular fa-thumbs-up fa-3x head-icon" ></i></div>
+                <div class="card-body text-center">
+                  <h3 class="card-title pt-1">Liked Products</h3>
+                  <span class="text-sm text-uppercase font-weight-bold">Learn More&nbsp;<i
+                      class="fe-icon-arrow-right"></i></span>
+
+
+                  <!--IS have a liked products-->
+                  <div class="list-group" *ngIf="likedProducts.length > 0">
+
+                    <a [routerLink]="['/catalog/products', product.id]" class="list-group-item list-group-item-action"
+                      *ngFor="let product of likedProducts">{{
+                      product.title }}</a>
+
+                  </div>
+                  <!--No likeds-->
+                  <div class="alert alert-danger" role="alert" *ngIf="likedProducts.length <=0">
+                    <p>No slecked products from this user!</p>
+                  </div>
+
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-venus-mars"></i> </span>
+  <input type="text" class="form-control" name="gender" id="gender" value="{{gender}}"
+    aria-label="Username" aria-describedby="basic-addon1">
+
+</div>
+<div class="genderRadio d-flex justify-content-evenly">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="gender" id="male" value="male"
+      [(ngModel)]="user.gender">
+    <label class="form-check-label" for="male">
+      Male
+    </label>
+  </div>
+
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="gender" id="female" value="female"
+      [(ngModel)]="user.gender">
+    <label class="form-check-label" for="female">
+      Female
+    </label>
+  </div>
+</div> -->

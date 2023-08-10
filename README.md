@@ -5,7 +5,7 @@
 
 The  "Angular-Project-Amigurumi"  application contains the following views: login page, registration page, logout page, personal profile page, catalog page and details page.
 
-The front end of the project has been deploy in Firebase:  https://amugurumiusers.web.app
+The front end of the project has been deploy in Firebase: [ https://amugurumiusers.web.app](https://amugurumiusers.firebaseapp.com/)
 
 ## Short description
  - This project was bootstrapped with [Angular](https://github.com/facebook/angular).

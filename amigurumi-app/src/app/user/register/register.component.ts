@@ -32,6 +32,12 @@ export class RegisterComponent  {
 
     this.userService.register(fullName, email, password);
 
+    // this.errorService.apiError$$.subscribe((err: any) => {
+    //   debugger;
+    //   console.log(err.message)
+    //   this.errorMsg = err.message;
+    // })
+
     // console.log(form.value)
     //   if (form.invalid) {
     //     return;

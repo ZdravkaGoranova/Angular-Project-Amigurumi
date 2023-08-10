@@ -60,6 +60,10 @@ export class ProfileComponent {
       email: lockedUseremail,
       fullName: lockedUserfullName,
     }
+    const k = userService.user;
+    console.log(k)
+
+    
     // console.log(this.t)
     this.getUsersProducts();
     this.getLickedProducts();
@@ -90,7 +94,7 @@ export class ProfileComponent {
     const collectionInstance = collection(this.firestore, 'products');
 
     const q = query(collectionInstance, where("ownerId", "==", lockedUserId));
-    console.log(q)
+    // console.log(q)
 
     try {
       const querySnapshot = await getDocs(q);
@@ -127,7 +131,7 @@ export class ProfileComponent {
     this.isLoalding = false;
   }
 
- 
+
 
   get isLoggedIn(): boolean {
     return this.userService.isLogged;

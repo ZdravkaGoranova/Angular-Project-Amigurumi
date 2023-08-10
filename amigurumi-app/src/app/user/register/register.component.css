@@ -176,4 +176,7 @@ input.ng-invalid.ng-touched {
    .success-message {
     background-color: rgba(99, 230, 81, 0.699);
    }
-   
+   .container {
+    padding-bottom: 10rem;
+    /* padding-top: 6rem; */
+}

@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 
 import { DEFAULT_EMAIL_DOMAINS } from 'src/app/shared/validators/constants';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,14 +12,17 @@ import { DEFAULT_EMAIL_DOMAINS } from 'src/app/shared/validators/constants';
 export class LoginComponent {
   appEmailDomains = DEFAULT_EMAIL_DOMAINS;
 
+
   constructor(
     private userService: UserService,
+  
   ) { }
 
   login(email: string, password: string): void {
 
-    this.userService.login(email, password);
+    this.userService.login(email, password)
 
+   
     //  this.userService.login( email, password).subscribe(()=>{
     //     this.router.navigate(['/']);
     //   });

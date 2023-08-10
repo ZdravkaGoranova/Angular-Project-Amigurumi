@@ -7,6 +7,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { FormsModule,  } from '@angular/forms';
 import { MaxCountDirective } from './max-count.directive';
 import { SharedModule } from '../shared/shared.module';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { SharedModule } from '../shared/shared.module';
     UserRoutingModule,
     FormsModule,
     SharedModule,
-    
+    CoreModule,
   ]
 })
 export class UserModule { }

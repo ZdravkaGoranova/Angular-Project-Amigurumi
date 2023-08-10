@@ -54,10 +54,7 @@ body{
 .custom-p{
     padding-bottom: 10px;
 }
-body{
-    margin-top:20px;
-    background:#eee;
-}
+
 .card::after {
     display: block;
     position: absolute;
@@ -159,7 +156,7 @@ p, .p {
 
 .head-icon{
     margin-top:18px;
-    color:#FF4500
+    color: blue
 }
 
 
@@ -186,6 +183,6 @@ input.ng-invalid.ng-touched {
     /* height: 100vh;  */
   }
   .container {
-    padding-bottom: 6rem;
+    padding-bottom: 10rem;
     /* padding-top: 6rem; */
 }

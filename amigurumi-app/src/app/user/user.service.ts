@@ -12,6 +12,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 
 import { Product } from 'src/app/types/product';
+import { ErrorService } from '../core/error/error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,7 @@ export class UserService   {
 
     private http: HttpClient,
     private router: Router,
+    private errorService: ErrorService,
   ) {
 
     this.subscription=this.user$.subscribe((user)=>{
@@ -83,8 +85,17 @@ export class UserService   {
         alert(' Successful Login')
         this.router.navigate(['/auth/profile'])
 
+
+        // this._snackBar.open('Successful Login', 'OK', {
+        //   verticalPosition: 'top',
+        //   horizontalPosition: 'center',
+        //   panelClass: 'bg-success' // Променете 'bg-success' според вашия CSS клас за успешни съобщения
+        // });
+
       }, err => {
-        alert(err.message);
+        // alert(err.message);
+        console.log(err.message)
+        this.errorService.setError(err);
         this.router.navigate(['/auth/login'])
       })
 
@@ -113,8 +124,7 @@ export class UserService   {
               id: this.loggedInUserId,
               fullName: fullName,
             };
-            this.user = userData;
-            this.user$$.next(this.user);
+      
 
             localStorage.setItem(this.USER_KYE, JSON.stringify(userData));
 
@@ -123,15 +133,17 @@ export class UserService   {
             this.router.navigate(['/auth/profile']);
             
           }).catch((error) => {
-            alert(error.message);
+            // alert(error.message);
             console.log(error.message);
+            this.errorService.setError(error);
           });
-
+    
         } else {
           console.log("User is null");
         }
       }).catch((error) => {
-         alert(error.message);
+        //  alert(error.message);
+         this.errorService.setError(error);
         console.log(error.message);
       })
   }
@@ -199,9 +211,10 @@ export class UserService   {
       };
       this.user = userData;
     this.user$$.next(this.user);
-
+  
     }).catch((error) => {
-      alert('An error occurred')
+      // alert('An error occurred')
+      this.errorService.setError(error);
     });
 
   }
@@ -216,7 +229,10 @@ export class UserService   {
       localStorage.removeItem(this.USER_KYE);
       this.user = undefined;
       this.router.navigate(['/']);
-    }).catch((error) => { alert(error.message) }
+    }).catch((error) => { 
+      // alert(error.message) 
+      this.errorService.setError(error);
+    }
     )
     this.user = undefined;
    

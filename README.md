@@ -13,7 +13,8 @@ The front end of the project has been deploy in Firebase:  https://amugurumiuser
  
  ## Usage
 
-- `src` cd client  `npm start`
+- npm i
+- ng s
 - email - peter@abv.bg
 - password - 123456
  
@@ -26,7 +27,7 @@ The front end of the project has been deploy in Firebase:  https://amugurumiuser
  ## Architecture - the project is structured
  -
  - `public` folder contains global asssets for the app.
- - `src` folder contains the App.js, index.html and folders for the components, environments, shared and service.
+ - `src` folder contains the app, index.html, styles.css, environments and folders for the components, modules, app.interceptor.ts,routing.module and service.
  - `app` folder - properly named folder for each component that includes the component itself, the css  for the component).
  - `environments` folder - contains custom environments
  - `core` folder - contains custom hooks

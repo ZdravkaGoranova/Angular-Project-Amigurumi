@@ -29,12 +29,12 @@
 }
 .container{
     /* flex: 1;
-    padding-bottom: 50px;
+
     min-height: 100vh; */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding-bottom: 70px; 
+    padding-bottom: 10rem; 
   
     /* opacity: 1;
     color: rgba(237, 240, 244, 0.2) !important; */
@@ -100,14 +100,7 @@ h3 {
     color: rgb(23, 22, 22);
 }
 
-.material-symbols-outlined {
-    font-size: 16px;
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 18,
-        'GRAD' 0,
-        'opsz' 48
-}
+
 
 .settings,
 .ownProduct {
@@ -228,7 +221,3 @@ hr {
     align-items: center;
     /* height: 100vh;  */
   }
-  .container {
-    padding-bottom: 10rem;
-    /* padding-top: 6rem; */
-}

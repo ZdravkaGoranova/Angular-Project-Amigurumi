@@ -1,10 +1,8 @@
-<link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <!-- Page title -->
+
             <div class="my-5">
                 <h3>Amigurumi Details:</h3>
                 <hr>
@@ -32,21 +30,21 @@
                     <h5 id="title">{{product?.title}}</h5>
                     <div class="prd-author">
 
-                        <span class="material-symbols-outlined custom-icon">
-                            account_circle
-                        </span>
-                        <span>
-                            {{product?.ownerId}}{{ownerEmailOrDisplayName}}</span>
+                        <i class="fa-regular fa-circle-user"></i>
+
+                      <span></span>  
                     </div>
                     <div class="skills-category">
                         <div class="prd-skillLevel">
 
-                            <i class="fa-brands fa-galactic-republic custom-icon"></i> <b>Category:</b> {{product?.category}}
+                            <i class="fa-brands fa-galactic-republic custom-icon"></i> <b>Category:</b>
+                            {{product?.category}}
 
                         </div>
                         <div class="prd-skillLevel">
 
-                            <i class="fa-solid fa-star custom-icon"></i> <b>Skill Level:</b> {{product?.skillLevel}}
+                            <i class="fa-solid fa-star custom-icon"></i>
+                             <b>Skill Level:</b> {{product?.skillLevel}}
 
                         </div>
                     </div>
@@ -55,34 +53,40 @@
                     </div>
                     <div class="settings" *ngIf="isLoggedIn">
 
-                       
-                            <button class="btn btn-outline-primary btn-sm" (click)="toggleLike();lickedProduct()"
-                                *ngIf="!isOwnerStatus"
-                                
-                                [disabled]="isLiked"
-                                >
-                                <span class="material-symbols-outlined">
-                                    thumb_up
-                                </span>
-                                <span>{{likeButtonTitle}}
-                                    
-                                </span>
+                        <!-- Not is isOwnerStatus-->
+                        <button class="btn btn-outline-primary btn-sm position-relative"
+                            (click)="toggleLike();lickedProduct()" *ngIf="!isOwnerStatus" [disabled]="isLiked">
 
-                            </button>
-                     
-                        <!-- <button class="btn-comment">
-                            <span class="material-symbols-outlined">
-                             rate_review
+                            <i class="fa-regular fa-thumbs-up"></i>
+                            <span>{{likeButtonTitle}}
+
                             </span>
-                             <span>Add Comment</span>
-                            </button> -->
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{countLikes}}
+
+                            </span>
+                        </button>
+
+                        <!-- isOwnerStatus-->
+                        <button class="btn btn-outline-primary btn-sm position-relative"
+                            (click)="toggleLike();lickedProduct()" *ngIf="isOwnerStatus" [disabled]="true">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                            <span>{{likeButtonTitle}}
+
+                            </span>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{countLikes}}
+
+                            </span>
+                        </button>
 
 
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                             data-bs-target="#exampleModalAddComment" data-bs-whatever="@mdo">
-                            <span class="material-symbols-outlined">
-                                rate_review
-                            </span>
+
+                            <i class="fa-regular fa-comment"></i>
                             <span>Add Comment</span></button>
 
                         <!--Add Comment Button trigger modal -->
@@ -118,17 +122,14 @@
 
                         <a [routerLink]="['/catalog/products/edit', product?.id]" *ngIf="isOwnerStatus"
                             class=" btn btn-outline-primary btn-sm">
-                            <span class="material-symbols-outlined">
-                                edit
-                            </span> <span>Edit</span>
+                            <i class="fa-solid fa-pen-nib"></i> <span>Edit</span>
                         </a>
 
 
                         <!--Delete Button trigger modal -->
                         <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="isOwnerStatus"
                             data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <span class="material-symbols-outlined">
-                                delete</span>
+                            <i class="fa-regular fa-trash-can"></i>
                             <span>Delete</span>
                         </button>
 
@@ -257,9 +258,7 @@
         </div>
       </div> -->
                 <div class="comments-container" *ngIf="commentsProduct.length >0">
-                    <!-- <div class="alert alert-primary" role="alert">
-                        List ot comments:
-                       </div> -->
+
                     <div class="list-group" *ngFor="let comment of commentsProduct">
 
                         <a class="list-group-item list-group-item mb-2">
@@ -274,14 +273,15 @@
                             <p class="card-text">
                                 <small class="text-body-tertiary">
 
-                                  
+
                                     <!-- {{ comment.timestamp.toDate() | elapsedTime }} -->
 
-                                    {{ comment.timestamp.toDate() | date: 'EEEE' }}
+                                    {{ comment.timestamp.toDate() | date: 'dd MMM ' }}
                                     <i class="fas fa-clock"></i>
                                     {{ comment.timestamp.toDate() | date: 'HH:mm' }}
                                     <i class="fas fa-calendar"></i>
                                     {{ comment.timestamp.toDate() | date: 'yyyy-MM-dd' }}
+
                                 </small>
                             </p>
                         </a>

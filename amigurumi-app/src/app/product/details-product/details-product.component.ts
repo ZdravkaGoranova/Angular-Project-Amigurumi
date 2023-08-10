@@ -34,6 +34,7 @@ export class DetailsProductComponent implements OnInit {
   isLoalding: boolean = true;
 
   isLiked: boolean = false;
+  countLikes: number | undefined = 0;
   likeButtonTitle: string = 'Like';
   likeIsShown: boolean = false;
 
@@ -44,7 +45,7 @@ export class DetailsProductComponent implements OnInit {
 
 
   ownerEmailOrDisplayName: string | null | undefined = null;
- 
+
   // descToShow: string;
   // productDescLen: number;
   // showReadMoreBtn: boolean = true;
@@ -78,7 +79,11 @@ export class DetailsProductComponent implements OnInit {
     const id = this.activatedRoute.snapshot.params['productId'];
 
     const productData = await this.apiService.getCurrentProduct(id);
+    console.log(productData)
 
+    this.countLikes = productData?.usersLiked.length || 0;
+    console.log(productData?.usersLiked.length)
+    console.log(this.countLikes)
 
     const ownerId = productData?.ownerId;
     // if (ownerId) {
@@ -115,80 +120,6 @@ export class DetailsProductComponent implements OnInit {
     // }
   }
 
-  // async getOwnerEmailOrDisplayName(ownerId: string): Promise<any> {
-  //   try {
-  //     const userRef = doc(this.firestore, 'users', ownerId);
-  //     const userDoc = await getDoc(userRef);
-
-  //     if (userDoc.exists()) {
-  //       const displayName = userDoc.data()['displayName'];
-  //       const email = userDoc.data()['email'];
-  //       const uid = userDoc.data()['uid'];
-
-  //       console.log(displayName);
-  //       console.log(email);
-  //       console.log(uid);
-
-  //       return displayName;
-
-
-
-  //     } else {
-  //       console.log('User not found!');
-  //       return null;
-  //     }
-  //   } catch (error) {
-  //     console.error('Error getting user by ID:', error);
-  //     return null;
-  //   }
-
-  // }
-
-
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user !== null) {
-  //       const displayName = user.displayName;
-  //       const email = user.email;
-  //       const uid = user.uid;
-
-  //       console.log(displayName);
-  //       console.log(email);
-  //       console.log(uid);
-  //       resolve(displayName);
-  //     } else {
-  //       console.log("No such document!");
-  //       resolve(null);
-  //     }
-  //   }, (error) => {
-  //     console.error('Error getting user:', error);
-  //     reject(error);
-  //   });
-  //   });
-  // }
-
-  // async getOwnerEmailOrDisplayName(ownerId: string | null | undefined): Promise<string | null | undefined> {
-  //   if (!ownerId) {
-  //     return null;
-  //   }
-
-  //   const auth = getAuth();
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user !== null) {
-  //       debugger
-  //       const displayName = user.displayName;
-  //       const email = user.email;
-  //       const uid = user.uid;
-
-  //       console.log(displayName);
-  //       console.log(email);
-  //       console.log(uid);
-  //       return displayName;
-  //     } else {
-  //       console.log("No such document!");
-  //       return null;
-  //     }
-  //   });
-  // }
 
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
@@ -263,13 +194,16 @@ export class DetailsProductComponent implements OnInit {
     } else {
       const updatedUsersLiked = [...product.usersLiked, lockedUserId];
       console.log(updatedUsersLiked)
-      // Актуализираме документа в Firestore с новия масив usersLiked
+
       const collectionInstance = collection(this.firestore, 'products');
       const washingtonRef = doc(collectionInstance, id);
       await updateDoc(washingtonRef, {
         usersLiked: updatedUsersLiked,
       });
       this.isLiked = true;
+      const productData = await this.apiService.getCurrentProduct(id);
+      this.countLikes = productData?.usersLiked.length;
+      console.log(this.countLikes)
     }
 
   }
@@ -277,7 +211,7 @@ export class DetailsProductComponent implements OnInit {
   //   const isLiked = productLikes?.some(item => {
   //     return item.author?._id === userId || item?._ownerId === userId;
   // });
-async isProductLiked(): Promise<void> {
+  async isProductLiked(): Promise<void> {
     const lockedUserId = this.userService.user?.id;
     console.log(lockedUserId)
     const id = this.activatedRoute.snapshot.params['productId'];
@@ -285,14 +219,14 @@ async isProductLiked(): Promise<void> {
     const productData = await this.apiService.getCurrentProduct(id);
     console.log(productData?.usersLiked)
 
-    if ( lockedUserId && productData?.usersLiked) {
-    
-      this.isLiked = (productData.usersLiked as string[]).includes(lockedUserId );
+    if (lockedUserId && productData?.usersLiked) {
+
+      this.isLiked = (productData.usersLiked as string[]).includes(lockedUserId);
       console.log(this.isLiked);
-      this.likeIsShown=false;
-     
+      this.likeIsShown = false;
+
     }
-  
+
   }
 
   async addComment(): Promise<void> {
@@ -326,7 +260,7 @@ async isProductLiked(): Promise<void> {
   }
 
   async getCommentsProducts(): Promise<void> {
- 
+
     const id = this.activatedRoute.snapshot.params['productId'];
 
     const collectionInstance = collection(this.firestore, 'products', id, 'comments');
@@ -349,8 +283,9 @@ async isProductLiked(): Promise<void> {
     }
   }
 
+}
 
-  // hideDesc(): void {
+ // hideDesc(): void {
   //   this.productDescLen = 0;
   //   this.descToShow = "";
   //   this.showReadMoreBtn = true;
@@ -373,4 +308,80 @@ async isProductLiked(): Promise<void> {
   //   this.imageButtonTitle = this.imageIsShown ? 'Hide Image' : 'Show Image';
 
   // }
-}
+
+
+
+ // async getOwnerEmailOrDisplayName(ownerId: string): Promise<any> {
+  //   try {
+  //     const userRef = doc(this.firestore, 'users', ownerId);
+  //     const userDoc = await getDoc(userRef);
+
+  //     if (userDoc.exists()) {
+  //       const displayName = userDoc.data()['displayName'];
+  //       const email = userDoc.data()['email'];
+  //       const uid = userDoc.data()['uid'];
+
+  //       console.log(displayName);
+  //       console.log(email);
+  //       console.log(uid);
+
+  //       return displayName;
+
+
+
+  //     } else {
+  //       console.log('User not found!');
+  //       return null;
+  //     }
+  //   } catch (error) {
+  //     console.error('Error getting user by ID:', error);
+  //     return null;
+  //   }
+
+  // }
+
+
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user !== null) {
+  //       const displayName = user.displayName;
+  //       const email = user.email;
+  //       const uid = user.uid;
+
+  //       console.log(displayName);
+  //       console.log(email);
+  //       console.log(uid);
+  //       resolve(displayName);
+  //     } else {
+  //       console.log("No such document!");
+  //       resolve(null);
+  //     }
+  //   }, (error) => {
+  //     console.error('Error getting user:', error);
+  //     reject(error);
+  //   });
+  //   });
+  // }
+
+  // async getOwnerEmailOrDisplayName(ownerId: string | null | undefined): Promise<string | null | undefined> {
+  //   if (!ownerId) {
+  //     return null;
+  //   }
+
+  //   const auth = getAuth();
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user !== null) {
+  //       debugger
+  //       const displayName = user.displayName;
+  //       const email = user.email;
+  //       const uid = user.uid;
+
+  //       console.log(displayName);
+  //       console.log(email);
+  //       console.log(uid);
+  //       return displayName;
+  //     } else {
+  //       console.log("No such document!");
+  //       return null;
+  //     }
+  //   });
+  // }

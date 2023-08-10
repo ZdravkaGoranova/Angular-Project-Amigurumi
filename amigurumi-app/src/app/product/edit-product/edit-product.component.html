@@ -156,7 +156,7 @@
                     </div>
 
                 </div> <!-- Row END -->
-                {{form.value |json}}
+                <!-- {{form.value |json}} -->
 
                 <!-- button -->
                 <div class="d-flex flex-row gap-2 mb-3">
@@ -164,7 +164,7 @@
                         <a [routerLink]="['../../']" class=" custom-btn">Back</a></button>
 
                     <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid"
-                        [style]="{backgroundColor:form.invalid ? '#e25562':' #6658d3'}">Add new Amigurumi</button>
+                        [style]="{backgroundColor:form.invalid ? '#e25562':' #6658d3'}">Save</button>
                   
                 </div>
 

@@ -52,8 +52,9 @@ export class EditProductComponent implements OnInit {
 
   }
   async submitHandler(form: NgForm): Promise<void> {
+    const id = this.activatedRoute.snapshot.params['productId'];
     try {
-      const id = this.activatedRoute.snapshot.params['productId'];
+    
       console.log(id)
    
       const collectionInstance = collection(this.firestore, 'products');
@@ -88,7 +89,7 @@ export class EditProductComponent implements OnInit {
       console.error("Error adding document: ", e);
     }
 
-    this.router.navigate(['/catalog/products']);
+    this.router.navigate(['/catalog/products/',id]);
 
   }
 }

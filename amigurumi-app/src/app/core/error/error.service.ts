@@ -7,8 +7,8 @@ import { BehaviorSubject } from 'rxjs';
 export class ErrorService {
   apiError$$ = new BehaviorSubject(null);
   constructor() { }
-
   setError(error: any): void {
+    debugger
     this.apiError$$.next(error)
   }
 }

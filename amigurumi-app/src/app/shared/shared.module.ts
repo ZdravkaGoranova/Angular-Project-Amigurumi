@@ -9,13 +9,14 @@ import { ElapsedTimePipe } from './pipes/elapsed-time.pipe';
 
 
 
+
 @NgModule({
   declarations: [
     LoaderComponent,
     AppEmailDirective,
     SlicePipe,
     ElapsedTimePipe,
-
+   
   ],
   imports: [
     CommonModule
@@ -24,7 +25,9 @@ import { ElapsedTimePipe } from './pipes/elapsed-time.pipe';
     AppEmailDirective,
     LoaderComponent,
     SlicePipe,
-    ElapsedTimePipe
+    ElapsedTimePipe,
+
+
   ]
 })
 export class SharedModule { }

@@ -47,7 +47,8 @@ export class ProductListComponent implements OnInit {
   isSearched: boolean = false;
 
 
-  constructor(private apiService: ApiService,
+  constructor(
+    private apiService: ApiService,
     private firestore: Firestore,
     ) {
     // this.productDescLen = 0;

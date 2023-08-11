@@ -49,6 +49,8 @@ The front end of the project has been deploy in Firebase: [ https://amugurumiuse
 ![](/PageRegister.jpg)
 ## Register  Page and Validation
 ![](RegisterValidation.jpg)
+![](RegisterError.jpg)
+
 ## Login Page 
 ![](/PageLogin.jpg)
 ## Login  Page and Validation

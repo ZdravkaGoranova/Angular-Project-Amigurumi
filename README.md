@@ -47,34 +47,32 @@ The front end of the project has been deploy in Firebase: [ https://amugurumiuse
 
 ## Register Page
 ![](/PageRegister.jpg)
-
+## Register  Page and Validation
+![]()
 ## Login Page 
 ![](/PageLogin.jpg)
-
+## Login  Page and Validation
+![](C)
 ## Profile Page
 ![](/ProfilePage.jpg)
 
-## Catalog Guest Page
-![](/GuestPageCatalog.jpg)
 
-## Catalog Profile Page
+## Catalog  Page
 ![](/CatalogProfilePage.jpg)
 
 ## Create  Page and Validation
-![](CreatePageValidation.jpg)
-![](CreateValidation.jpg)
+![](CreateValidation.png)
+
 
 ## Edit Page
 ![](/EditPage.jpg)
 
 ## Delete Product
-![](/DeletePage.jpg)
+![](/del.jpg)
 
 ## Owner Details Page
 ![](/OwnerDetailsPage.jpg)
 
-## Details Comment Page.jpg
-![](/DetailsCommentPage.jpg)
 
 ## Details Page Comment
 ![](/ListComment.jpg)
@@ -84,12 +82,12 @@ The front end of the project has been deploy in Firebase: [ https://amugurumiuse
 ![](/AddComment.jpg)
 
 
-## Details Page Like Product
-![](/LikeProductNonOwner.jpg)
 
 ## PageNotFound
 ![](/404.jpg)
 
+## Delete Product
+![](/del.jpg)
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
 
 ## Development server

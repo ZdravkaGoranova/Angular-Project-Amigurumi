@@ -11,6 +11,8 @@ import {
   where,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { ErrorService } from '../core/error/error.service';
+
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -21,38 +23,28 @@ export class ProductListComponent implements OnInit {
   // productData: Product[]=[];
 
   isLoalding: boolean = true;
-
   productData!: Observable<Product[]>;
+
   @Input() product!: Product;
-  @Input() productDesc!: string;
+ 
 
   products: Product[] = [];
 
   db = getFirestore();
-
   colRef = collection(this.db, 'products');
 
-  // descToShow: string;
-  // productDescLen: number;
-  // showReadMoreBtn: boolean = true;
-  // showHideBtn: boolean = false;
-  // imageIsShown: boolean = true;
-  // imageButtonTitle: string = 'Show Image';
-
-  likeIsShown: boolean = false;
   likeButtonTitle: string = 'Like';
 
   searchKeyword: string = '';
   searcProducts: Product[] = [];
   isSearched: boolean = false;
 
-
   constructor(
     private apiService: ApiService,
     private firestore: Firestore,
+    private errorService: ErrorService,
     ) {
-    // this.productDescLen = 0;
-    // this.descToShow = "";
+  
   }
   async ngOnInit(): Promise<void> {
 
@@ -94,11 +86,13 @@ export class ProductListComponent implements OnInit {
         console.log(this.searcProducts.length)
           } catch (e) {
             console.error("Error searching products: ", e);
+            this.errorService.setError(e);
             this.isLoalding=false;
           }
-      console.log(this.searcProducts)
+      // console.log(this.searcProducts)
     }
   }
+
 
     // async getAll() {
     //   const collectionInstance = collection(this.firestore, 'products');
@@ -112,9 +106,6 @@ export class ProductListComponent implements OnInit {
   
     //   console.log(this.products)
     // }
-
-
-
 
 // try {
 
@@ -143,7 +134,6 @@ export class ProductListComponent implements OnInit {
     // try {
     //   const snapshot = await getDocs(this.colRef);
     //   console.log(snapshot)
-    //   debugger;
     //   snapshot.docs.forEach((doc) => {
     //     const data = doc.data() as Partial<Product>;
     //     if (data.author && data.description && data.imageUrl && data.skillLevel && data.title) {
@@ -184,37 +174,7 @@ export class ProductListComponent implements OnInit {
     // })
 
   
-  // readMore(): void {
-  //   this.productDescLen += this.symbols;
-  //   if (this.productDescLen >= this.productDesc.length) {
-  //     this.showReadMoreBtn = false;
-  //     this.showHideBtn = true;
-  //     this.descToShow = this.productDesc;
-  //   } else {
-  //     this.descToShow = this.productDesc.substr(0, this.productDescLen);
 
-  //   }
-  // }
-
-  // toggleImage(): void {
-  //   this.imageIsShown = !this.imageIsShown;
-  //   this.imageButtonTitle = this.imageIsShown ? 'Hide Image' : 'Show Image';
-
-  // }
-  // toggleLike(): void {
-  //   this.likeIsShown = !this.likeIsShown;
-  //   this.likeButtonTitle = this.likeIsShown ? 'Like' : 'You already liked!';
-
-  // }
-  // hideDesc(): void {
-  //   this.productDescLen = 0;
-  //   this.descToShow = "";
-  //   this.showReadMoreBtn = true;
-  //   this.showHideBtn = false;
-  // }
-
-
-  // products!: Product[];
 
   // constructor(private apiService: ApiService) { }
 

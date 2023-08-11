@@ -5,7 +5,7 @@ import { Product } from 'src/app/types/product';
 import { Comment } from 'src/app/types/comment';
 import { UserService } from 'src/app/user/user.service';
 import { ElapsedTimePipe } from '../../shared/pipes/elapsed-time.pipe';
-import * as moment from 'moment';
+
 import {
   Firestore,
   collection, addDoc,
@@ -13,7 +13,8 @@ import {
   getDocs,
 } from '@angular/fire/firestore';
 
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+
+import { ErrorService } from 'src/app/core/error/error.service';
 
 @Component({
   selector: 'app-details-product',
@@ -22,11 +23,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class DetailsProductComponent implements OnInit {
 
-
-  private symbols: number = 250;
-  // product!: Product[] | undefined;
-  // @Input() product!: Product;
-  @Input() productDesc!: string;
   product: Product | null = null;
 
   isOwnerStatus: boolean = false;
@@ -44,56 +40,32 @@ export class DetailsProductComponent implements OnInit {
   commentsProduct: Comment[] = [];
 
 
-  ownerEmailOrDisplayName: string | null | undefined = null;
-
-  // descToShow: string;
-  // productDescLen: number;
-  // showReadMoreBtn: boolean = true;
-  // showHideBtn: boolean = false;
-  // imageIsShown: boolean = true;
-  // imageButtonTitle: string = 'Show Image';
-
-
   constructor(
     private firestore: Firestore,
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
     private userService: UserService,
     private router: Router,
-    private afAuth: AngularFireAuth
+    private errorService: ErrorService,
   ) {
-    this.checkIsOwner();
-    this.isProductLiked()
+
     // this.activatedRoute.params.subscribe((v) => console.log(v))
 
-    // this.productDescLen = 0;
-    // this.descToShow = "";
-    this.getCommentsProducts()
   }
   async ngOnInit(): Promise<void> {
     await this.fetchTheme();
     await this.checkIsOwner();
+    await this.isProductLiked();
+    await this.getCommentsProducts();
+
     this.isOwner()
     this.isLoalding = false;
-    console.log(this.ownerEmailOrDisplayName)
+
     const id = this.activatedRoute.snapshot.params['productId'];
-
     const productData = await this.apiService.getCurrentProduct(id);
-    console.log(productData)
-
+    
     this.countLikes = productData?.usersLiked.length || 0;
-    console.log(productData?.usersLiked.length)
     console.log(this.countLikes)
-
-    const ownerId = productData?.ownerId;
-    // if (ownerId) {
-    //   const ownerData = await this.getOwnerEmailOrDisplayName(ownerId);
-    //   console.log(ownerData);
-    //   this.ownerEmailOrDisplayName = ownerData ? ownerData : null;
-    //   console.log(this.ownerEmailOrDisplayName);
-    // } else {
-    //   this.ownerEmailOrDisplayName = null;
-    // }
 
   }
 
@@ -105,21 +77,8 @@ export class DetailsProductComponent implements OnInit {
     const lockedUserId = this.userService.user?.id;
     this.isOwnerStatus = this.userService.isLogged && product?.ownerId === lockedUserId;
     console.log(this.isOwnerStatus);
-    // if (product && this.isOwnerStatus) {
-    //   this.ownerEmailOrDisplayName = this.userService.user?.fullName;
-    //   console.log(this.ownerEmailOrDisplayName);
-    // } else if (product) {
-    //   const ownerId = product?.ownerId;
-    //   debugger
-    //   const ownerData = await this.getOwnerEmailOrDisplayName(ownerId);
-    //   console.log(ownerData);
-    //   this.ownerEmailOrDisplayName = ownerData ? ownerData : null;
-    //   console.log(this.ownerEmailOrDisplayName);
-    // } else {
-    //   this.ownerEmailOrDisplayName = null;
-    // }
-  }
 
+  }
 
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
@@ -127,10 +86,11 @@ export class DetailsProductComponent implements OnInit {
 
   async isOwner(): Promise<boolean> {
     const id = this.activatedRoute.snapshot.params['productId'];
+
     const productOwner = await this.apiService.getCurrentProductOwner(id);
     const lockedUserId = this.userService.user?.id;
     this.isOwnerStatus = this.userService.isLogged && productOwner == lockedUserId;
-    console.log(productOwner === lockedUserId);
+
     console.log(this.isOwnerStatus);
 
     return this.userService.isLogged && productOwner == lockedUserId;
@@ -154,22 +114,6 @@ export class DetailsProductComponent implements OnInit {
       this.isLiked = true; // Disable the button
       this.likeButtonTitle = this.likeIsShown ? 'Like' : 'You already liked!';
     }
-  }
-
-  async editProduct(): Promise<void> {
-    const id = this.activatedRoute.snapshot.params['productId'];
-
-    const collectionInstance = collection(this.firestore, 'products');
-
-    const docRef = doc(collectionInstance, id);
-
-
-    const washingtonRef = doc(collectionInstance, id);
-
-    await updateDoc(washingtonRef, {
-      capital: true
-    });
-
   }
 
   deleteProduct(): void {
@@ -208,23 +152,19 @@ export class DetailsProductComponent implements OnInit {
 
   }
 
-  //   const isLiked = productLikes?.some(item => {
-  //     return item.author?._id === userId || item?._ownerId === userId;
-  // });
+
   async isProductLiked(): Promise<void> {
     const lockedUserId = this.userService.user?.id;
-    console.log(lockedUserId)
+
     const id = this.activatedRoute.snapshot.params['productId'];
 
     const productData = await this.apiService.getCurrentProduct(id);
     console.log(productData?.usersLiked)
 
     if (lockedUserId && productData?.usersLiked) {
-
       this.isLiked = (productData.usersLiked as string[]).includes(lockedUserId);
       console.log(this.isLiked);
-      this.likeIsShown = false;
-
+      this.likeIsShown = this.isLiked;
     }
 
   }
@@ -254,6 +194,7 @@ export class DetailsProductComponent implements OnInit {
       await this.getCommentsProducts();
     } catch (error) {
       console.error('Error adding comment:', error);
+      this.errorService.setError(error);
     }
 
     this.newComment = '';
@@ -285,103 +226,3 @@ export class DetailsProductComponent implements OnInit {
 
 }
 
- // hideDesc(): void {
-  //   this.productDescLen = 0;
-  //   this.descToShow = "";
-  //   this.showReadMoreBtn = true;
-  //   this.showHideBtn = false;
-  // }
-  // readMore(): void {
-  //   this.productDescLen += this.symbols;
-  //   if (this.productDescLen >= this.productDesc.length) {
-  //     this.showReadMoreBtn = false;
-  //     this.showHideBtn = true;
-  //     this.descToShow = this.productDesc;
-  //   } else {
-  //     this.descToShow = this.productDesc.substr(0, this.productDescLen);
-
-  //   }
-  // }
-
-  // toggleImage(): void {
-  //   this.imageIsShown = !this.imageIsShown;
-  //   this.imageButtonTitle = this.imageIsShown ? 'Hide Image' : 'Show Image';
-
-  // }
-
-
-
- // async getOwnerEmailOrDisplayName(ownerId: string): Promise<any> {
-  //   try {
-  //     const userRef = doc(this.firestore, 'users', ownerId);
-  //     const userDoc = await getDoc(userRef);
-
-  //     if (userDoc.exists()) {
-  //       const displayName = userDoc.data()['displayName'];
-  //       const email = userDoc.data()['email'];
-  //       const uid = userDoc.data()['uid'];
-
-  //       console.log(displayName);
-  //       console.log(email);
-  //       console.log(uid);
-
-  //       return displayName;
-
-
-
-  //     } else {
-  //       console.log('User not found!');
-  //       return null;
-  //     }
-  //   } catch (error) {
-  //     console.error('Error getting user by ID:', error);
-  //     return null;
-  //   }
-
-  // }
-
-
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user !== null) {
-  //       const displayName = user.displayName;
-  //       const email = user.email;
-  //       const uid = user.uid;
-
-  //       console.log(displayName);
-  //       console.log(email);
-  //       console.log(uid);
-  //       resolve(displayName);
-  //     } else {
-  //       console.log("No such document!");
-  //       resolve(null);
-  //     }
-  //   }, (error) => {
-  //     console.error('Error getting user:', error);
-  //     reject(error);
-  //   });
-  //   });
-  // }
-
-  // async getOwnerEmailOrDisplayName(ownerId: string | null | undefined): Promise<string | null | undefined> {
-  //   if (!ownerId) {
-  //     return null;
-  //   }
-
-  //   const auth = getAuth();
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user !== null) {
-  //       debugger
-  //       const displayName = user.displayName;
-  //       const email = user.email;
-  //       const uid = user.uid;
-
-  //       console.log(displayName);
-  //       console.log(email);
-  //       console.log(uid);
-  //       return displayName;
-  //     } else {
-  //       console.log("No such document!");
-  //       return null;
-  //     }
-  //   });
-  // }

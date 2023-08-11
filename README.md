@@ -25,21 +25,20 @@ The front end of the project has been deploy in Firebase: [ https://amugurumiuse
  - Bootstrap
  
  ## Architecture - the project is structured
- -
+ 
  - `public` folder contains global asssets for the app.
  - `src` folder contains the app, index.html, styles.css, environments and folders for the components, modules, app.interceptor.ts,routing.module and service.
- - `app` folder - properly named folder for each component that includes the component itself, the css  for the component).
+ - `app` folder - properly named folder for each component that includes the component itself, the css  for the component.
  - `environments` folder - contains custom environments
- - `core` folder - contains custom hooks
- - `services` folder - contains 
-  - `guards` folder -  contains 
- - `home` folder - contains
- - `main` folder -  contains 
- - `product` folder - contains
- - `product-list` folder -  contains 
- - `shared` folder - contains
- - `main` folder -  contains 
- - `user` folder - contains 
+ - `core` folder - contains footer,header and error components.
+  - `guards` folder -  contains authguards.
+ - `home` folder - contains css, html and ts components.
+ - `main` folder -  contains </app-product-list>.
+ - `product` folder - contains details,edit, new-product components,product-routing,product.module.
+ - `product-list` folder - contains css, html and ts components.
+ - `shared` folder - contains loader, pipes and validators.
+ - `user` folder - contains login,register and profile components.
+   
 # Routes views
 
 ## Home Page

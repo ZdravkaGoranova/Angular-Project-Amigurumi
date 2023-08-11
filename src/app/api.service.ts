@@ -15,8 +15,7 @@ import { ErrorService } from './core/error/error.service';
 })
 
 export class ApiService {
-  // productsCollection: collectionData<Product>;
-
+ 
   // products: Observable<Product[]>
 
   productData!: Observable<any>;
@@ -30,22 +29,6 @@ export class ApiService {
 
   ) { }
 
-  addData(form: any) {
-    console.log(form.value)
-
-  }
-
-
-  // getProducts() {
-  //   const { apiUrl } = environment
-  //   return this.http.get<Product[]>(`${apiUrl}.json`)
-  // }
-
-  // getSingleProduct(id: string) {
-  //   const { apiUrl } = environment
-  //   return this.http.get<Product>(`${apiUrl}/${id}/.json`)
-  // }
-
   async getDataProducts(): Promise<Product[]> {
     try {
       const collectionInstance = collection(this.firestore, 'products');
@@ -53,8 +36,8 @@ export class ApiService {
 
       if (data) {
         const products: Product[] = data.map((docData) => {
-          const { id, ownerId, description, imageUrl, skillLevel, title, category, usersLiked, coments } = docData;
-          return { id, ownerId, description, imageUrl, skillLevel, title, category, usersLiked, coments };
+          const { id, ownerId, description, imageUrl, skillLevel, title, category, usersLiked, coments, emailOwner } = docData;
+          return { id, ownerId, description, imageUrl, skillLevel, title, category, usersLiked, coments, emailOwner };
         });
         return products;
       } else {
@@ -65,6 +48,7 @@ export class ApiService {
       return [];
     }
 
+    //subscribe
     // getDataProducts() {
     //   const collectionInstance = collection(this.firestore, 'products');
     //   collectionData(collectionInstance).subscribe(val => {
@@ -101,10 +85,10 @@ export class ApiService {
 
     }
   }
+
   async getCurrentProduct(id: string): Promise<Product | null> {
 
     try {
-
       const collectionInstance = collection(this.firestore, 'products');
 
       const docRef = doc(collectionInstance, id);
@@ -124,7 +108,9 @@ export class ApiService {
           title: productData['title'],
           category: productData['category'],
           usersLiked: productData['usersLiked'],
-          coments: productData['coments']
+          coments: productData['coments'],
+          emailOwner: productData['emailOwner'],
+
         };
         console.log(product)
         return product;
@@ -148,7 +134,10 @@ export class ApiService {
 
       if (docSnap.exists()) {
         const productData = docSnap.data();
+
+        console.log(productData)
         const ownerId: string = productData['ownerId'];
+       
         console.log(ownerId)
         return ownerId;
       } else {
@@ -173,4 +162,14 @@ export class ApiService {
 
   //     console.log(doc.id, " => ", doc.data());
   //   });
+  // }
+
+    // getProducts() {
+  //   const { apiUrl } = environment
+  //   return this.http.get<Product[]>(`${apiUrl}.json`)
+  // }
+
+  // getSingleProduct(id: string) {
+  //   const { apiUrl } = environment
+  //   return this.http.get<Product>(`${apiUrl}/${id}/.json`)
   // }

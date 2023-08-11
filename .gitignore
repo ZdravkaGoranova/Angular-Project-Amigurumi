@@ -45,3 +45,14 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+*.pack
+*.json
+*.old
+*.png
+*.woff2
+*.ttf
+*.html
+*.js
+*.css
+*.txt
+*.ico

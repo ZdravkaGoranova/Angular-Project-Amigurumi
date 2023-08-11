@@ -4,21 +4,19 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <!-- Page title -->
             <div class="my-5">
                 <h3>Add new Amigurumi</h3>
                 <hr>
             </div>
             <!-- Form START -->
-
-
             <form class="file-upload" #form="ngForm" (ngSubmit)="submitHandler(form)">
                 <div class="row mb-5 gx-5">
-                    <!-- change password -->
+                 
                     <div class="col-xxl-6">
                         <div class="bg-secondary-soft px-4 py-5 rounded">
                             <div class="row g-3">
                                 <h4 class="my-4">Details:</h4>
+
                                 <!-- Title -->
                                 <div class="col-md-12">
                                     <label for="exampleInputPassword1" class="form-label">Title</label>
@@ -36,7 +34,6 @@
                                         Title is required!
                                     </div>
                                 </ng-container>
-
 
                                 <!-- Description -->
                                 <div class="col-md-12">
@@ -172,7 +169,6 @@
                                 <div class="text-center">
                                     <!-- Show the uploaded image if imageUrl is available -->
                                  
-
                                     <div class="image-container"*ngIf="imageUrl">
                                         <img [src]="imageUrl" class="card-img-top" alt="product image">
                                     </div>
@@ -190,6 +186,7 @@
 
                 </div> <!-- Row END -->
                 <!-- {{form.value |json}} -->
+
                 <!-- button -->
                 <div class="d-flex flex-row gap-2 mb-3">
                     <button type="submit" class="btn btn-outline-dark">
@@ -197,7 +194,6 @@
 
                     <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid"
                         [style]="{backgroundColor:form.invalid ? '#e25562':' #6658d3'}">Add new Amigurumi</button>
-                  
                 </div>
              
             </form> <!-- Form END -->

@@ -25,10 +25,7 @@ const routes: Routes = [
         path: 'addNewProduct',
         component: NewProductComponent
     },
-    // }, {
-    //     path: 'add-product',
-    //     component: NewThemeComponent,
-    // },
+
 ];
 
 @NgModule({

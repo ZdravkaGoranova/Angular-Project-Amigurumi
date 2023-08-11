@@ -16,6 +16,7 @@ import {
 import { Observable } from 'rxjs';
 
 import { UserService } from 'src/app/user/user.service';
+import { ErrorService } from 'src/app/core/error/error.service';
 
 @Component({
   selector: 'app-new-product',
@@ -34,14 +35,12 @@ export class NewProductComponent {
   constructor(
     private firestore: Firestore,
     private router: Router,
-    private userService: UserService
-  ) {
-    this.getDataPro();
-    this.readData();
-  }
+    private userService: UserService,
+    private errorService: ErrorService,
+  ) { }
 
   async submitHandler(form: NgForm): Promise<void> {
-    console.log(form.value);
+    // console.log(form.value);
     if (form.invalid) {
       return;
     }
@@ -51,73 +50,34 @@ export class NewProductComponent {
 
       const newProductId = docRef.id;
       console.log(newProductId);
-  
+
       const lockedUserId = this.userService.user?.id;
-      // console.log(lockedUserId);
-      const updatedProductData = {
-        ...form.value,
-        id: newProductId, 
-      };
-      // console.log(updatedProductData);
-  
+      const emailOwner = this.userService.user?.email;
+
       const washingtonRef = doc(collectionInstance, newProductId);
       // console.log(washingtonRef);
 
       await updateDoc(washingtonRef, {
-  
+        ...form.value,
         id: newProductId,
-        ownerId:lockedUserId,
-        usersLiked:[],
-        coments:[]
+        ownerId: lockedUserId,
+        usersLiked: [],
+        coments: [],
+        emailOwner: emailOwner,
       });
 
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
+      this.errorService.setError(e);
     }
-   
-
-    this.router.navigate(['/catalog/products']);
 
     // Reset the form after submission (optional)
     form.reset();
-
-
-    // const collectionInstance = collection(this.firestore, 'products');
-    // addDoc(collectionInstance, form.value).then(() => {
-    //   console.log('Data Saved Successfuly')
-    // }).catch((err) => {
-    //   console.log(err)
-    // })
-
-    // if (form.invalid) {
-    //   return;
-    // }
-
     this.router.navigate(['/catalog/products']);
-    // form.setValue({
-    //   fullName: '', email: '', password: '', gender: '',
-    // })
-
+  }
+}
+ // form.setValue({ fullName: '', email: '', password: '', gender: '', })
     // const value: { title: string; description: string; skillLevel: string; category: string; } = form.value
     // console.log({ value })
     // console.log(value.description)
-    // console.log(value.title)
-    // console.log(value.category)
-    // console.log(value.skillLevel)
-  }
-  getDataPro() {
-    const collectionInstance = collection(this.firestore, 'products');
-    collectionData(collectionInstance).subscribe(val => {
-      console.log(val)
-    })
-    this.productData = collectionData(collectionInstance);
-  }
-  async readData() {
-    console.log(' readData------------');
-    const querySnapshot = await getDocs(collection(this.firestore, "products"));
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-    });
-  }
-}

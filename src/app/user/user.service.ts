@@ -101,7 +101,7 @@ export class UserService   {
 
   }
   
-//Моя вариянт --Promise<void>
+//Моят вариянт --Promise<void>
   register(fullName: string, email: string, password: string) {
     const auth = getAuth();
  

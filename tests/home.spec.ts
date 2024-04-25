@@ -7,7 +7,5 @@ test('Check home page', async ({ page }) => {
     const heading = await page.$('h1');
     const text = await heading?.textContent();
     expect(text).toContain('Welcome to Amigurumi');  
-
-   
   });
   

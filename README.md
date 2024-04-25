@@ -23,7 +23,6 @@ The front end of the project has been deploy in Firebase: [ https://amugurumiuse
  ### Test Accounts:
 `Account with data:` - email : `peter@abv.bg` password : `123456`
 
-
 ### Error Handling:
 
 - If there is an error it is returned as { message }</p>
@@ -32,6 +31,8 @@ The front end of the project has been deploy in Firebase: [ https://amugurumiuse
 ### Run Web UI Tests:
 - Go to folder tests: `cd tests`
 - `npx playwright test test`
+  
+ ![](/uiTests.jpg)
   
 ### It has:
 - Two types of users: <strong>Guest User</strong> and <strong>Logged-In User</strong>

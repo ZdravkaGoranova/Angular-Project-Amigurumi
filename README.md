@@ -29,6 +29,7 @@ The front end of the project has been deploy in Firebase: [ https://amugurumiuse
 - Example: {message: "Invalid Password, because length is short than 6 symbols." }</p>
 
 ### Run Web UI Tests:
+-  `npm start`
 - Go to folder tests: `cd tests`
 - `npx playwright test test`
   

@@ -1,13 +1,4 @@
 {
-  "targets": {
-    "amugurumiusers": {
-      "hosting": {
-        "Prodject-Amigorumi": [
-          "amugurumiusers"
-        ]
-      }
-    }
-  },
   "projects": {
     "default": "amugurumiusers"
   }
